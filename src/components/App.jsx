@@ -10,6 +10,7 @@ class App extends React.Component {
             ]
         }
     }
+    
 
     render() {
         var messageNodes = this.state.messages.map((messages) => {

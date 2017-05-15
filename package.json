@@ -1,0 +1,25 @@
+{
+  "name": "postit",
+  "version": "1.0.0",
+  "description": "Allows users create rooms for notification",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ofor Chinedu",
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "webpack": "^2.5.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andela-cofor/postit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/andela-cofor/postit/issues"
+  },
+  "homepage": "https://github.com/andela-cofor/postit#readme"
+}

@@ -1,0 +1,16 @@
+{
+    "messages": {
+        "0": {
+            "message": "Hi wassup, how are you",
+            "date": "Wed, 08 Jul 2015 18:14:27 GMT",
+            "author": "Jeremy Johnson",
+            "profilePic": "http://socialearth.org/wp-content/uploads/2015/06/2-300x226.jpg"
+        },
+        "1": {
+            "message": "I am fine how about you",
+            "date": "Wed, 08 Jul 2015 18:14:27 GMT",
+            "author": "Ofor Chinedu",
+            "profilePic": "https://scontent-amt2-1.xx.fbcdn.net/v/t1.0-9/12803239_10208843541829335_4608025519985567461_n.jpg?oh=3635d89c74b8ca644c31074976b1fa49&oe=59A964F2"
+        }
+    }
+}

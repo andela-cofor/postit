@@ -13,7 +13,6 @@
     "babel-loader": "^7.0.0",
     "css-loader": "^0.28.1",
     "firebase": "^3.9.0",
-    "loadash": "0.0.1",
     "lodash": "^4.17.4",
     "material-ui": "^0.18.1",
     "node-sass": "^4.5.2",

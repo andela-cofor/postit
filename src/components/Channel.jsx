@@ -9,7 +9,6 @@ class Channel extends React.Component {
     }
 
     render(){
-        console.log(this.props.channel, 'Got here')
         return (
         <ListItem>
             {this.props.channel}

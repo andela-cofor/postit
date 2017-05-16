@@ -6,6 +6,9 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import * as Colors from 'material-ui/styles/colors';
+var firebase = require("firebase/app");
+require("firebase/auth");
+require("firebase/database");
 
 var ThemeManager = getMuiTheme;
 
@@ -18,6 +21,17 @@ class App extends React.Component {
             primary1Color: Colors.blue100,
             accent1Color: Colors.pink400
         }});
+
+        let config = {
+            apiKey: "AIzaSyA60fC3LsXyi-WPNlEYIlEu6kfNv3CKsqM",
+            authDomain: "postit-3ad4f.firebaseapp.com",
+            databaseURL: "https://postit-3ad4f.firebaseio.com",
+            projectId: "postit-3ad4f",
+            storageBucket: "postit-3ad4f.appspot.com",
+            messagingSenderId: "996317807496"
+        };
+        firebase.initializeApp(config);
+        
     }
 
     static childContextTypes() {

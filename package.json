@@ -9,8 +9,10 @@
   "author": "Ofor Chinedu",
   "license": "ISC",
   "dependencies": {
+    "alt": "^0.18.6",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "css-loader": "^0.28.1",
     "eslint": "^3.19.0",
     "firebase": "^3.9.0",

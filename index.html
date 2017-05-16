@@ -6,10 +6,23 @@
     </head>
     <body>
         <div id="container"></div>
-        <script src="/public/main.js"></script>
         <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase-auth.js"></script>
         <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase-database.js"></script>
         <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase-messaging.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+        <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyA60fC3LsXyi-WPNlEYIlEu6kfNv3CKsqM",
+            authDomain: "postit-3ad4f.firebaseapp.com",
+            databaseURL: "https://postit-3ad4f.firebaseio.com",
+            projectId: "postit-3ad4f",
+            storageBucket: "postit-3ad4f.appspot.com",
+            messagingSenderId: "996317807496"
+        };
+        firebase.initializeApp(config);
+        </script>
+        <script src="/public/main.js"></script>
     </body>
 </html>

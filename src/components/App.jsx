@@ -2,16 +2,20 @@ import React from 'react';
 import MessageList from './MessageList.jsx';
 import ChannelList from './ChannelList.jsx'
 import MessageBox from './MessageBox.jsx';
+import Login from './Login.jsx';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import * as Colors from 'material-ui/styles/colors';
+import connectToStores from 'alt-utils/lib/connectToStores' 
+import ChatStore from '../store/ChatStore';
 var firebase = require("firebase/app");
 require("firebase/auth");
 require("firebase/database");
 
 var ThemeManager = getMuiTheme;
 
+@connectToStores
 class App extends React.Component {
     constructor(){
         super();
@@ -34,16 +38,24 @@ class App extends React.Component {
         
     }
 
+    static getStores(){
+        return [ChatStore]
+    }
+
+    static getPropsFromStores(){
+        return ChatStore.getState();
+    }
+
     static childContextTypes() {
         muiTheme: React.PropTypes.object
     }
 
     render() {
-        return (
-            <MuiThemeProvider>
+        let view = <Login />
+        if(this.props.user){
+            view = (
                 <div>
-                    <AppBar title="PostIt" />
-                    <div style={{
+                  <div style={{
                             display: 'flex',
                             flexFlow: 'row wrap',
                             maxWidth: 1200,
@@ -54,6 +66,14 @@ class App extends React.Component {
                         <MessageList />
                     </div>
                     <MessageBox />
+                </div>
+            )
+        }
+        return (
+            <MuiThemeProvider>
+                <div>
+                    <AppBar title="PostIt" />
+                    {view}
                 </div>
             </MuiThemeProvider>
         );

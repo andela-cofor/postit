@@ -12,6 +12,25 @@ class ChatStore {
     this.state = {user: null, messages: null}
   }
 
+  @bind(Actions.channelOpened)
+  channelOpened(selectedChannel){
+    _(this.state.channels)
+      .values()
+      .map((channel) => {
+        channel.selected = false
+      })
+      .value();
+
+      selectedChannel.selected = true
+
+      this.setState({
+        selectedChannel,
+        channels: this.state.channels
+      })
+
+      setTimeout(this.getInstance().getMessages, 100);
+  }
+
   @bind(Actions.messagesReceived)
   receivedMessages(messages){
     _(messages)

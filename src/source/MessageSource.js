@@ -3,14 +3,14 @@ import Firebase from 'firebase';
 require("firebase/auth");
 require("firebase/database");
 
-// var firebase = require("firebase/app");
 var firebase = null;
 
 let MessageSource = {
   getMessages: {
     remote(state){
       if(firebase){
-        firebase.database().ref.off();
+        // firebase.database().ref.off();
+        firebase = null
       }
       firebase = require("firebase/app");
 

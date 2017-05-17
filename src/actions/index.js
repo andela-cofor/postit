@@ -2,15 +2,15 @@ import alt from '../alt/';
 import Firebase from 'firebase';
 
 class Actions {
+  constructor(){
+    this.generateActions(
+      'channelsReceived',
+      'channelsFailed'
+    )
+  }
+
   login(args){
     return (dispatch) => {
-      // let firebaseRef = new Firebase('https://postit-3ad4f.firebaseio.com')
-      // firebaseRef.authWithOAuthPopup('google', (error, user) => {
-      //   if(error) {
-      //     return 
-      //   }
-      //   dispatch(user);
-      // })
       let provider = new firebase.auth.GoogleAuthProvider();
       firebase.auth().signInWithPopup(provider).then(function(result) {
         // This gives you a Google Access Token. You can use it to access the Google API.

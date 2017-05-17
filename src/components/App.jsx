@@ -34,8 +34,7 @@ class App extends React.Component {
             storageBucket: "postit-3ad4f.appspot.com",
             messagingSenderId: "996317807496"
         };
-        firebase.initializeApp(config);
-        
+        firebase.initializeApp(config);   
     }
 
     static getStores(){

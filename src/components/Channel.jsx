@@ -2,10 +2,16 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import {list, ListItem} from 'material-ui';
 import Avatar from 'material-ui/Avatar';
+import Actions from '../actions/';
 
 class Channel extends React.Component {
     constructor(props) {
         super(props);
+        this.onClick=this.onClick.bind(this)
+    }
+
+    onClick(){
+      Actions.channelOpened(this.props.channel);
     }
 
     render(){
@@ -15,6 +21,7 @@ class Channel extends React.Component {
             }
         return (
         <ListItem
+          onClick={this.onClick}
           style={style}>
             {this.props.channel.name}
         </ListItem>

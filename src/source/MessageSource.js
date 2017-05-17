@@ -6,18 +6,43 @@ require("firebase/database");
 var firebase = null;
 
 let MessageSource = {
+
+  sendMessage: {
+    remote(state){
+      return new Promise((resolve, reject) => {
+        if(!firebase){
+          return resolve()
+        }
+        firebase.database().ref('/messages/' + state.selectedChannel.key).push({
+          "message": state.message,
+          "date": new Date().toUTCString(),
+          "author": state.user.displayName,
+          "userId": state.user.uid,
+          "profilePic": state.user.photoURL
+        });
+        resolve();
+      });
+    },
+    success: Actions.messageSendSuccess,
+    error: Actions.messageSendError
+  },
+
   getMessages: {
     remote(state){
       if(firebase){
-        // firebase.database().ref.off();
         firebase = null
       }
       firebase = require("firebase/app");
 
       return new Promise((resolve, reject) => {
-        firebase.database().ref('/messages/' + state.selectedChannel.key).on('value', (dataSnapshot) => {
+        firebase.database().ref('/messages/' + state.selectedChannel.key).once('value', (dataSnapshot) => {
           let messages = dataSnapshot.val();
           resolve(messages);
+          firebase.database().ref('/messages/' + state.selectedChannel.key).on('child_added', (msg) => {
+            let msgVal = msg.val();
+            msgVal.key = msg.key;
+            Actions.messageReceived(msgVal)
+          })
         })
       });
     },

@@ -9,12 +9,13 @@ class Message extends React.Component {
     }
 
     render(){
+        console.log(this.props.message.profilePic)
         return (
         <ListItem disabled={true}
       leftAvatar={
-        <Avatar src="" />
+        <Avatar src={this.props.message.profilePic} />
       } >
-            {this.props.message}
+            {this.props.message.message}
         </ListItem>
         );
     }

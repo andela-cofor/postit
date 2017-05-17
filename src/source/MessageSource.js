@@ -33,7 +33,6 @@ let MessageSource = {
         firebase = null
       }
       firebase = require("firebase/app");
-
       return new Promise((resolve, reject) => {
         firebase.database().ref('/messages/' + state.selectedChannel.key).once('value', (dataSnapshot) => {
           let messages = dataSnapshot.val();

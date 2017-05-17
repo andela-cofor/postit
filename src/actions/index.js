@@ -1,5 +1,6 @@
 import alt from '../alt/';
 import Firebase from 'firebase';
+import { browserHistory } from 'react-router';
 
 class Actions {
   constructor(){
@@ -17,7 +18,7 @@ class Actions {
     )
   }
 
-  login(args){
+  login(router){
     return (dispatch) => {
       let provider = new firebase.auth.GoogleAuthProvider();
       firebase.auth().signInWithPopup(provider).then(function(result) {
@@ -27,6 +28,8 @@ class Actions {
         var user = result.user;
         // ...
         dispatch(user);
+
+        browserHistory.push('chat')
       }).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;

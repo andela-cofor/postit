@@ -1,21 +1,20 @@
 import React from 'react';
-import MessageList from './MessageList.jsx';
-import ChannelList from './ChannelList.jsx'
-import MessageBox from './MessageBox.jsx';
 import Login from './Login.jsx';
+// import Chat from './Chat.jsx';
+// import {RouteHandler} from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import * as Colors from 'material-ui/styles/colors';
-import connectToStores from 'alt-utils/lib/connectToStores' 
-import ChatStore from '../store/ChatStore';
+// import connectToStores from 'alt-utils/lib/connectToStores' 
+// import ChatStore from '../store/ChatStore';
 var firebase = require("firebase/app");
 require("firebase/auth");
 require("firebase/database");
 
 var ThemeManager = getMuiTheme;
 
-@connectToStores
+// @connectToStores
 class App extends React.Component {
     constructor(){
         super();
@@ -37,13 +36,13 @@ class App extends React.Component {
         firebase.initializeApp(config);   
     }
 
-    static getStores(){
-        return [ChatStore]
-    }
+    // static getStores(){
+    //     return [ChatStore]
+    // }
 
-    static getPropsFromStores(){
-        return ChatStore.getState();
-    }
+    // static getPropsFromStores(){
+    //     return ChatStore.getState();
+    // }
 
     static childContextTypes() {
         muiTheme: React.PropTypes.object
@@ -52,27 +51,14 @@ class App extends React.Component {
     render() {
         let view = <Login />
         if(this.props.user){
-            view = (
-                <div>
-                  <div style={{
-                            display: 'flex',
-                            flexFlow: 'row wrap',
-                            maxWidth: 1200,
-                            width: '100%',
-                            margin: '30px auto 30px',
-                        }}>
-                        <ChannelList />
-                        <MessageList />
-                    </div>
-                    <MessageBox />
-                </div>
-            )
+            view = <Chat />
         }
         return (
             <MuiThemeProvider>
                 <div>
                     <AppBar title="PostIt" />
-                    {view}
+                    {this.props.children}
+                    {/*<RouteHandler />*/}
                 </div>
             </MuiThemeProvider>
         );

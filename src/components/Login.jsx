@@ -3,11 +3,6 @@ import { Card, CardText } from 'material-ui/Card';
 import Actions from '../actions/';
 import RB from 'material-ui/RaisedButton';
 
-// let {
-//   Card,
-//   CardText,
-// } = mui
-
 let RaisedButton = RB
 
 class Login extends React.Component {
@@ -15,9 +10,9 @@ class Login extends React.Component {
     super()
     this.onClick=this.onClick.bind(this)
   }
+
   onClick(){
-    // console.log('Logging in')
-    Actions.login();
+    Actions.login(this.context.router);
   }
 
   render(){
@@ -30,14 +25,18 @@ class Login extends React.Component {
         <CardText style={{
           'textAlign': 'center'
         }}>
-          To use app, please log in with your Google account.
+          Sign in with your Google account.
         </CardText>
         <RaisedButton style={{
           'display': 'block',
-        }} onClick={this.onClick} label="log in with Google" />
+        }} onClick={this.onClick} label="Sign In" />
       </Card>
     )
   }
+}
+
+Login.contextTypes = {
+  router: React.PropTypes.func.isRequired
 }
 
 module.exports = Login;

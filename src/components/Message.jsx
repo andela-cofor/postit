@@ -9,7 +9,6 @@ class Message extends React.Component {
     }
 
     render(){
-        console.log(this.props.message.profilePic)
         return (
         <ListItem disabled={true}
       leftAvatar={

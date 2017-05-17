@@ -22,7 +22,8 @@ let MessageSource = {
       });
     },
     success: Actions.messagesReceived,
-    error: Actions.messagesFailed
+    error: Actions.messagesFailed,
+    loading: Actions.messagesLoading
   }
 }
 

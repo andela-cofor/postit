@@ -3,6 +3,7 @@ import Message from './Message.jsx';
 import mui from 'material-ui/Card';
 import li from 'material-ui/List';
 import _ from 'lodash';
+import CircularProgress from 'material-ui/CircularProgress';
 import connectToStores from 'alt-utils/lib/connectToStores'
 import ChatStore from '../store/ChatStore';
 var firebase = require("firebase/app");
@@ -64,12 +65,23 @@ class MessageList extends React.Component {
   render() {
     let messageNodes = null;
 
-    if(this.props.messages){
+    if(!this.props.messagesLoading){
       messageNodes = _.values(this.props.messages).map((message) => {
         return (
             <Message message={message.message} />
         );
       });
+    } else {
+      messageNodes = <CircularProgress
+        mode="indeterminate"
+        style={{
+          paddingTop: 20,
+          paddingBottom: 20,
+          margin: '0 auto',
+          display: 'block',
+          width: '60px'
+        }}        
+      />
     }
     
 

@@ -29,6 +29,19 @@ class ChatStore {
     })
   }
 
+  @bind(Actions.channelReceived)
+  channelReceived(chan){
+    if(this.state.channels[chan.key]){
+      return;
+    }
+
+    this.state.channels[chan.key] = chan;
+
+    this.setState({
+      channels: this.state.channels
+    })
+  }
+
   @bind(Actions.channelOpened)
   channelOpened(selectedChannel){
     _(this.state.channels)
@@ -76,12 +89,11 @@ class ChatStore {
     setTimeout(this.getInstance().sendMessage, 10);
   }
 
-  // // @bind(Actions.addChannel)
-  // addChannel(){
-  //   this.setState({
-  //     channels,
-  //     selectedChannel
-  //   })
+  @bind(Actions.addChannel)
+  addChannel(channel){
+    this.state.channel = channel
+    setTimeout(this.getInstance().addChannel, 10);
+  }
 
   //   setTimeout(this.getInstance().getMessages, 100);
   // }

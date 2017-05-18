@@ -15,6 +15,10 @@ class Actions {
       'messageSendSuccess',
       'messageSendError',
       'messageReceived',
+      'addChannel',
+      'channelAddSuccess',
+      'channelAddError',
+      'channelReceived',
     )
   }
 

@@ -8,24 +8,23 @@ var firebase = require("firebase/app");
 let ChannelSource = {
   addChannel: {
     remote(state){
-      console.log(state, 'looking')
-      console.log('here baby')
       return new Promise((resolve, reject) => {
+        let chan = state.channel.trim()
         firebase.database().ref('/users/' + state.user.displayName + '/channels/').push({
-          "name": 'firebase',
+          "name": chan,
         });
-        firebase.database().ref('/messages/firebase/' ).push({
+        firebase.database().ref(`/messages/${chan}/` ).push({
           "message": 'Welcome...',
           "date": new Date().toUTCString(),
           "author": state.user.displayName,
           "userId": state.user.uid,
           "profilePic": state.user.photoURL
         });
-        resolve(channels);
+        resolve();
       });
     },
-    success: Actions.channelsReceived,
-    error: Actions.channelsFailed
+    success: Actions.channelAddSuccess,
+    error: Actions.channelAddError
   },
   getChannels: {
     remote(state){
@@ -33,6 +32,11 @@ let ChannelSource = {
         firebase.database().ref('/users/' + state.user.displayName + '/channels/').on('value', (dataSnapshot) => {
           let channels = dataSnapshot.val();
           resolve(channels);
+          firebase.database().ref('/users/' + state.user.displayName + '/channels/').on('child_added', (chan) => {
+            let chanVal = chan.val();
+            chanVal.key = chan.key;
+            Actions.channelReceived(chanVal)
+          })
         })
       });
     },

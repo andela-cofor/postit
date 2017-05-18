@@ -13,7 +13,6 @@ let MessageSource = {
         if(!firebase){
           return resolve()
         }
-        console.log(state.selectedChannel)
         firebase.database().ref('/messages/' + state.selectedChannel.name).push({
           "message": state.message,
           "date": new Date().toUTCString(),

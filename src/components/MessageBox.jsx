@@ -34,11 +34,6 @@ class MessageBox extends React.Component {
       evt.preventDefault();
 
       Actions.sendMessage(this.state.message);
-
-      firebase.database().ref('/messages/').push({
-        message: this.state.message
-      })
-    
     
       this.setState({
         message: ''

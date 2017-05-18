@@ -13,7 +13,8 @@ let MessageSource = {
         if(!firebase){
           return resolve()
         }
-        firebase.database().ref('/messages/' + state.selectedChannel.key).push({
+        console.log(state.selectedChannel)
+        firebase.database().ref('/messages/' + state.selectedChannel.name).push({
           "message": state.message,
           "date": new Date().toUTCString(),
           "author": state.user.displayName,
@@ -34,10 +35,10 @@ let MessageSource = {
       }
       firebase = require("firebase/app");
       return new Promise((resolve, reject) => {
-        firebase.database().ref('/messages/' + state.selectedChannel.key).once('value', (dataSnapshot) => {
+        firebase.database().ref('/messages/' + state.selectedChannel.name).on('value', (dataSnapshot) => {
           let messages = dataSnapshot.val();
           resolve(messages);
-          firebase.database().ref('/messages/' + state.selectedChannel.key).on('child_added', (msg) => {
+          firebase.database().ref('/messages/' + state.selectedChannel.name).on('child_added', (msg) => {
             let msgVal = msg.val();
             msgVal.key = msg.key;
             Actions.messageReceived(msgVal)

@@ -5,6 +5,8 @@ import Avatar from 'material-ui/Avatar';
 import mui from 'material-ui/Card';
 import trim from 'trim';
 import Actions from '../actions/'
+import MenuItem from 'material-ui/MenuItem';
+
 // var firebase = require("firebase/app");
 // require("firebase/auth");
 // require("firebase/database");
@@ -33,9 +35,9 @@ class MessageBox extends React.Component {
 
       Actions.sendMessage(this.state.message);
 
-    //   firebase.database().ref('/messages/').push({
-    //     message: this.state.message
-    //   })
+      firebase.database().ref('/messages/').push({
+        message: this.state.message
+      })
     
     
       this.setState({

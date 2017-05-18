@@ -56,9 +56,13 @@ class App extends React.Component {
         return (
             <MuiThemeProvider>
                 <div>
-                    <AppBar title="PostIt" />
-                    {this.props.children}
-                    {/*<RouteHandler />*/}
+                <AppBar 
+                    title="PostIt"
+                    iconClassNameRight="muidocs-icon-navigation-expand-more"
+                >
+                </AppBar>
+                {this.props.children}
+                {/*<RouteHandler />*/}
                 </div>
             </MuiThemeProvider>
         );

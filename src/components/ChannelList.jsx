@@ -19,7 +19,7 @@ let List = li
 class ChannelList extends React.Component {
   constructor(props) {
     super(props);
-    ChatStore.getChannels()  
+    ChatStore.getChannels()
 
       // this.onChange=this.onChange.bind(this)
       // this.onKeyUp=this.onKeyUp.bind(this)

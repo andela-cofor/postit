@@ -76,6 +76,16 @@ class ChatStore {
     setTimeout(this.getInstance().sendMessage, 10);
   }
 
+  // // @bind(Actions.addChannel)
+  // addChannel(){
+  //   this.setState({
+  //     channels,
+  //     selectedChannel
+  //   })
+
+  //   setTimeout(this.getInstance().getMessages, 100);
+  // }
+
   @bind(Actions.channelsReceived)
   receivedChannels(channels){
     let selectedChannel;

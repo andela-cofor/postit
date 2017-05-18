@@ -1,0 +1,79 @@
+{
+  "messages": {
+    "firebase": {
+      "fb_first": {
+        "message": "First in firebase",
+        "date": "Wednesday 08 Jul 2015 18:14:27 GMT",
+        "author": "Jeremy Johnson",
+        "profilePic": "http://socialearth.org/wp-content/uploads/2015/06/2-300x226.jpg"
+      },
+      "fb_second": {
+        "message": "I am fine how about you",
+        "date": "Wed, 08 Jul 2015 18:14:27 GMT",
+        "author": "Ofor Chinedu",
+        "profilePic": "https://scontent-amt2-1.xx.fbcdn.net/v/t1.0-9/12803239_10208843541829335_4608025519985567461_n.jpg?oh=3635d89c74b8ca644c31074976b1fa49&oe=59A964F2"
+      }
+    },
+    "flux": {
+      "flux_first": {
+        "message": "First in flux",
+        "date": "Wednesday 08 Jul 2015 18:14:27 GMT",
+        "author": "Henry Chukwu",
+        "profilePic": "http://socialearth.org/wp-content/uploads/2015/06/2-300x226.jpg"
+      },
+      "flux_second": {
+        "message": "I am fine how about you",
+        "date": "Wed, 08 Jul 2015 18:14:27 GMT",
+        "author": "Ofor Chinedu",
+        "profilePic": "https://scontent-amt2-1.xx.fbcdn.net/v/t1.0-9/12803239_10208843541829335_4608025519985567461_n.jpg?oh=3635d89c74b8ca644c31074976b1fa49&oe=59A964F2"
+      }
+    },
+    "react": {
+      "react_first": {
+        "message": "First in flux",
+        "date": "Wednesday 08 Jul 2015 18:14:27 GMT",
+        "author": "Henry Chukwu",
+        "profilePic": "http://socialearth.org/wp-content/uploads/2015/06/2-300x226.jpg"
+      },
+      "react_second": {
+        "message": "I am fine how about you",
+        "date": "Wed, 08 Jul 2015 18:14:27 GMT",
+        "author": "Ofor Chinedu",
+        "profilePic": "https://scontent-amt2-1.xx.fbcdn.net/v/t1.0-9/12803239_10208843541829335_4608025519985567461_n.jpg?oh=3635d89c74b8ca644c31074976b1fa49&oe=59A964F2"
+      }
+    },
+    "webpack": {
+      "wb_first": {
+        "message": "First in flux",
+        "date": "Wednesday 08 Jul 2015 18:14:27 GMT",
+        "author": "Henry Chukwu",
+        "profilePic": "http://socialearth.org/wp-content/uploads/2015/06/2-300x226.jpg"
+      },
+      "wb_second": {
+        "message": "I am fine how about you",
+        "date": "Wed, 08 Jul 2015 18:14:27 GMT",
+        "author": "Ofor Chinedu",
+        "profilePic": "https://scontent-amt2-1.xx.fbcdn.net/v/t1.0-9/12803239_10208843541829335_4608025519985567461_n.jpg?oh=3635d89c74b8ca644c31074976b1fa49&oe=59A964F2"
+      }
+    }
+  },
+  "users": {
+    "Chinedor": {
+      "channels": {
+        "flux": {
+          "name": "flux"
+        },
+        "react": {
+          "name": "react"
+        },
+        "firebase": {
+          "name": "webpack"
+        },
+        "webpack": {
+          "name": "webpack"
+        }
+      }
+    }
+  }
+}
+

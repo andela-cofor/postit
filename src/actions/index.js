@@ -19,6 +19,10 @@ class Actions {
       'channelAddSuccess',
       'channelAddError',
       'channelReceived',
+      'addNumber',
+      'numberAddSuccess',
+      'numberAddError',
+      'numbersReceived',
     )
   }
 
@@ -33,7 +37,18 @@ class Actions {
         // ...
         dispatch(user);
 
-        browserHistory.push('chat')
+        firebase.database().ref('/users/' + user.uid).on('value', (dataSnapshot) => {
+          let userFirebase = dataSnapshot.val();
+          console.log(user, 'User Details')
+          if(userFirebase === null){
+            console.log('not in dbb')
+            browserHistory.push('/phone')
+          }else if(userFirebase){
+            browserHistory.push('chat')
+          }
+        })
+
+        // browserHistory.push('chat')
       }).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -45,6 +60,13 @@ class Actions {
         // ...
         return;
       });
+    }
+  }
+
+  phoneNumber(number){
+    return (dispatch) => {
+      console.log(number, 'from actions')
+      dispatch(number);
     }
   }
 }

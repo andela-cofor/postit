@@ -17,7 +17,11 @@ module.exports = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoEmitOnErrorsPlugin()
+        new webpack.NoEmitOnErrorsPlugin(),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery'
+        })
     ],
     module: {
         loaders: [
@@ -40,4 +44,7 @@ module.exports = {
      resolveLoader: {
         moduleExtensions: ['-loader']
     },
+    externals: {
+    jquery: 'jQuery'
+  }
 }

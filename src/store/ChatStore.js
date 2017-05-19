@@ -3,9 +3,10 @@ import Actions from '../actions/';
 import {decorate, bind, datasource} from 'alt-utils/lib/decorators'
 import ChannelSource from '../source/ChannelSource';
 import MessageSource from '../source/MessageSource';
+import UserSource from '../source/UserSource';
 import _ from 'lodash';
 
-@datasource(ChannelSource, MessageSource)
+@datasource(ChannelSource, MessageSource, UserSource)
 @decorate(alt)
 class ChatStore {
   constructor() {
@@ -122,7 +123,16 @@ class ChatStore {
 
   @bind(Actions.login)
   login(user){
+    console.log('this is user from ChatStore', user)
     this.setState({user: user})
+  }
+
+  @bind(Actions.phoneNumber)
+  phoneNumber(number){
+    this.setState({number: number})
+    console.log('state set successfully', this.state)
+
+    setTimeout(this.getInstance().addUser, 10);
   }
 
 }

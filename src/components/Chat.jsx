@@ -39,7 +39,7 @@ class Chat extends React.Component {
 
   onClick(){
     console.log('On Click works')
-    ChatStore.addChannel('Firebase')
+    ChatStore.addChannel()
   }
 
   onChange(evt){

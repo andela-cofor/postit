@@ -26,7 +26,7 @@ var ThemeManager = getMuiTheme;
 class App extends React.Component {
   constructor(){
     super();
-    this.onClick=this.onClick.bind(this)
+    // this.onClick=this.onClick.bind(this)
     ThemeManager({palette: {
         primary1Color: Colors.blue500,
         primary1Color: Colors.blue700,
@@ -61,14 +61,12 @@ class App extends React.Component {
   }
 
   onClick(){
-    console.log('Was called Buya')
     browserHistory.push('/profile')
   }
 
   render() {
     let view = <Login />
     if(this.props.user){
-      console.log('Apppppp', this.props.user)
         // view = <Chat />
     }
     return (
@@ -76,13 +74,15 @@ class App extends React.Component {
           <div>
             <AppBar 
             title="PostIt"
-            iconClassNameRight="muidocs-icon-navigation-expand-more"
             iconElementRight={
-              <RaisedButton 
-                label="Profile" 
-                style={{margin: 12,}}
+              <Avatar
                 onClick={this.onClick}
-                 />
+                src=""
+                size={50}
+                style={{
+                  margin: 5
+                }}
+              />
             }
           >
           </AppBar>

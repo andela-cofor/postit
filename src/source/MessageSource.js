@@ -9,6 +9,7 @@ let MessageSource = {
 
   sendMessage: {
     remote(state){
+      console.log('Message', state)
       return new Promise((resolve, reject) => {
         if(!firebase){
           return resolve()
@@ -38,6 +39,7 @@ let MessageSource = {
           let messages = dataSnapshot.val();
           resolve(messages);
           firebase.database().ref('/messages/' + state.selectedChannel.name).on('child_added', (msg) => {
+            console.log(msgVal)
             let msgVal = msg.val();
             msgVal.key = msg.key;
             Actions.messageReceived(msgVal)

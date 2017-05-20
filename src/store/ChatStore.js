@@ -96,9 +96,6 @@ class ChatStore {
     setTimeout(this.getInstance().addChannel, 10);
   }
 
-  //   setTimeout(this.getInstance().getMessages, 100);
-  // }
-
   @bind(Actions.channelsReceived)
   receivedChannels(channels){
     let selectedChannel;
@@ -123,16 +120,49 @@ class ChatStore {
 
   @bind(Actions.login)
   login(user){
-    console.log('this is user from ChatStore', user)
     this.setState({user: user})
+  }
+
+  @bind(Actions.resendUser)
+  resendUser(user){
+    console.log('this is user from ChatStore', user)
+    this.setState({
+      user: user
+    })
+    setTimeout(this.getInstance().getChannels(user), 10);
+    console.log('userDetails set successfully', this.state)
+  }
+
+  @bind(Actions.loginWithEmail)
+  loginWithEmail(user){
+    this.setState({
+      user: user
+    })
+  }
+
+  @bind(Actions.createUserWithEmailAndPassword)
+  createUserWithEmailAndPassword(user){
+    this.setState({
+      user: user
+    })
+    setTimeout(this.getInstance().addUser1, 10);
   }
 
   @bind(Actions.phoneNumber)
   phoneNumber(number){
     this.setState({number: number})
-    console.log('state set successfully', this.state)
-
     setTimeout(this.getInstance().addUser, 10);
+  }
+
+  @bind(Actions.editDetails)
+  editDetails(userDetails){
+    this.setState({userDetails: userDetails})
+    setTimeout(this.getInstance().editUserDetails, 10);
+  }
+
+  @bind(Actions.userAddSuccess)
+  userAddSuccess(){
+    setTimeout(this.getInstance().homepage, 10);
   }
 
 }

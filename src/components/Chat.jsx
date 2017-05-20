@@ -9,6 +9,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import connectToStores from 'alt-utils/lib/connectToStores' 
 import trim from 'trim';
 import Actions from '../actions/index'
+import RaisedButton from 'material-ui/RaisedButton';
 
 @connectToStores
 class Chat extends React.Component {
@@ -20,13 +21,27 @@ class Chat extends React.Component {
     this.onChange=this.onChange.bind(this)
     this.onKeyUp=this.onKeyUp.bind(this)
     this.onClick=this.onClick.bind(this)
+    this.loginPage=this.loginPage.bind(this)
   }
 
   componentDidMount(){
     let state = ChatStore.getState();
-    if(!state.user){
-      browserHistory.push('/')
+    if(state.user === null){
+      console.log('empty')
+      const user = JSON.parse(localStorage.getItem('state'))
+      console.log(user, 'from loc');
+      Actions.resendUser(user);
     }
+    // console.log(state.user)
+    // if(state.user === null){
+    //   // console.log('true')
+    // }
+    // console.log(this.state, 'sty;ignnfdk')
+    // localStorage.setItem('state', JSON.stringify(state));
+    // console.log(localStorage.getItem('state'),'after string')
+    // const user = JSON.parse(localStorage.getItem('state'))
+    // console.log(user, 'from loc');
+    // console.log(state.user, 'state...');
   }
 
   static getStores(){
@@ -48,6 +63,16 @@ class Chat extends React.Component {
     })
   }
 
+  // onClick(){
+  //   console.log('Was called Buya')
+  //   browserHistory.push('/profile')
+  // }
+
+  loginPage(){
+    console.log('Was called Buya')
+    browserHistory.push('/profile')
+  }
+
   onKeyUp(evt) {
     if(evt.keyCode === 13 && trim(evt.target.value) != '') {
       evt.preventDefault();
@@ -62,7 +87,15 @@ class Chat extends React.Component {
 
   render() {
     return(
-      <div>
+      
+      <div
+      iconElementRight={
+              <RaisedButton 
+                label="Profile" 
+                style={{margin: 12,}}
+                onClick={this.loginPage}
+                 />
+            }>
         {/*<FloatingActionButton
         style={{marginLeft: 20, marginTop: 10}}
         onClick={this.onClick}

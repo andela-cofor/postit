@@ -9,36 +9,32 @@ import { browserHistory } from 'react-router';
 
 let RaisedButton = RB
 
-class Login extends React.Component {
+class Signup extends React.Component {
   constructor() {
     super()
     this.state = {
       userDetails: {
+        firstName: '',
+        lastName: '',
         email: '',
-        password: ''
+        password: '',
+        phoneNumber: ''
       }
     }
     // this.onClick=this.onClick.bind(this)
-    this.signInWithEmailAndPassword=this.signInWithEmailAndPassword.bind(this)
+    // this.createUserWithEmailAndPassword=this.createUserWithEmailAndPassword.bind(this)
     this.handleChange=this.handleChange.bind(this)
     this.signUp=this.signUp.bind(this)
-    this.loginWithEmail=this.loginWithEmail.bind(this)
-    this.loginWithGoogle=this.loginWithGoogle.bind(this)
   }
 
-  // onClick(event){
+  onClick(event){
+    
+  }
+
+  // signInWithEmailAndPassword(event){
   //   event.preventDefault();
-  //   Actions.login(this.context.router);
+  //   Actions.signInWithEmailAndPassword(this.state.userDetails)
   // }
-  loginWithGoogle(){
-    event.preventDefault();
-    Actions.login(this.context.router);
-  }
-
-  signInWithEmailAndPassword(event){
-    event.preventDefault();
-    Actions.signInWithEmailAndPassword(this.state.userDetails)
-  }
 
   handleChange(event) {
     const userDetails = this.state.userDetails;
@@ -50,14 +46,16 @@ class Login extends React.Component {
   //   event.preventDefault(this.state.userDetails);
   // }
 
-  signUp(){
-    browserHistory.push('/signup')
+  signUp(event){
+    event.preventDefault();
+    // console.log('was called')
+    Actions.createUserWithEmailAndPassword(this.state.userDetails)
   }
 
-  loginWithEmail(event){
-    event.preventDefault();
-    Actions.loginWithEmail(this.state.userDetails);
-  }
+  // createUserWithEmailAndPassword(event){
+  //   event.preventDefault();
+  //   Actions.createUserWithEmailAndPassword(this.state.userDetails)
+  // }
 
   render(){
     return (
@@ -69,10 +67,30 @@ class Login extends React.Component {
         <CardText style={{
           'textAlign': 'center'
         }}>
-          <RaisedButton label="Login" style={{margin: 12,}} />
+          <RaisedButton label="Signup" style={{margin: 12,}} />
         </CardText>
-        <form className="mui-form" onSubmit={this.signInWithEmailAndPassword}>
+        <form className="mui-form" onSubmit={this.signUp}>
           <br /><br /><br /><br />
+          <div className="mui-textfield">
+            <TextField
+              required
+              name="firstName"
+              value={this.state.firstName}
+              onChange={this.handleChange}
+              placeholder="Enter your firstname"
+              type="text"
+            /><br />
+          </div>
+          <div className="mui-textfield">
+            <TextField
+              required
+              name="lastName"
+              value={this.state.lastName}
+              onChange={this.handleChange}
+              placeholder="Enter your last name"
+              type="text"
+            /><br />
+          </div>
           <div className="mui-textfield">
             <TextField
               required
@@ -93,24 +111,25 @@ class Login extends React.Component {
               type="password"
             /><br />
           </div>
+          <div className="mui-textfield">
+            <TextField
+              required
+              name="phoneNumber"
+              value={this.state.phoneNumber}
+              onChange={this.handleChange}
+              placeholder="Enter phone number"
+              type="number"
+            /><br />
+          </div>
           <br/><br/>
           <div>
-          <RaisedButton 
-            onClick={this.loginWithEmail}
-            label="Login with Email" 
-            type="submit"
-            primary={true} 
-            style={{margin: 12,}} 
-          />
-          <RaisedButton 
-            onClick={this.loginWithGoogle}
-            label="Google"
-          />
-          <RaisedButton
-            label="Sign Up"
-            secondary={true}
-            onClick={this.signUp}
-            style={{margin: 12,}} />
+            <RaisedButton
+              label="Sign Up"
+              type="submit"
+              style={{
+                margin: 12,
+              }}
+            />
           </div>
         </form>
       </Card>
@@ -118,8 +137,8 @@ class Login extends React.Component {
   }
 }
 
-Login.contextTypes = {
+Signup.contextTypes = {
   router: React.PropTypes.func.isRequired
 }
 
-module.exports = Login;
+module.exports = Signup;

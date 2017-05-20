@@ -33,18 +33,11 @@ class PhoneBook extends React.Component {
 
   componentDidMount(){
     let state = ChatStore.getState();
-    console.log(this.props.user)
   }
 
   // onClick(){
-  //   // Actions.login(this.context.router);
+  //   ChatStore.addUser()
   // }
-
-  onClick(){
-    // console.log('On Click works')
-    ChatStore.addUser()
-    // Actions.phoneNumber(this.state.phoneNumber)
-  }
 
   onChange(evt){
     this.setState({
@@ -61,7 +54,7 @@ class PhoneBook extends React.Component {
           phoneNumber: this.state.phoneNumber
         })
       } else{
-        console.log('Enter Number')
+        // console.log('Enter Number')
       }
     }
   }

@@ -27,35 +27,16 @@ class Signup extends React.Component {
     this.signUp=this.signUp.bind(this)
   }
 
-  onClick(event){
-    
-  }
-
-  // signInWithEmailAndPassword(event){
-  //   event.preventDefault();
-  //   Actions.signInWithEmailAndPassword(this.state.userDetails)
-  // }
-
   handleChange(event) {
     const userDetails = this.state.userDetails;
     userDetails[event.target.name] = event.target.value;
     this.setState({ userDetails });
   }
 
-  // createUserWithEmailAndPassword(event){
-  //   event.preventDefault(this.state.userDetails);
-  // }
-
   signUp(event){
     event.preventDefault();
-    // console.log('was called')
     Actions.createUserWithEmailAndPassword(this.state.userDetails)
   }
-
-  // createUserWithEmailAndPassword(event){
-  //   event.preventDefault();
-  //   Actions.createUserWithEmailAndPassword(this.state.userDetails)
-  // }
 
   render(){
     return (

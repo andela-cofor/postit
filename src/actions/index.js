@@ -33,6 +33,44 @@ class Actions {
     )
   }
 
+  addUserToFriends(newUser){
+    return(dispatch) => {
+      console.log(newUser, 'adding this to user')
+      const user = JSON.parse(localStorage.getItem('state'))
+      console.log(user);
+      const senderName = user.displayName;
+      const newUser1 = newUser.replace(/\s/g, '');
+      const userId = user.uid
+      console.log
+    
+      firebase.database().ref('/contacts/' + newUser1).on('value', (dataSnapshot) => {
+        console.log(dataSnapshot.val())
+        const userInDb = dataSnapshot.val()
+        if(userInDb === null){
+          console.log('not in db')
+        } else {
+          console.log(userInDb)
+          const username = userInDb.username
+          const email = userInDb.email
+          const phoneNumber = userInDb.number
+          const userId = user.uid
+          // firebase.database().ref('/friends/' ).push({
+          //   "userId": userId,
+          //   "username": username,
+          //   "email": email,
+          //   "phoneNumber": phoneNumber
+          // });
+          firebase.database().ref('/friends/' + `/${userId}/`).push({
+            "userId": userId,
+            "username": username,
+            "email": email,
+            "phoneNumber": phoneNumber
+          });
+        }
+      })
+    }
+  }
+
   loginWithFirebase(){
     return(dispatch) => {
 
@@ -41,9 +79,7 @@ class Actions {
 
   resendUser(user){
     return(dispatch) => {
-      console.log(user, 'I was called')
       dispatch(user)
-      browserHistory.push('chat')
     }
   }
 
@@ -173,10 +209,9 @@ class Actions {
     }
   }
 
-  loginWithFirebase(){
-    // chinnkkjhkor@andela
-    console.log(state, 'I finall')
-  }
+  // loginWithFirebase(){
+  //   console.log(state, 'I finall')
+  // }
 
   phoneNumber(number){
     return (dispatch) => {

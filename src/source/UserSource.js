@@ -45,11 +45,31 @@ let UserSource = {
           "userId": userId,
           "username": userName
         });
-        firebase.database().ref('/channelsList/').set({
-          "name": 'Lagos All',
+        // firebase.database().ref('/friends/' + `/${userId}/`).push({
+        //   "userId": state.user.uid,
+        //   "username": username,
+        //   "email": userEmail,
+        //   "number": number
+        // });
+        firebase.database().ref('/contacts/' + number).push({
+          "email": userEmail,
+          "userId": userId,
+          "username": userName,
+          "number": number,
         });
+        // firebase.database().ref('/channelsList/').push({
+        //   "name": 'Lagos All',
+        //   "username": userName,
+        //   "number": number,
+        // });
+
         firebase.database().ref('/channels/' + userId).push({
           "name": 'Lagos All',
+        });
+        firebase.database().ref('/Lagos All/' + userId).push({
+          "email": userEmail,
+          "username": userName,
+          "number": number,
         });
         firebase.database().ref('/messages/' + '/Lagos All/').push({
           "message": `${userName} just joined this Group... Welcome Him`,
@@ -84,8 +104,19 @@ let UserSource = {
           "username": userName,
           "password": state.user.password
         });
-        firebase.database().ref('/channelsList/').set({
-          "name": 'Lagos All',
+        firebase.database().ref('/contacts/' + number).push({
+          "email": userEmail,
+          "userId": userId,
+          "username": userName,
+          "number": number,
+        });
+        // firebase.database().ref('/channelsList/').set({
+        //   "name": 'Lagos All',
+        // });
+        firebase.database().ref('/Lagos All/' + userId).push({
+          "email": userEmail,
+          "username": userName,
+          "number": number,
         });
         firebase.database().ref('/channels/' + userId).push({
           "name": 'Lagos All',

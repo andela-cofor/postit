@@ -14,12 +14,15 @@ let MessageSource = {
         if(!firebase){
           return resolve()
         }
+        // console.log(JSON.parse(localStorage.getItem('state')))
+        const user = JSON.parse(localStorage.getItem('state'))
+        const userPic = user.photoURL;
         firebase.database().ref('/messages/' + state.selectedChannel.name).push({
           "message": state.message,
           "date": new Date().toUTCString(),
           "author": state.user.displayName,
           "userId": state.user.uid,
-          "profilePic": state.user.photoURL
+          "profilePic": userPic
         });
         resolve();
       });

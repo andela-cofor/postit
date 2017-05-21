@@ -30,20 +30,64 @@ class Actions {
       'editDetails',
       'userAddSuccess',
       'userAddError',
+      'addToFriends',
+      'FriendReceived',
+      'FriendOpened'
     )
   }
 
-  loginWithFirebase(){
+  addToFriends(newUser){
     return(dispatch) => {
+      console.log(newUser, 'adding this to user')
+      const userNumber = newUser.trim()
+      const user = JSON.parse(localStorage.getItem('state'))
+      console.log(user);
+      const userId = user.uid
 
+      firebase.database().ref('/contacts/' +  userNumber ).on('value', (dataSnapshot) => {
+          let contact = dataSnapshot.val();
+          console.log(contact)
+          if(!contact){
+            console.log('Contact has not joined PostIt')
+          } else{
+            console.log('Add User')
+            Object.keys(contact).forEach((contactDetails) =>{
+              console.log(contact[contactDetails]);
+              const email = contact[contactDetails].email;
+              const username = contact[contactDetails].username;
+              const number = contact[contactDetails].number;
+              const userId = contact[contactDetails].userId;
+
+              firebase.database().ref('/allfriends/' +  userId + `/${userNumber}/`).on('value', (dataSnapshot) => {
+                let myfriends = dataSnapshot.val();
+                console.log(myfriends, 'All my friends')
+                if(myfriends === null){
+                  console.log('User has not been added to you')
+                  firebase.database().ref('/friends/' + userId).push({
+                    "userId": userId,
+                    "username": username,
+                    "email": email,
+                    "number": number
+                  });
+                  firebase.database().ref('/allfriends/' + userId + `/${number}/`).set({
+                    "userId": userId,
+                    "username": username,
+                    "email": email,
+                    "number": number
+                  });
+                } else {
+                  console.log('u have him')
+                }
+              })
+            })
+          }
+        })
     }
   }
 
   resendUser(user){
     return(dispatch) => {
-      console.log(user, 'I was called')
       dispatch(user)
-      browserHistory.push('chat')
     }
   }
 
@@ -171,11 +215,6 @@ class Actions {
         return;
       });
     }
-  }
-
-  loginWithFirebase(){
-    // chinnkkjhkor@andela
-    console.log(state, 'I finall')
   }
 
   phoneNumber(number){

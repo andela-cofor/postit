@@ -22,7 +22,7 @@ class Chat extends React.Component {
     this.onKeyUp=this.onKeyUp.bind(this)
     this.onClick=this.onClick.bind(this)
     this.loginPage=this.loginPage.bind(this)
-    this.onClickEnter=this.onClickEnter.bind(this)
+    this.addAFriend=this.addAFriend.bind(this)
   }
 
   componentDidMount(){
@@ -76,7 +76,7 @@ class Chat extends React.Component {
     }
   }
 
-  onClickEnter(event){
+  addAFriend(event){
     // event.preventDefault();
     // console.log(event.target.value, 'From user text');
     if(event.keyCode === 13 && trim(event.target.value) != '') {
@@ -85,7 +85,7 @@ class Chat extends React.Component {
       // this.setState({
       //     channel: event.target.value
       // })
-      Actions.addUserToFriends(event.target.value); 
+      Actions.addToFriends(event.target.value); 
       
     }
   }
@@ -110,7 +110,7 @@ class Chat extends React.Component {
             />
         </FloatingActionButton>*/}
         <textarea
-          placeholder="Add channel..."
+          placeholder="Add a group..."
           value={this.state.message}
           onChange={this.onChange}
           onKeyUp={this.onKeyUp}
@@ -127,7 +127,22 @@ class Chat extends React.Component {
           marginTop: 10
         }} />
         <textarea
-          placeholder="Add a a friend..."
+          placeholder="Add a a friend with number..."
+          onKeyUp={this.addAFriend}
+          style={{
+          width: '20%',
+          borderColor: '#D0D0D0',
+          resize: 'none',
+          borderRadius: 3,
+          minHeight: 50,
+          color: '#555',
+          fontSize: 14,
+          outline: 'auto 0px',
+          marginLeft: 200,
+          marginTop: 10
+        }} />
+        <textarea
+          placeholder="Invite a friend to channel..."
           name="newUserEmail"
           value={this.state.newUserEmail}
           onKeyUp={this.onClickEnter}
@@ -140,7 +155,7 @@ class Chat extends React.Component {
           color: '#555',
           fontSize: 14,
           outline: 'auto 0px',
-          marginLeft: 400,
+          marginLeft: 218,
           marginTop: 10
         }} />
         <div style={{

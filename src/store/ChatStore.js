@@ -43,6 +43,13 @@ class ChatStore {
     })
   }
 
+  @bind(Actions.FriendReceived)
+  FriendReceived(frn){
+    if(this.state.friends[frn.key]){
+      return
+    }
+  }
+
   @bind(Actions.channelOpened)
   channelOpened(selectedChannel){
     _(this.state.channels)
@@ -60,6 +67,25 @@ class ChatStore {
       })
 
       setTimeout(this.getInstance().getMessages, 100);
+  }
+
+  @bind(Actions.FriendOpened)
+  FriendOpened(selectedFriend){
+    _(this.state.friends)
+      .values()
+      .map((friends) => {
+        friends.selected = false
+      })
+      .value();
+
+      selectedFriend.selected = true
+
+      this.setState({
+        selectedFriend,
+        friends: this.state.friends
+      })
+
+      // setTimeout(this.getInstance().getMessages, 100);
   }
 
   @bind(Actions.messagesLoading)
@@ -118,6 +144,8 @@ class ChatStore {
     setTimeout(this.getInstance().getMessages, 100);
   }
 
+  
+
   @bind(Actions.login)
   login(user){
     this.setState({user: user})
@@ -163,6 +191,11 @@ class ChatStore {
   @bind(Actions.userAddSuccess)
   userAddSuccess(){
     setTimeout(this.getInstance().homepage, 10);
+  }
+
+  @bind(Actions.addToFriends)
+  addToFriends(){
+    conosle.log('I am in store now')
   }
 
 }

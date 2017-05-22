@@ -42,7 +42,6 @@ class Profile extends React.Component {
   componentDidMount(){
     let state = ChatStore.getState();
     console.log(this.props.user)
-    console.log(localStorage.getItem('state'))
   }
 
   setProfilePic(url){

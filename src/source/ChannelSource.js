@@ -56,7 +56,7 @@ let ChannelSource = {
   },
   getChannels: {
     remote(state){
-      console.log(state, 'state in channels')
+      // console.log(state, 'state in channels')
       return new Promise((resolve, reject) => {
         firebase.database().ref('/channels/' +  state.user.uid ).on('value', (dataSnapshot) => {
           let channels = dataSnapshot.val();

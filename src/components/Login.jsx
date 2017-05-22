@@ -69,7 +69,9 @@ class Login extends React.Component {
         <CardText style={{
           'textAlign': 'center'
         }}>
-          <RaisedButton label="Login" style={{margin: 12,}} />
+          <RaisedButton
+            label="Login"
+            style={{margin: 12,}} />
         </CardText>
         <form className="mui-form" onSubmit={this.signInWithEmailAndPassword}>
           <br /><br /><br /><br />

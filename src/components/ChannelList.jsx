@@ -135,7 +135,7 @@ class ChannelList extends React.Component {
               fontSize: 14,
               outline: 'auto 0px'
           }} />*/}
-            <Card >
+            <Card>
                 <List>
                     {channelNodes}
                 </List>

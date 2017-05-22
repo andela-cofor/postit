@@ -1,6 +1,7 @@
 import React from 'react';
 import MessageList from './MessageList.jsx';
 import ChannelList from './ChannelList.jsx';
+import FriendList from './FriendList.jsx';
 import MessageBox from './MessageBox.jsx';
 import ChatStore from '../store/ChatStore';
 import { browserHistory } from 'react-router';
@@ -18,20 +19,24 @@ class Chat extends React.Component {
     this.state = {
         channel: '',
     }
-    this.onChange=this.onChange.bind(this)
-    this.onKeyUp=this.onKeyUp.bind(this)
-    this.onClick=this.onClick.bind(this)
-    this.loginPage=this.loginPage.bind(this)
-    this.addAFriend=this.addAFriend.bind(this)
+    this.onChange=this.onChange.bind(this);
+    this.onKeyUp=this.onKeyUp.bind(this);
+    this.onClick=this.onClick.bind(this);
+    this.loginPage=this.loginPage.bind(this);
+    this.addAFriend=this.addAFriend.bind(this);
+    this.logout=this.logout.bind(this);
   }
 
   componentDidMount(){
     let state = ChatStore.getState();
     if(state.user === null){
-      console.log('empty')
-      const user = JSON.parse(localStorage.getItem('state'))
-      // console.log(user, 'from loc');
-      Actions.resendUser(user);
+      if(!JSON.parse(localStorage.getItem('state'))){
+        browserHistory.push('/')
+      }
+      else {
+        const user = JSON.parse(localStorage.getItem('state'))
+        Actions.resendUser(user);
+      }
     }
   }
 
@@ -86,8 +91,13 @@ class Chat extends React.Component {
       //     channel: event.target.value
       // })
       Actions.addToFriends(event.target.value); 
-      
     }
+  }
+
+  logout(){
+    console.log('Someone clicked me');
+    localStorage.clear();
+    browserHistory.push('/')
   }
 
   render() {
@@ -109,6 +119,16 @@ class Chat extends React.Component {
               
             />
         </FloatingActionButton>*/}
+        <div>
+          <RaisedButton
+            onClick={this.logout}
+            label="Logout"
+            style={{
+              marginLeft: 1150,
+            }}
+          />
+        </div>
+        <div>
         <textarea
           placeholder="Add a group..."
           value={this.state.message}
@@ -124,21 +144,6 @@ class Chat extends React.Component {
           fontSize: 14,
           outline: 'auto 0px',
           marginLeft: 40,
-          marginTop: 10
-        }} />
-        <textarea
-          placeholder="Add a a friend with number..."
-          onKeyUp={this.addAFriend}
-          style={{
-          width: '20%',
-          borderColor: '#D0D0D0',
-          resize: 'none',
-          borderRadius: 3,
-          minHeight: 50,
-          color: '#555',
-          fontSize: 14,
-          outline: 'auto 0px',
-          marginLeft: 200,
           marginTop: 10
         }} />
         <textarea
@@ -158,6 +163,23 @@ class Chat extends React.Component {
           marginLeft: 218,
           marginTop: 10
         }} />
+        <textarea
+          type="number"
+          placeholder="Add a a friend with number..."
+          onKeyUp={this.addAFriend}
+          style={{
+          width: '20%',
+          borderColor: '#D0D0D0',
+          resize: 'none',
+          borderRadius: 3,
+          minHeight: 50,
+          color: '#555',
+          fontSize: 14,
+          outline: 'auto 0px',
+          marginLeft: 200,
+          marginTop: 10
+        }} />
+        </div>
         <div style={{
           display: 'flex',
           flexFlow: 'row wrap',
@@ -167,6 +189,7 @@ class Chat extends React.Component {
           }}>
           <ChannelList {...this.props}/>
           <MessageList />
+          <FriendList />
         </div>
         <MessageBox />
     </div>

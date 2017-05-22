@@ -11,7 +11,6 @@ class Friend extends React.Component {
   }
 
   render(){
-    console.log(this.props.friend, 'What I got')
     return (
       <ListItem>{this.props.friend.email}</ListItem>
     )

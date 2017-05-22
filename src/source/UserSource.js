@@ -66,7 +66,7 @@ let UserSource = {
         firebase.database().ref('/channels/' + userId).push({
           "name": 'Lagos All',
         });
-        firebase.database().ref('/Lagos All/' + userId).push({
+        firebase.database().ref('/Lagos All/' + userId).set({
           "email": userEmail,
           "username": userName,
           "number": number,

@@ -10,10 +10,13 @@
   "license": "ISC",
   "dependencies": {
     "alt": "^0.18.6",
+    "axios": "^0.16.1",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "body-parser": "^1.17.2",
     "css-loader": "^0.28.1",
+    "dotenv": "^4.0.0",
     "eslint": "^3.19.0",
     "firebase": "^3.9.0",
     "intl-tel-input": "^11.0.12",
@@ -35,7 +38,9 @@
     "toastr": "^2.1.2",
     "trim": "0.0.1",
     "webpack": "^2.5.1",
-    "webpack-dev-server": "^2.4.5"
+    "webpack-dev-middleware": "^1.10.2",
+    "webpack-dev-server": "^2.4.5",
+    "webpack-hot-middleware": "^2.18.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

@@ -72,38 +72,39 @@ class Profile extends React.Component {
     const reader = new FileReader()
     reader.onload = function (evt) {
       console.log(evt)
-      // const mediaRef = firebase.storage().ref('images/').child('test')
-      // mediaRef.putString(evt.target.result).then((snap) => {
-      //   console.log(snap.downloadURL);
-      //   this.setProfilePic(snap.downloadURL);
-      // })
+      const mediaRef = firebase.storage().ref('images/').child('pest')
+      mediaRef.putString(evt.target.result).then((snap) => {
+        console.log(snap);
+        // this.setProfilePic(snap.downloadURL);
+      })
     }
     reader.readAsDataURL(file)
 
-    // firebase.storage().ref('images/').child('test.jpg').getDownloadURL().then(function(url) {
-    // // `url` is the download URL for 'images/stars.jpg'
+    firebase.storage().ref('images/').child('pest').getDownloadURL().then(function(url) {
+    // `url` is the download URL for 'images/stars.jpg'
 
-    // // This can be downloaded directly:
-    // var xhr = new XMLHttpRequest();
-    // xhr.responseType = 'blob';
-    // xhr.onload = function(event) {
-    //   var blob = xhr.response;
-    //   console.log('this is blob', blob)
-    // };
-    // xhr.open('GET', url);
-    // xhr.send();
+    // This can be downloaded directly:
+    var xhr = new XMLHttpRequest();
+    xhr.responseType = 'blob';
+    xhr.onload = function(event) {
+      var blob = xhr.response;
+      console.log('this is blob', blob)
+    };
+    xhr.open('GET', url);
+    xhr.send();
 
-    // // Or inserted into an <img> element:
-    // var img = document.getElementById('myimg');
-    //   img.src = url;
-    // // this.setState({
-    // //   profilePicture: url
-    // // });
-    //   console.log(url, 'Url');
-    // }).catch(function(error) {
-    //   // Handle any errors
-    //   console.log(error)
+    // Or inserted into an <img> element:
+    var img = document.getElementById('myimg');
+
+      // img.src = url;
+    // this.setState({
+    //   profilePicture: url
     // });
+      console.log(url, 'Url');
+    }).catch(function(error) {
+      // Handle any errors
+      console.log(error)
+    });
   }
 
   render(){

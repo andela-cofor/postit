@@ -1,5 +1,8 @@
 import alt from '../alt/';
 import Firebase from 'firebase';
+import axios from 'axios';
+// import nodemailer from 'nodemailer';
+// import ChatStore from '../store/ChatStore'
 import { browserHistory } from 'react-router';
 require("firebase/auth");
 require("firebase/database");
@@ -36,6 +39,54 @@ class Actions {
       'FriendsFailed',
       'logout'
     )
+  }
+
+  sendEmailUsers(value){
+    return (dispatch) => {
+      console.log(value, 'Received value')
+      const channelName = value.channel;
+      const message = value.message;
+      const user = JSON.parse(localStorage.getItem('state'))
+      const senderEmail = user.email
+      // const 
+      firebase.database().ref(`/${channelName}/`).on('value', (dataSnapshot) => {
+        let channelDetails = dataSnapshot.val();
+        // console.log(channelDetails, 'for Emma tope');
+        Object.keys(channelDetails).forEach((details) => {
+          console.log(channelDetails[details].email, 'lalalal');
+          axios.post('/api/urgent', {
+            receiver: channelDetails[details].email,
+            channel: channelName,
+            sender: senderEmail,
+            message
+          }).then((response) => {
+            console.log(response);
+          }).catch((error) => {
+            console.log(error);
+          });
+        })
+      });
+  
+    }
+  }
+
+  inviteFriendToChannel(emailDetails){
+    return (dispatch) => {
+      console.log(emailDetails);
+      const receiverEmail = emailDetails.email
+      const channelName = emailDetails.channelName
+      const user = JSON.parse(localStorage.getItem('state'))
+      const senderEmail = user.email
+      axios.post('/api/invite/email', {
+        receiver: receiverEmail,
+        channel: channelName,
+        sender: senderEmail
+      }).then((response) => {
+        console.log(response);
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
   }
 
   addToFriends(newUser){

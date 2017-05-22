@@ -6,6 +6,10 @@ import mui from 'material-ui/Card';
 import trim from 'trim';
 import Actions from '../actions/'
 import MenuItem from 'material-ui/MenuItem';
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+import ActionFavorite from 'material-ui/svg-icons/action/favorite';
+import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
+import ChatStore from '../store/ChatStore'
 
 // var firebase = require("firebase/app");
 // require("firebase/auth");
@@ -18,12 +22,24 @@ class MessageBox extends React.Component {
     super(props);
     this.state = {
         message: '',
-        value: 2
+        value: 'Normal',
+        channel: ''
     }
     // this.state = {value: 1};
     this.onChange=this.onChange.bind(this)
     this.onKeyUp=this.onKeyUp.bind(this)
     this.handleChange=this.handleChange.bind(this)
+  }
+
+  handleChange(event, index, value){
+    // this.setState({ value });
+    // this.setState({
+    //   value: event.target.value
+    // });
+    this.state = (Object.assign({}, this.state, {
+      value: event.target.value
+    }));
+    
   }
 
   onChange(evt){
@@ -37,16 +53,30 @@ class MessageBox extends React.Component {
       evt.preventDefault();
 
       Actions.sendMessage(this.state.message);
-    
+
+      console.log('Here it starts')
+      let state = ChatStore.getState();
+      console.log(state.selectedChannel.name, 'Channel Name');
+
+      this.state = (Object.assign({}, this.state, {
+        channel: state.selectedChannel.name
+      }));
+
+      console.log(this.state.value, 'Current Value')
+      console.log(typeof this.state.value, 'Current Type')
+      if(this.state.value === 'Urgent'){
+        console.log('Urgent State')
+        Actions.sendEmailUsers(this.state);
+      } else if(this.state.value === 'Critical'){
+        // console.log('Critical state')
+      }
+
       this.setState({
-        message: ''
+        message: '',
+        channel: ''
       })
     }
   }
-
-  handleChange(event, index, value) { 
-    this.setState({value})
-  };
 
   render(){
     return (
@@ -69,6 +99,23 @@ class MessageBox extends React.Component {
           fontSize: 14,
           outline: 'auto 0px'
         }} />
+        <RadioButtonGroup valueSelected={this.state.value} name="shipSpeed" defaultSelected="not_light" onChange={this.handleChange}>
+          <RadioButton
+            value="Normal"
+            label="Normal"
+            style={{marginBottom: 16,}}
+          />
+          <RadioButton
+            value="Urgent"
+            label="Urgent"
+            style={{marginBottom: 16,}}
+          />
+          <RadioButton
+            value="Critical"
+            label="Critical"
+            style={{marginBottom: 16,}}
+          />
+        </RadioButtonGroup>
       </Card>
     );
   }

@@ -57,11 +57,6 @@ let UserSource = {
           "username": userName,
           "number": number,
         });
-        // firebase.database().ref('/channelsList/').push({
-        //   "name": 'Lagos All',
-        //   "username": userName,
-        //   "number": number,
-        // });
 
         firebase.database().ref('/channels/' + userId).push({
           "name": 'Lagos All',

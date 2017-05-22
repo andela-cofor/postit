@@ -42,7 +42,7 @@ function sendUrgentMail(receiver, channel, sender, message) {
     from: '"PostIt 👻" <no-reply@postit.com>', // sender address
     to: receiver, // list of receivers
     subject: 'Invite', // Subject line
-    html: `<p><b>Hello, ${sender} sent  
+    html: `<p><b>Hello, ${sender} sent: 
     ${message}</b><br />
       Channel Name: <b>${channel}</b><i><u></u>
       </i> It is Urgent!!!` // html body

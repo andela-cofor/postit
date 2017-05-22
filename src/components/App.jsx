@@ -1,13 +1,10 @@
 import React from 'react';
 import Login from './Login.jsx';
-// import Chat from './Chat.jsx';
-// import {RouteHandler} from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
+import FriendList from './FriendList.jsx'
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import * as Colors from 'material-ui/styles/colors';
-// import connectToStores from 'alt-utils/lib/connectToStores' 
-// import ChatStore from '../store/ChatStore';
 var firebase = require("firebase/app");
 require("firebase/auth");
 require("firebase/database");

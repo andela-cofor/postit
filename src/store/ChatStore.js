@@ -4,9 +4,10 @@ import {decorate, bind, datasource} from 'alt-utils/lib/decorators'
 import ChannelSource from '../source/ChannelSource';
 import MessageSource from '../source/MessageSource';
 import UserSource from '../source/UserSource';
+import FriendSource from'../source/FriendSource';
 import _ from 'lodash';
 
-@datasource(ChannelSource, MessageSource, UserSource)
+@datasource(ChannelSource, MessageSource, UserSource, FriendSource )
 @decorate(alt)
 class ChatStore {
   constructor() {
@@ -15,6 +16,29 @@ class ChatStore {
       messages: null,
       messagesLoading: true
     }
+  }
+
+  @bind(Actions.FriendsReceived)
+  receivedFriends(friends){
+    console.log(friends, 'got friends')
+    let selectedFriend;
+    _(friends)
+      .keys()
+      .map((key, index) => {
+        friends[key].key = key;
+        if(index == 0){
+          friends[key].selected = true;
+          selectedFriend = friends[key];
+        }
+      })
+      .value();
+
+    this.setState({
+      friends,
+      selectedFriend
+    })
+
+    // setTimeout(this.getInstance().getMessages, 100);
   }
 
   @bind(Actions.messageReceived)
@@ -41,13 +65,6 @@ class ChatStore {
     this.setState({
       channels: this.state.channels
     })
-  }
-
-  @bind(Actions.FriendReceived)
-  FriendReceived(frn){
-    if(this.state.friends[frn.key]){
-      return
-    }
   }
 
   @bind(Actions.channelOpened)
@@ -153,12 +170,10 @@ class ChatStore {
 
   @bind(Actions.resendUser)
   resendUser(user){
-    console.log('this is user from ChatStore', user)
     this.setState({
       user: user
     })
     setTimeout(this.getInstance().getChannels(user), 10);
-    console.log('userDetails set successfully', this.state)
   }
 
   @bind(Actions.loginWithEmail)
@@ -194,8 +209,8 @@ class ChatStore {
   }
 
   @bind(Actions.addToFriends)
-  addToFriends(){
-    conosle.log('I am in store now')
+  addToFriends(number){
+    console.log('I am in store now', number)
   }
 
 }

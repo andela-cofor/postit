@@ -68,7 +68,6 @@ class MessageList extends React.Component {
     if(!this.props.messagesLoading){
       messageNodes = _.values(this.props.messages).map((message) => {
         return (
-            // <Message message={message.message} />
             <Message message={message} />
         );
       });
@@ -87,10 +86,9 @@ class MessageList extends React.Component {
     
 
     return (
-        // <div>{messageNodes}</div>
         <div style={{
-                flex: 4,
-                marginLeft: 30,
+                flex: 2,
+                marginLeft: 20,
             }}>
             <Card >
                 <List>

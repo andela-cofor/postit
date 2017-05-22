@@ -33,7 +33,7 @@ let ChannelSource = {
               // firebase.database().ref('/channelsList/').push({
               //   "name": chan,
               // });
-              firebase.database().ref(`/${chan}/` + userId).push({
+              firebase.database().ref(`/${chan}/` + userId).set({
                 "email": userEmail,
                 "username": username,
                 "number": phoneNumber,

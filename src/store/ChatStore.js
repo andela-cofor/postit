@@ -20,7 +20,6 @@ class ChatStore {
 
   @bind(Actions.FriendsReceived)
   receivedFriends(friends){
-    console.log(friends, 'got friends')
     let selectedFriend;
     _(friends)
       .keys()
@@ -77,12 +76,12 @@ class ChatStore {
       .value();
 
       selectedChannel.selected = true
-
+      console.log(selectedChannel);
       this.setState({
         selectedChannel,
         channels: this.state.channels
       })
-
+      console.log(this.state, 'Emma')
       setTimeout(this.getInstance().getMessages, 100);
   }
 

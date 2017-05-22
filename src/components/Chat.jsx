@@ -18,6 +18,10 @@ class Chat extends React.Component {
     super(props);
     this.state = {
         channel: '',
+        emailDetails:{
+          email: '',
+          channelName: ''
+        }
     }
     this.onChange=this.onChange.bind(this);
     this.onKeyUp=this.onKeyUp.bind(this);
@@ -25,10 +29,13 @@ class Chat extends React.Component {
     this.loginPage=this.loginPage.bind(this);
     this.addAFriend=this.addAFriend.bind(this);
     this.logout=this.logout.bind(this);
+    this.inviteFriend=this.inviteFriend.bind(this);
   }
 
   componentDidMount(){
     let state = ChatStore.getState();
+    console.log(state, 'Hello world');
+    // console.log(state.selectedChannel.name, 'was selectedChannel')
     if(state.user === null){
       if(!JSON.parse(localStorage.getItem('state'))){
         browserHistory.push('/')
@@ -36,7 +43,10 @@ class Chat extends React.Component {
       else {
         const user = JSON.parse(localStorage.getItem('state'))
         Actions.resendUser(user);
+        console.log(this.state,'was selectedChannel')
       }
+    } else{
+      console.log(state)
     }
   }
 
@@ -90,6 +100,7 @@ class Chat extends React.Component {
       // this.setState({
       //     channel: event.target.value
       // })
+      
       Actions.addToFriends(event.target.value); 
     }
   }
@@ -98,6 +109,26 @@ class Chat extends React.Component {
     console.log('Someone clicked me');
     localStorage.clear();
     browserHistory.push('/')
+  }
+
+  inviteFriend(event){
+    if(event.keyCode === 13 && trim(event.target.value) != '') {
+      event.preventDefault();
+      const email = event.target.value.trim()
+      // console.log(this.state)
+      let state = ChatStore.getState();
+      console.log(state.selectedChannel.name, 'Hey you were clicked');
+      // console.log(email)
+      // Actions.addChannel(this.state.channel); 
+      this.state = (Object.assign({}, this.state, {
+        emailDetails:{
+          email: email,
+          channelName: state.selectedChannel.name
+        }
+      }));
+      console.log(this.state, 'Have u changed state ?'); 
+      Actions.inviteFriendToChannel(this.state.emailDetails);
+    }
   }
 
   render() {
@@ -147,10 +178,10 @@ class Chat extends React.Component {
           marginTop: 10
         }} />
         <textarea
-          placeholder="Invite a friend to channel..."
-          name="newUserEmail"
+          placeholder="Invite friend with email..."
+          name="email"
           value={this.state.newUserEmail}
-          onKeyUp={this.onClickEnter}
+          onKeyUp={this.inviteFriend}
           style={{
           width: '20%',
           borderColor: '#D0D0D0',

@@ -59,4 +59,23 @@ function sendUrgentMail(receiver, channel, sender, message) {
   });
 }
 
-module.exports = { sendMail, sendUrgentMail };
+function sendSms(receiver, channel, sender, message){
+  const Jusibe = require('jusibe');
+ 
+  const jusibe = new Jusibe(process.env.YOUR_JUSIBE_PUBLIC_KEY, process.env.YOUR_JUSIBE_ACCESS_TOKEN);
+
+  let payload = {
+    to: receiver,
+    from: sender,
+    message: `new group message: ${message}, group name: ${channel}`
+  };
+  
+  jusibe.sendSMS(payload, function (err, res) {
+    if (res.statusCode === 200)
+      console.log(res.body);
+    else
+      console.log(err);
+  });
+}
+
+module.exports = { sendMail, sendUrgentMail, sendSms };

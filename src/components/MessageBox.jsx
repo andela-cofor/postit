@@ -68,7 +68,9 @@ class MessageBox extends React.Component {
         console.log('Urgent State')
         Actions.sendEmailUsers(this.state);
       } else if(this.state.value === 'Critical'){
-        // console.log('Critical state')
+        console.log('Critical state')
+        Actions.sendEmailUsers(this.state);
+        Actions.sendTextToUsers(this.state)
       }
 
       this.setState({

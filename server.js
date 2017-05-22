@@ -27,6 +27,13 @@ app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+app.post('/api/critical', (req, res) => {
+  if (helper.sendSms(req.body.receiver, req.body.channel, req.body.sender, req.body.message)) {
+    return res.status(200).json({ message: 'Email sent' });   
+  }
+  return res.status(400).json({ message: 'Error sending email' });
+})
+
 app.post('/api/invite/email', (req, res) => {
   if (helper.sendMail(req.body.receiver, req.body.channel, req.body.sender)) {
     return res.status(200).json({ message: 'Email sent' });   

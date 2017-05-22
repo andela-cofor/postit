@@ -41,9 +41,35 @@ class Actions {
     )
   }
 
+  sendTextToUsers(value){
+    return (dispatch) => {
+      console.log(value, 'Received value from Critical')
+      const channelName = value.channel;
+      const message = value.message;
+      const user = JSON.parse(localStorage.getItem('state'))
+      const userId = user.uid;
+
+      firebase.database().ref(`/${channelName}/`).on('value', (dataSnapshot) => {
+        let channelDetails = dataSnapshot.val();
+        Object.keys(channelDetails).forEach((details) => {
+          console.log(channelDetails[details].number, 'lalalal');
+          axios.post('/api/critical', {
+            receiver: channelDetails[details].number,
+            channel: channelName,
+            sender: 'PostIt App',
+            message: message
+          }).then((response) => {
+            console.log(response);
+          }).catch((error) => {
+            console.log(error);
+          });
+        })
+      });
+    }
+  }
+
   sendEmailUsers(value){
     return (dispatch) => {
-      console.log(value, 'Received value')
       const channelName = value.channel;
       const message = value.message;
       const user = JSON.parse(localStorage.getItem('state'))

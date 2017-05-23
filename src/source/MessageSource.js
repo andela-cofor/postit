@@ -45,15 +45,14 @@ const MessageSource = {
           const messages = dataSnapshot.val();
           if (!messageSent && !initialLoad) {
             if(window.Notification && Notification.permission !== "denied") {
-              // alert();
-              console.log('bla')
+              alert(`You have a new message from ${state.selectedChannel.name} Group`);
               Notification.requestPermission(function(status) {  // status is "granted", if accepted by user
-                let n = new Notification('PostIt', { 
-                  body: 'You have a new notification!',
-                  icon: '../../public/images/PostIt.jpg' // optional
-                }); 
+                var ms = 15000;
+                var en = new Notification(`You have a new message from ${state.selectedChannel.name} Group`, { 
+                    body: 'From: PostIt App',
+                });
+                en.onshow = function() { setTimeout(en.close, ms) }
               });
-              setTimeout(n.close.bind(n), 2000);
             }
             messageSent = null;
           }

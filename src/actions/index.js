@@ -153,6 +153,7 @@ class Actions {
           });
         }
       });
+      browserHistory.push('chat')
     };
   }
 

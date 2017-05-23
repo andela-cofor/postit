@@ -18,7 +18,7 @@ function sendMail(receiver, channel, sender) {
 
   // setup email data with unicode symbols
   const mailOptions = {
-    from: '"PostIt 👻" <no-reply@postit.com>', // sender address
+    from: '"PostIt" <no-reply@postit.com>', // sender address
     to: receiver, // list of receivers
     subject: 'Invite', // Subject line
     html: `<p><b>Hello, ${sender} has invited you to 
@@ -42,7 +42,7 @@ function sendUrgentMail(receiver, channel, sender, message) {
 
   // setup email data with unicode symbols
   const mailOptions = {
-    from: '"PostIt 👻" <no-reply@postit.com>', // sender address
+    from: '"PostIt" <no-reply@postit.com>', // sender address
     to: receiver, // list of receivers
     subject: 'Invite', // Subject line
     html: `<p><b>Hello, ${sender} sent: 

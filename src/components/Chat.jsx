@@ -10,7 +10,6 @@ import MessageBox from './MessageBox.jsx';
 import ChatStore from '../store/ChatStore';
 import Actions from '../actions/index';
 
-
 /**
  * @class Chat
  * @extends {React.Component}
@@ -24,6 +23,7 @@ class Chat extends React.Component {
    * @memberof Chat
    */
   constructor(props) {
+    ChatStore.getFriends();
     super(props);
     this.state = {
       channel: '',

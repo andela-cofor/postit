@@ -261,6 +261,7 @@ class ChatStore {
    */
   @bind(Actions.editDetails)
   editDetails(userDetails) {
+    console.log(userDetails, 'User Details in store');
     this.setState({ userDetails });
     setTimeout(this.getInstance().editUserDetails, 10);
   }

@@ -45,7 +45,7 @@ const MessageSource = {
           const messages = dataSnapshot.val();
           if (!messageSent && !initialLoad) {
             if(window.Notification && Notification.permission !== "denied") {
-              alert(`You have a new message from ${state.selectedChannel.name} Group`);
+              // alert(`You have a new message from ${state.selectedChannel.name} Group`);
               Notification.requestPermission(function(status) {  // status is "granted", if accepted by user
                 var ms = 15000;
                 var en = new Notification(`You have a new message from ${state.selectedChannel.name} Group`, { 

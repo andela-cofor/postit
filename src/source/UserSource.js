@@ -10,21 +10,24 @@ let firebase = require('firebase/app');
 const UserSource = {
   editUserDetails: {
     remote(state) {
-      console.log('Profile State', state);
-      return new Promise((resolve, reject) => {
+      console.log('Profile State of User', state);
+      // return new Promise((resolve, reject) => {
         const number = state.userDetails.phoneNumber;
         const userName = state.userDetails.userName;
-        const userEmail = state.userDetails.email;
+        const userEmail = state.user.email;
         const userId = state.user.uid;
+        const userPic = state.user.photoURL
 
-        // firebase = require('firebase/app');
+        console.log('I got here ')
+
+        firebase = require('firebase/app');
         firebase.database().ref('/users/' + userId + '/profileDetails').set({
-          'firebase/app': number,
+          'number': number,
+          'username': userName,
+          'profilePic': userPic,
           'email': userEmail,
           'userId': userId,
-          'username': userName
         });
-      });
     }
   },
 
@@ -67,7 +70,7 @@ const UserSource = {
           'username': userName,
           'number': number,
         });
-        firebase.database().ref('/messages/' + '/Lagos All/').push({
+        firebase.database().ref('/messages' + '/Lagos All/').push({
           'message': `${userName} just joined this Group... Welcome Him`,
           'date': new Date().toUTCString(),
           'author': state.user.displayName,
@@ -116,7 +119,7 @@ const UserSource = {
         firebase.database().ref('/channels/' + userId).push({
           'number': defualtChannel,
         });
-        firebase.database().ref('/messages/' + '/Lagos All/').push({
+        firebase.database().ref('/messages/' + 'Lagos All/').push({
           'message': `${userName} just joined this Group... Welcome Him`,
           'date': new Date().toUTCString(),
           'author': userName,

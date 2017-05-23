@@ -105,7 +105,7 @@ class Chat extends React.Component {
    * @memberof Chat
    */
   loginPage() {
-    console.log('Was called Buya');
+    console.log('state');
     browserHistory.push('/profile');
   }
 
@@ -143,7 +143,7 @@ class Chat extends React.Component {
    */
   logout() {
     console.log('Someone clicked me');
-    localStorage.clear();
+    localStorage.removeItem("");
     browserHistory.push('/');
   }
 

@@ -50,28 +50,47 @@ class Profile extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.handleFileUpload = this.handleFileUpload.bind(this);
-    this.setProfilePic = this.setProfilePic.bind(this);
+    // this.handleFileUpload = this.handleFileUpload.bind(this);
+    // this.setProfilePic = this.setProfilePic.bind(this);
   }
 
   /**
    * @memberof Profile
    */
-  componentDidMount() {
+  componentWillMount() {
+    // const user = JSON.parse(localStorage.getItem('state'));
+    // console.log(user, 'localStorage');
     const state = ChatStore.getState();
-    console.log(this.props.user);
+    console.log(state, 'Hello world');
+    // console.log(state.selectedChannel.name, 'was selectedChannel')
+    if (state.user === null) {
+      if (!JSON.parse(localStorage.getItem('state'))) {
+        browserHistory.push('/');
+      } else {
+        const user = JSON.parse(localStorage.getItem('state'));
+        console.log(user, 'Local User')
+        Actions.resendUser(user);
+        const state = ChatStore.getState();
+        console.log(state, 'was selectedChannel');
+        this.setState({
+          profilePicture: state.user.photoURL
+        })
+      }
+    }
+    // const state = ChatStore.getState();
+    // console.log(this.state, 'new state');
   }
 
   /**
    * @param {any} url
    * @memberof Profile
    */
-  setProfilePic(url) {
-    console.log('I got url');
-    this.setState({
-      profilePicture: url
-    });
-  }
+  // setProfilePic(url) {
+  //   console.log('I got url');
+  //   this.setState({
+  //     profilePicture: url
+  //   });
+  // }
 
   /**
    * @param {any} event
@@ -93,52 +112,52 @@ class Profile extends React.Component {
     console.log(this.state.userDetails);
   }
 
-  /**
-   * @param {any} evt
-   * @memberof Profile
-   */
-  handleFileUpload(evt) {
-    const file = evt.target.files[0];
+  // /**
+  //  * @param {any} evt
+  //  * @memberof Profile
+  //  */
+  // handleFileUpload(evt) {
+  //   const file = evt.target.files[0];
 
-    const reader = new FileReader();
-    reader.onload = function (evt) {
-      console.log(evt)
-      const mediaRef = firebase.storage().ref('images/').child('pest')
-      mediaRef.putString(evt.target.result).then((snap) => {
-        console.log(snap);
-        // this.setProfilePic(snap.downloadURL);
-      });
-    };
-    reader.readAsDataURL(file);
+  //   const reader = new FileReader();
+  //   reader.onload = function (evt) {
+  //     console.log(evt)
+  //     const mediaRef = firebase.storage().ref('images/').child('pest')
+  //     mediaRef.putString(evt.target.result).then((snap) => {
+  //       console.log(snap);
+  //       // this.setProfilePic(snap.downloadURL);
+  //     });
+  //   };
+  //   reader.readAsDataURL(file);
 
-    firebase.storage().ref('images/').child('pest').getDownloadURL()
-      .then((url) => {
-    // `url` is the download URL for 'images/stars.jpg'
+  //   firebase.storage().ref('images/').child('pest').getDownloadURL()
+  //     .then((url) => {
+  //   // `url` is the download URL for 'images/stars.jpg'
 
-    // This can be downloaded directly:
-        const xhr = new XMLHttpRequest();
-        xhr.responseType = 'blob';
-        xhr.onload = () => {
-          const blob = xhr.response;
-          console.log('this is blob', blob);
-        };
-        xhr.open('GET', url);
-        xhr.send();
+  //   // This can be downloaded directly:
+  //       const xhr = new XMLHttpRequest();
+  //       xhr.responseType = 'blob';
+  //       xhr.onload = () => {
+  //         const blob = xhr.response;
+  //         console.log('this is blob', blob);
+  //       };
+  //       xhr.open('GET', url);
+  //       xhr.send();
 
-        // Or inserted into an <img> element:
-        const img = document.getElementById('myimg');
+  //       // Or inserted into an <img> element:
+  //       const img = document.getElementById('myimg');
 
-        img.src = url;
-        // this.setState({
-        //   profilePicture: url
-        // });
-        // console.log(url, 'Url');
-      })
-        .catch((error) => {
-      // Handle any errors
-          console.log(error);
-        });
-  }
+  //       img.src = url;
+  //       // this.setState({
+  //       //   profilePicture: url
+  //       // });
+  //       // console.log(url, 'Url');
+  //     })
+  //       .catch((error) => {
+  //     // Handle any errors
+  //         console.log(error);
+  //       });
+  // }
 
   /**
    * @returns Card
@@ -154,7 +173,6 @@ class Profile extends React.Component {
       <CardText style={{
         'textAlign': 'center'
       }}>
-         Welcome {this.props.user.displayName} you can edit your profile details
         </CardText>
         <Avatar
           src={this.state.profilePicture}
@@ -163,19 +181,19 @@ class Profile extends React.Component {
             margin: 5
           }}
         />
-        <FlatButton label="Change Picture" labelPosition="before">
+        {/*<FlatButton label="Change Picture" labelPosition="before">
            <input
             type="file"
             onChange={(e) => this.handleFileUpload(e)}
             id="fileButton"
           />
-         </FlatButton>
+         </FlatButton>*/}
         <form className="mui-form" onSubmit={this.onSubmit}>
           <br /><br /><br /><br />
           <div className="mui-textfield">
             <TextField
               name="phoneNumber"
-              value={this.state.phoneNumber}
+              /*value={this.state.phoneNumber}*/
               onChange={this.handleChange}
               placeholder="Enter your new phone number"
               style={{
@@ -187,7 +205,7 @@ class Profile extends React.Component {
           <div className="mui-textfield">
             <TextField
               name="userName"
-              value={this.state.userName}
+              /*value={this.state.userName}*/
               onChange={this.handleChange}
               placeholder="Enter your new userName"
               style={{

@@ -35,7 +35,7 @@ class Actions {
       'FriendOpened',
       'FriendsReceived',
       'FriendsFailed',
-      'logout'
+      'logout',
     );
   }
 
@@ -159,7 +159,9 @@ class Actions {
 
   resendUser(user) {
     return (dispatch) => {
+      console.log(user, 'got to resendUser');
       dispatch(user);
+      
     };
   }
 

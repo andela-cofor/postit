@@ -296,6 +296,21 @@ class Actions {
       dispatch(number);
     };
   }
+
+  sendPasswordResetEmail(userDetails){
+    console.log(userDetails, 'User Details');
+    const auth = firebase.auth();
+    const emailAddress = userDetails;
+    console.log(emailAddress);
+
+    auth.sendPasswordResetEmail(emailAddress).then(function(res) {
+      // Email sent.
+      console.log(res, 'from firebase')
+    }, function(error) {
+      // An error happened.
+      console.log(error, 'from firebase');
+    });
+  }
 }
 
 export default alt.createActions(Actions);

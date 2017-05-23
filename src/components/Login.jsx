@@ -7,7 +7,6 @@ import Actions from '../actions/';
 
 const RaisedButton = RB;
 
-
 /**
  * @class Login
  * @extends {React.Component}
@@ -31,6 +30,7 @@ class Login extends React.Component {
     this.signUp = this.signUp.bind(this);
     this.loginWithEmail = this.loginWithEmail.bind(this);
     this.loginWithGoogle = this.loginWithGoogle.bind(this);
+    this.forgetPassword = this.forgetPassword.bind(this);
   }
 
   /**
@@ -41,14 +41,13 @@ class Login extends React.Component {
     Actions.login(this.context.router);
   }
 
-
   /**
    * @param {any} event
    * @memberof Login
    */
   signInWithEmailAndPassword(event) {
     event.preventDefault();
-    Actions.signInWithEmailAndPassword(this.state.userDetails)
+    Actions.signInWithEmailAndPassword(this.state.userDetails);
   }
 
   /**
@@ -59,8 +58,8 @@ class Login extends React.Component {
     const userDetails = this.state.userDetails;
     userDetails[event.target.name] = event.target.value;
     this.setState({ userDetails });
+    console.log(this.state.userDetails)
   }
-
 
   /**
    * @memberof Login
@@ -68,7 +67,6 @@ class Login extends React.Component {
   signUp() {
     browserHistory.push('/signup');
   }
-
 
   /**
    * @param {any} event
@@ -79,6 +77,16 @@ class Login extends React.Component {
     Actions.loginWithEmail(this.state.userDetails);
   }
 
+  forgetPassword(event){
+    event.preventDefault();
+    // console.log(this.state.userDetails)
+    if(this.state.userDetails.email === ''){
+      console.log('Enter Email');
+    } else {
+      Actions.sendPasswordResetEmail(this.state.userDetails.email);
+    }
+    // console.log(this.state.userDetails)
+  }
 
   /**
    * @returns
@@ -90,8 +98,9 @@ class Login extends React.Component {
         'maxWidth': '500px',
         'margin': '30px auto',
         'padding': '50px'
-      }}>
-        <CardText style={{
+        }}>;
+        <CardText
+          style = { {
           'textAlign': 'center'
         }}>
           <RaisedButton
@@ -99,6 +108,10 @@ class Login extends React.Component {
             style={{margin: 12,}} />
         </CardText>
         <form className="mui-form" onSubmit={this.signInWithEmailAndPassword}>
+          <br /><br />
+          <a href="#"
+            onClick={this.forgetPassword}
+            >Forget Password</a>
           <br /><br /><br /><br />
           <div className="mui-textfield">
             <TextField

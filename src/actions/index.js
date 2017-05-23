@@ -2,8 +2,6 @@ import { browserHistory } from 'react-router';
 import axios from 'axios';
 import alt from '../alt/';
 
-
-
 require('firebase/auth');
 require('firebase/database');
 
@@ -155,6 +153,7 @@ class Actions {
           });
         }
       });
+      browserHistory.push('chat')
     };
   }
 

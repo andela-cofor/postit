@@ -280,6 +280,7 @@ class ChatStore {
   @bind(Actions.addToFriends)
   addToFriends(number) {
     console.log('I am in store now', number);
+    setTimeout(this.getInstance().getFriends, 10)
   }
 }
 

@@ -46,12 +46,12 @@ const UserSource = {
           'userId': userId,
           'username': userName
         });
-        firebase.database().ref('/friends/' + `/${userId}/`).push({
-          'userId': state.user.uid,
-          'username': userName,
-          'email': userEmail,
-          'number': number
-        });
+        // firebase.database().ref('/friends/' + `/${userId}/`).push({
+        //   'userId': state.user.uid,
+        //   'username': userName,
+        //   'email': userEmail,
+        //   'number': number
+        // });
         firebase.database().ref('/contacts/' + number).push({
           'email': userEmail,
           'userId': userId,

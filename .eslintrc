@@ -38,6 +38,8 @@
     "expect": true
   },
   "rules": {
+    "react/require-extension": 0,
+    "react/wrap-multilines": 0,
     "quote-props": 0,
     "class-methods-use-this": 0,
     "one-var": 0,

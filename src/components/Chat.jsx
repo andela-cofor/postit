@@ -62,7 +62,6 @@ class Chat extends React.Component {
     }
   }
 
-
   /**
    * @static
    * @returns ChatStore

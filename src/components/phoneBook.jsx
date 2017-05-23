@@ -1,65 +1,87 @@
 import React from 'react';
 import { Card, CardText } from 'material-ui/Card';
-import Actions from '../actions/';
-import RB from 'material-ui/RaisedButton';
-import connectToStores from 'alt-utils/lib/connectToStores'
-import ChatStore from '../store/ChatStore'
-import { browserHistory } from 'react-router';
+import trim from 'trim';
 import TextField from 'material-ui/TextField';
-import trim from 'trim'
+import connectToStores from 'alt-utils/lib/connectToStores';
+import ChatStore from '../store/ChatStore';
+import Actions from '../actions/';
 
-
-let RaisedButton = RB
-
+/**
+ * @class PhoneBook
+ * @extends {React.Component}
+ */
 @connectToStores
 class PhoneBook extends React.Component {
+
+  /**
+   * @static
+   * @returns ChatStore
+   * @memberof PhoneBook
+   */
+  static getStores() {
+    return [ChatStore];
+  }
+
+
+  static getPropsFromStores() {
+    return ChatStore.getState();
+  }
+
+  /**
+   * Creates an instance of PhoneBook.
+   * @memberof PhoneBook
+   */
   constructor() {
-      super()
+    super();
     // this.onClick=this.onClick.bind(this)
-    this.onChange=this.onChange.bind(this)
-    this.onKeyUp=this.onKeyUp.bind(this)
+    this.onChange = this.onChange.bind(this);
+    this.onKeyUp = this.onKeyUp.bind(this);
     this.state = {
-        phoneNumber: ''
-    }
+      phoneNumber: ''
+    };
   }
 
-  static getStores(){
-        return [ChatStore]
-    }
-
-    static getPropsFromStores(){
-        return ChatStore.getState();
-    }
-
-  componentDidMount(){
-    let state = ChatStore.getState();
+  /**
+   * @memberof PhoneBook
+   */
+  componentDidMount() {
+    const state = ChatStore.getState();
   }
 
-  // onClick(){
-  //   ChatStore.addUser()
-  // }
-
-  onChange(evt){
+  /**
+   * @param {any} evt
+   * @memberof PhoneBook
+   */
+  onChange(evt) {
     this.setState({
-        phoneNumber: evt.target.value
-    })
+      phoneNumber: evt.target.value
+    });
   }
 
+
+  /**
+   * @param {any} evt
+   * @memberof PhoneBook
+   */
   onKeyUp(evt) {
-    if(evt.keyCode === 13 && trim(evt.target.value) != '') {
+    if (evt.keyCode === 13 && trim(evt.target.value) !== '') {
       evt.preventDefault();
-      if(this.state.phoneNumber){
+      if (this.state.phoneNumber) {
         Actions.phoneNumber(this.state.phoneNumber);
         this.setState({
           phoneNumber: this.state.phoneNumber
-        })
-      } else{
+        });
+      } else {
         // console.log('Enter Number')
       }
     }
   }
 
-  render(){
+  /**
+   * @returns Card
+   * @memberof PhoneBook
+   */
+  render() {
     return (
       <Card style={{
         'maxWidth': '800px',
@@ -67,9 +89,9 @@ class PhoneBook extends React.Component {
         'padding': '50px'
       }}>
       <CardText style={{
-          'textAlign': 'center'
-        }}>
-          Number format: 000-0000-000
+        'textAlign': 'center'
+      }}>
+          Number format: 080-0000-000
         </CardText>
         <TextField
           value={this.state.phoneNumber}
@@ -84,12 +106,12 @@ class PhoneBook extends React.Component {
           type="number"
         /><br />
       </Card>
-    )
+    );
   }
 }
 
 PhoneBook.contextTypes = {
   router: React.PropTypes.func.isRequired
-}
+};
 
 module.exports = PhoneBook;

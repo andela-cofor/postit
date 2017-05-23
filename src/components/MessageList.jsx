@@ -1,76 +1,60 @@
 import React from 'react';
-import Message from './Message.jsx';
 import mui from 'material-ui/Card';
 import li from 'material-ui/List';
 import _ from 'lodash';
 import CircularProgress from 'material-ui/CircularProgress';
-import connectToStores from 'alt-utils/lib/connectToStores'
+import connectToStores from 'alt-utils/lib/connectToStores';
 import ChatStore from '../store/ChatStore';
-var firebase = require("firebase/app");
-require("firebase/auth");
-require("firebase/database");
+import Message from './Message.jsx';
 
-var Card = mui;
-var List = li
+require('firebase/auth');
+require('firebase/database');
 
+const Card = mui;
+const List = li;
+
+/**
+ * @class MessageList
+ * @extends {React.Component}
+ */
 @connectToStores
 class MessageList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-        messages: {}
-    }
-      
-    // firebase.database().ref('/messages/').on('child_added', (msg) => {
-    //   // console.log(msg)
-    //   if(this.state.messages[msg.key]){
-    //       return;
-    //   }
-    //   let msgVal = msg.val();
-    //   msgVal.key = msg.key;
-    //   this.state.messages[msgVal.key] = msgVal;
-    //   this.setState({messages: this.state.messages})
 
-    //   firebase.database().ref('/messages/').on('child_removed', (msg) => {
-    //     var key = msg.key;
-    //     delete this.state.messages[key];
-    //     this.setState({messages: this.state.messages});
-    //   })
-    //     // let messagesVal = dataSnapshot.val();
-    //     // let messages = _(messagesVal)
-    //     //     .keys()
-    //     //     .map((messageKey) => {
-    //     //         console.log('got here')
-    //     //         let cloned = _.clone(messagesVal[messageKey]);
-    //     //         cloned.key = messageKey;
-    //     //         return cloned;
-    //     //     })
-    //     //     .value();
-
-    //     // this.setState({
-    //     //     messages: messages
-    //     // })
-    // });
-      
-  }
-
-  static getStores(){
+  static getStores() {
     return [ChatStore];
   }
 
-  static getPropsFromStores(){
+  static getPropsFromStores() {
     return ChatStore.getState();
   }
 
+  /**
+   * Creates an instance of MessageList.
+   * @param {any} props
+   * @memberof MessageList
+   */
+  constructor(props) {
+    super(props);
+    this.state = {
+      messages: {}
+    };
+  }
+
+
+  /**
+   * @returns message
+   * @memberof MessageList
+   */
   render() {
     let messageNodes = null;
 
-    if(!this.props.messagesLoading){
-      messageNodes = _.values(this.props.messages).map((message) => {
-        return (
+    if (!this.props.messagesLoading) {
+      messageNodes = _.values(this.props.messages)
+        .map((message) => {
+          return (
             <Message message={message} />
-        );
-      });
+          );
+        });
     } else {
       messageNodes = <CircularProgress
         mode="indeterminate"
@@ -80,16 +64,15 @@ class MessageList extends React.Component {
           margin: '0 auto',
           display: 'block',
           width: '60px'
-        }}        
-      />
+        }}
+      />;
     }
-    
-
     return (
-        <div style={{
-                flex: 2,
-                marginLeft: 20,
-            }}>
+        <div
+          style={{
+            flex: 2,
+            marginLeft: 20,
+          }}>
             <Card >
                 <List>
                     {messageNodes}

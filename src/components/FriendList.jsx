@@ -1,32 +1,58 @@
 import React from 'react';
-import Friend from './Friend.jsx';
 import _ from 'lodash';
+import CircularProgress from 'material-ui/CircularProgress';
 import mui from 'material-ui/Card';
 import li from 'material-ui/List';
-import connectToStores from 'alt-utils/lib/connectToStores'
+import connectToStores from 'alt-utils/lib/connectToStores';
+import Friend from './Friend.jsx';
 import ChatStore from '../store/ChatStore';
-import CircularProgress from 'material-ui/CircularProgress';
 
-let Card = mui;
-let List = li
+const Card = mui;
+const List = li;
 
+/**
+ * @class FriendList
+ * @extends {React.Component}
+ */
 @connectToStores
 class FriendList extends React.Component {
-  constructor(props){
-    super(props)
-    ChatStore.getFriends()
+
+  /**
+   * Creates an instance of FriendList.
+   * @param {any} props
+   * @memberof FriendList
+   */
+  constructor(props) {
+    super(props);
+    // ChatStore.getFriends();
   }
 
-  static getStores(){
+  /**
+   * @static
+   * @returns ChatStore
+   * @memberof FriendList
+   */
+  static getStores() {
     return [ChatStore];
   }
 
+
+  /**
+   * @static
+   * @returns state
+   * @memberof FriendList
+   */
   static getPropsFromStores(){
     return ChatStore.getState();
   }
 
-  render(){
-    if(!this.props.friends){
+
+  /**
+   * @returns FriendList
+   * @memberof FriendList
+   */
+  render() {
+    if (!this.props.friends) {
       <CircularProgress
         mode="indeterminate"
         style={{
@@ -36,24 +62,25 @@ class FriendList extends React.Component {
           display: 'block',
           width: '60px'
         }}
-      />
+      />;
     }
 
-    let FriendNodes = _(this.props.friends)
+    const FriendNodes = _(this.props.friends)
       .keys()
       .map((k, index) => {
-        let friend = this.props.friends[k];
-      return (
+        const friend = this.props.friends[k];
+        return (
         <Friend friend={friend} key={`${friend.key}${index}`} />
-      )
-    })
+        );
+      })
     .value();
 
     return (
-      <Card style={{
-                flex: 1,
-                marginLeft: 20,
-            }}>
+      <Card
+        style={{
+          flex: 1,
+          marginLeft: 20,
+        }}>
         <List>
           {FriendNodes}
         </List>

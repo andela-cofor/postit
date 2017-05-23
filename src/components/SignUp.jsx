@@ -1,17 +1,21 @@
 import React from 'react';
 import { Card, CardText } from 'material-ui/Card';
-import Actions from '../actions/';
 import RB from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
-import IconButton from 'material-ui/IconButton';
-import { browserHistory } from 'react-router';
+import Actions from '../actions/';
 
-let RaisedButton = RB
-
+/**
+ * @class Signup
+ * @extends {React.Component}
+ */
 class Signup extends React.Component {
+
+  /**
+   * Creates an instance of Signup.
+   * @memberof Signup
+   */
   constructor() {
-    super()
+    super();
     this.state = {
       userDetails: {
         firstName: '',
@@ -20,25 +24,38 @@ class Signup extends React.Component {
         password: '',
         phoneNumber: ''
       }
-    }
+    };
     // this.onClick=this.onClick.bind(this)
     // this.createUserWithEmailAndPassword=this.createUserWithEmailAndPassword.bind(this)
-    this.handleChange=this.handleChange.bind(this)
-    this.signUp=this.signUp.bind(this)
+    this.handleChange = this.handleChange.bind(this);
+    this.signUp = this.signUp.bind(this);
   }
 
+  /**
+   * @param {any} event
+   * @memberof Signup
+   */
   handleChange(event) {
     const userDetails = this.state.userDetails;
     userDetails[event.target.name] = event.target.value;
     this.setState({ userDetails });
   }
 
-  signUp(event){
+
+  /**
+   * @param {any} event
+   * @memberof Signup
+   */
+  signUp(event) {
     event.preventDefault();
-    Actions.createUserWithEmailAndPassword(this.state.userDetails)
+    Actions.createUserWithEmailAndPassword(this.state.userDetails);
   }
 
-  render(){
+  /**
+   * @returns User
+   * @memberof Signup
+   */
+  render() {
     return (
       <Card style={{
         'maxWidth': '500px',
@@ -48,7 +65,7 @@ class Signup extends React.Component {
         <CardText style={{
           'textAlign': 'center'
         }}>
-          <RaisedButton label="Signup" style={{margin: 12,}} />
+          <RaisedButton label="Signup" style={{ margin: 12, }} />
         </CardText>
         <form className="mui-form" onSubmit={this.signUp}>
           <br /><br /><br /><br />
@@ -114,12 +131,12 @@ class Signup extends React.Component {
           </div>
         </form>
       </Card>
-    )
+    );
   }
 }
 
 Signup.contextTypes = {
   router: React.PropTypes.func.isRequired
-}
+};
 
 module.exports = Signup;

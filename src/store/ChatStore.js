@@ -1,13 +1,17 @@
+import _ from 'lodash';
+import { decorate, bind, datasource } from 'alt-utils/lib/decorators';
 import alt from '../alt/';
 import Actions from '../actions/';
-import {decorate, bind, datasource} from 'alt-utils/lib/decorators'
 import ChannelSource from '../source/ChannelSource';
 import MessageSource from '../source/MessageSource';
 import UserSource from '../source/UserSource';
-import FriendSource from'../source/FriendSource';
-import _ from 'lodash';
+import FriendSource from '../source/FriendSource';
 
-@datasource(ChannelSource, MessageSource, UserSource, FriendSource )
+
+/**
+ * @class ChatStore
+ */
+@datasource(ChannelSource, MessageSource, UserSource, FriendSource)
 @decorate(alt)
 class ChatStore {
   constructor() {
@@ -15,17 +19,21 @@ class ChatStore {
       user: null,
       messages: null,
       messagesLoading: true
-    }
+    };
   }
 
+  /**
+   * @param {any} friends
+   * @memberof ChatStore
+   */
   @bind(Actions.FriendsReceived)
-  receivedFriends(friends){
+  receivedFriends(friends) {
     let selectedFriend;
     _(friends)
       .keys()
       .map((key, index) => {
         friends[key].key = key;
-        if(index == 0){
+        if (index === 0) {
           friends[key].selected = true;
           selectedFriend = friends[key];
         }
@@ -35,14 +43,19 @@ class ChatStore {
     this.setState({
       friends,
       selectedFriend
-    })
-
+    });
     // setTimeout(this.getInstance().getMessages, 100);
   }
 
+
+  /**
+   * @param {any} msg
+   * @returns null
+   * @memberof ChatStore
+   */
   @bind(Actions.messageReceived)
-  messageReceived(msg){
-    if(this.state.messages[msg.key]){
+  messageReceived(msg) {
+    if (this.state.messages[msg.key]) {
       return;
     }
 
@@ -50,12 +63,17 @@ class ChatStore {
 
     this.setState({
       messages: this.state.messages
-    })
+    });
   }
 
+  /**
+   * @param {any} chan
+   * @returns null
+   * @memberof ChatStore
+   */
   @bind(Actions.channelReceived)
-  channelReceived(chan){
-    if(this.state.channels[chan.key]){
+  channelReceived(chan) {
+    if (this.state.channels[chan.key]) {
       return;
     }
 
@@ -63,56 +81,67 @@ class ChatStore {
 
     this.setState({
       channels: this.state.channels
-    })
+    });
   }
 
+  /**
+   * @param {any} selectedChannel
+   * @memberof ChatStore
+   */
   @bind(Actions.channelOpened)
-  channelOpened(selectedChannel){
+  channelOpened(selectedChannel) {
     _(this.state.channels)
       .values()
       .map((channel) => {
-        channel.selected = false
+        channel.selected = false;
       })
       .value();
 
-      selectedChannel.selected = true
-      console.log(selectedChannel);
-      this.setState({
-        selectedChannel,
-        channels: this.state.channels
-      })
-      console.log(this.state, 'Emma')
-      setTimeout(this.getInstance().getMessages, 100);
+    selectedChannel.selected = true;
+    console.log(selectedChannel);
+    this.setState({
+      selectedChannel,
+      channels: this.state.channels
+    });
+    // console.log(this.state, 'Emma');
+    setTimeout(this.getInstance().getMessages, 100);
   }
 
   @bind(Actions.FriendOpened)
-  FriendOpened(selectedFriend){
+  FriendOpened(selectedFriend) {
     _(this.state.friends)
       .values()
       .map((friends) => {
-        friends.selected = false
+        friends.selected = false;
       })
       .value();
 
-      selectedFriend.selected = true
+    selectedFriend.selected = true;
 
-      this.setState({
-        selectedFriend,
-        friends: this.state.friends
-      })
+    this.setState({
+      selectedFriend,
+      friends: this.state.friends
+    });
 
       // setTimeout(this.getInstance().getMessages, 100);
   }
 
+  /**
+   * @memberof ChatStore
+   */
   @bind(Actions.messagesLoading)
-  messagesLoading(){
+  messagesLoading() {
     this.setState({
       messagesLoading: true
-    })
+    });
   }
 
+  /**
+   * @param {any} messages
+   * @memberof ChatStore
+   */
   @bind(Actions.messagesReceived)
-  receivedMessages(messages){
+  receivedMessages(messages) {
     _(messages)
       .keys()
       .map((k) => {
@@ -123,29 +152,41 @@ class ChatStore {
     this.setState({
       messages,
       messagesLoading: false
-    })
+    });
   }
 
+  /**
+   * @param {any} message
+   * @memberof ChatStore
+   */
   @bind(Actions.sendMessage)
-  sendMessage(message){
-    this.state.message = message
+  sendMessage(message) {
+    this.state.message = message;
     setTimeout(this.getInstance().sendMessage, 10);
   }
 
+  /**
+   * @param {any} channel
+   * @memberof ChatStore
+   */
   @bind(Actions.addChannel)
-  addChannel(channel){
-    this.state.channel = channel
+  addChannel(channel) {
+    this.state.channel = channel;
     setTimeout(this.getInstance().addChannel, 10);
   }
 
+  /**
+   * @param {any} channels
+   * @memberof ChatStore
+   */
   @bind(Actions.channelsReceived)
-  receivedChannels(channels){
+  receivedChannels(channels) {
     let selectedChannel;
     _(channels)
       .keys()
       .map((key, index) => {
         channels[key].key = key;
-        if(index == 0){
+        if (index === 0) {
           channels[key].selected = true;
           selectedChannel = channels[key];
         }
@@ -155,63 +196,91 @@ class ChatStore {
     this.setState({
       channels,
       selectedChannel
-    })
+    });
 
     setTimeout(this.getInstance().getMessages, 100);
   }
 
-  
-
+  /**
+   * @param {any} user
+   * @memberof ChatStore
+   */
   @bind(Actions.login)
   login(user){
-    this.setState({user: user})
+    this.setState({ user });
   }
 
+  /**
+   * @param {any} user
+   * @memberof ChatStore
+   */
   @bind(Actions.resendUser)
-  resendUser(user){
+  resendUser(user) {
     this.setState({
-      user: user
-    })
+      user
+    });
     setTimeout(this.getInstance().getChannels(user), 10);
   }
 
+  /**
+   * @param {any} user
+   * @memberof ChatStore
+   */
   @bind(Actions.loginWithEmail)
-  loginWithEmail(user){
+  loginWithEmail(user) {
     this.setState({
-      user: user
-    })
+      user
+    });
   }
 
+  /**=
+   * @param {any} user
+   * @memberof ChatStore
+   */
   @bind(Actions.createUserWithEmailAndPassword)
-  createUserWithEmailAndPassword(user){
+  createUserWithEmailAndPassword(user) {
     this.setState({
-      user: user
-    })
+      user
+    });
     setTimeout(this.getInstance().addUser1, 10);
   }
 
+  /**
+   * @param {any} number
+   * @memberof ChatStore
+   */
   @bind(Actions.phoneNumber)
-  phoneNumber(number){
-    this.setState({number: number})
+  phoneNumber(number) {
+    this.setState({ number });
     setTimeout(this.getInstance().addUser, 10);
   }
 
+  /**
+   * @param {any} userDetails
+   * @memberof ChatStore
+   */
   @bind(Actions.editDetails)
-  editDetails(userDetails){
-    this.setState({userDetails: userDetails})
+  editDetails(userDetails) {
+    this.setState({ userDetails });
     setTimeout(this.getInstance().editUserDetails, 10);
   }
 
+  /**
+   * @memberof ChatStore
+   */
   @bind(Actions.userAddSuccess)
-  userAddSuccess(){
+  userAddSuccess() {
     setTimeout(this.getInstance().homepage, 10);
   }
 
+  /**
+   * @param {any} number
+   * @memberof ChatStore
+   */
   @bind(Actions.addToFriends)
-  addToFriends(number){
-    console.log('I am in store now', number)
+  addToFriends(number) {
+    console.log('I am in store now', number);
   }
-
 }
 
 export default alt.createStore(ChatStore);

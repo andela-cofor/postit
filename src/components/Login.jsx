@@ -1,65 +1,90 @@
 import React from 'react';
 import { Card, CardText } from 'material-ui/Card';
-import Actions from '../actions/';
-import RB from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
-import TextField from 'material-ui/TextField';
-import IconButton from 'material-ui/IconButton';
 import { browserHistory } from 'react-router';
+import RB from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+import Actions from '../actions/';
 
-let RaisedButton = RB
+const RaisedButton = RB;
 
+
+/**
+ * @class Login
+ * @extends {React.Component}
+ */
 class Login extends React.Component {
+
+  /**
+   * Creates an instance of Login.
+   * @memberof Login
+   */
   constructor() {
-    super()
+    super();
     this.state = {
       userDetails: {
         email: '',
         password: ''
       }
-    }
-    // this.onClick=this.onClick.bind(this)
-    this.signInWithEmailAndPassword=this.signInWithEmailAndPassword.bind(this)
-    this.handleChange=this.handleChange.bind(this)
-    this.signUp=this.signUp.bind(this)
-    this.loginWithEmail=this.loginWithEmail.bind(this)
-    this.loginWithGoogle=this.loginWithGoogle.bind(this)
+    };
+    this.signInWithEmailAndPassword = this.signInWithEmailAndPassword.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.signUp = this.signUp.bind(this);
+    this.loginWithEmail = this.loginWithEmail.bind(this);
+    this.loginWithGoogle = this.loginWithGoogle.bind(this);
   }
 
-  // onClick(event){
-  //   event.preventDefault();
-  //   Actions.login(this.context.router);
-  // }
-  loginWithGoogle(){
+  /**
+   * @memberof Login
+   */
+  loginWithGoogle() {
     event.preventDefault();
     Actions.login(this.context.router);
   }
 
-  signInWithEmailAndPassword(event){
+
+  /**
+   * @param {any} event
+   * @memberof Login
+   */
+  signInWithEmailAndPassword(event) {
     event.preventDefault();
     Actions.signInWithEmailAndPassword(this.state.userDetails)
   }
 
+  /**
+   * @param {any} event
+   * @memberof Login
+   */
   handleChange(event) {
     const userDetails = this.state.userDetails;
     userDetails[event.target.name] = event.target.value;
     this.setState({ userDetails });
   }
 
-  // createUserWithEmailAndPassword(event){
-  //   event.preventDefault(this.state.userDetails);
-  // }
 
-  signUp(){
-    browserHistory.push('/signup')
+  /**
+   * @memberof Login
+   */
+  signUp() {
+    browserHistory.push('/signup');
   }
 
-  loginWithEmail(event){
+
+  /**
+   * @param {any} event
+   * @memberof Login
+   */
+  loginWithEmail(event) {
     event.preventDefault();
     Actions.loginWithEmail(this.state.userDetails);
   }
 
-  render(){
+
+  /**
+   * @returns
+   * @memberof Login
+   */
+  render() {
     return (
       <Card style={{
         'maxWidth': '500px',
@@ -97,14 +122,14 @@ class Login extends React.Component {
           </div>
           <br/><br/>
           <div>
-          <RaisedButton 
+          <RaisedButton
             onClick={this.loginWithEmail}
-            label="Login with Email" 
+            label="Login with Email"
             type="submit"
-            primary={true} 
-            style={{margin: 12,}} 
+            primary={true}
+            style={{ margin: 12, }}
           />
-          <RaisedButton 
+          <RaisedButton
             onClick={this.loginWithGoogle}
             label="Google"
           />
@@ -112,16 +137,16 @@ class Login extends React.Component {
             label="Sign Up"
             secondary={true}
             onClick={this.signUp}
-            style={{margin: 12,}} />
+            style={{ margin: 12, }} />
           </div>
         </form>
       </Card>
-    )
+    );
   }
 }
 
 Login.contextTypes = {
   router: React.PropTypes.func.isRequired
-}
+};
 
 module.exports = Login;

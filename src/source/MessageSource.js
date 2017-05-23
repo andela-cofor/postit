@@ -1,28 +1,26 @@
 import Actions from '../actions/';
-import Firebase from 'firebase';
-require("firebase/auth");
-require("firebase/database");
+require('firebase/auth');
+require('firebase/database');
 
-var firebase = null;
+let firebase = null;
 
-let MessageSource = {
+const MessageSource = {
 
   sendMessage: {
-    remote(state){
-      console.log('Message', state)
+    remote(state) {
       return new Promise((resolve, reject) => {
-        if(!firebase){
-          return resolve()
+        if (!firebase) {
+          return resolve();
         }
         // console.log(JSON.parse(localStorage.getItem('state')))
-        const user = JSON.parse(localStorage.getItem('state'))
+        const user = JSON.parse(localStorage.getItem('state'));
         const userPic = user.photoURL;
         firebase.database().ref('/messages/' + state.selectedChannel.name).push({
-          "message": state.message,
-          "date": new Date().toUTCString(),
-          "author": state.user.displayName,
-          "userId": state.user.uid,
-          "profilePic": userPic
+          'message': state.message,
+          'date': new Date().toUTCString(),
+          'author': state.user.displayName,
+          'userId': state.user.uid,
+          'profilePic': userPic
         });
         resolve();
       });
@@ -32,28 +30,27 @@ let MessageSource = {
   },
 
   getMessages: {
-    remote(state){
-      if(firebase){
-        firebase = null
+    remote(state) {
+      if (firebase) {
+        firebase = null;
       }
-      firebase = require("firebase/app");
+      firebase = require('firebase/app');
       return new Promise((resolve, reject) => {
         firebase.database().ref('/messages/' + state.selectedChannel.name).on('value', (dataSnapshot) => {
-          let messages = dataSnapshot.val();
+          const messages = dataSnapshot.val();
           resolve(messages);
           firebase.database().ref('/messages/' + state.selectedChannel.name).on('child_added', (msg) => {
-            console.log(msgVal)
-            let msgVal = msg.val();
+            const msgVal = msg.val();
             msgVal.key = msg.key;
-            Actions.messageReceived(msgVal)
-          })
-        })
+            Actions.messageReceived(msgVal);
+          });
+        });
       });
     },
     success: Actions.messagesReceived,
     error: Actions.messagesFailed,
     loading: Actions.messagesLoading
   }
-}
+};
 
 export default MessageSource;

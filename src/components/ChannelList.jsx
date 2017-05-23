@@ -1,90 +1,60 @@
 import React from 'react';
-import Channel from './Channel.jsx';
+import _ from 'lodash';
 import mui from 'material-ui/Card';
 import li from 'material-ui/List';
-import _ from 'lodash';
-var firebase = require("firebase");
-require("firebase/auth");
-require("firebase/database");
-import trim from 'trim';
-import connectToStores from 'alt-utils/lib/connectToStores'
-import ChatStore from '../store/ChatStore';
 import CircularProgress from 'material-ui/CircularProgress';
+import connectToStores from 'alt-utils/lib/connectToStores';
+import ChatStore from '../store/ChatStore';
+import Channel from './Channel.jsx';
 
-let Card = mui;
-let List = li
+require('firebase/auth');
+require('firebase/database');
+
+const Card = mui;
+const List = li;
 
 
+/**
+ * @class ChannelList
+ * @extends {React.Component}
+ */
 @connectToStores
 class ChannelList extends React.Component {
+
+  /**
+   * Creates an instance of ChannelList.
+   * @param {any} props
+   * @memberof ChannelList
+   */
   constructor(props) {
     super(props);
-    ChatStore.getChannels()
-
-      // this.onChange=this.onChange.bind(this)
-      // this.onKeyUp=this.onKeyUp.bind(this)
-
-      // firebase.database().ref('/channels/').on('value', (dataSnapshot) => {
-      //   let channelsVal = dataSnapshot.val()
-      //   let channels = _(channelsVal)
-      //     .keys()
-      //     .map((channelKey) => {
-      //       let cloned = _.clone(channelsVal[channelKey]);
-      //       cloned.key = channelKey;
-      //       return cloned;
-      //     })
-      //     .value();
-
-
-      //   this.setState({
-      //     channels: channels
-      //   })
-      // });
+    ChatStore.getChannels();
   }
 
-  // componentDidMount(){
-  //   this.selectedChannel = this.props.params.channel
-  //   ChatStore.getChannels(this.selectedChannel);
-  // }
-
-  // componentWillReceiveProps(nextProps){
-  //   if(this.selectedChannel != nextProps.params.channel){
-  //     this.selectedChannel = nextProps.params.channel;
-  //     ChatStore.getChannels(this.selectedChannel);
-  //   }
-  // }
-
-  static getStores(){
+  /**
+   * @static
+   * @returns store
+   * @memberof ChannelList
+   */
+  static getStores() {
     return [ChatStore];
   }
 
-  static getPropsFromStores(){
+  /**
+   * @static
+   * @returns state
+   * @memberof ChannelList
+   */
+  static getPropsFromStores() {
     return ChatStore.getState();
   }
 
-  // onChange(evt){
-  //     this.setState({
-  //         channels: evt.target.value
-  //     })
-  //     console.log(this.state.channels, 'Channel state')
-  // }
-
-  // onKeyUp(evt) {
-  //   // console.log(evt.target.value, 'onKeyUp')
-  //     if(evt.keyCode === 13 && trim(evt.target.value) != '') {
-  //       evt.preventDefault();
-
-  //       firebase.database().ref('/channels/' + name).push({
-  //         name: this.state.channels
-  //       })
-  //       this.setState({
-  //         channels: channels
-  //       })
-  //     }
-  // }
-
+  /**
+   * @returns ChannelList
+   * @memberof ChannelList
+   */
   render() {
-    if(!this.props.channels){
+    if (!this.props.channels) {
       return (
         <Card style={{
           flexGrow: 1
@@ -100,41 +70,24 @@ class ChannelList extends React.Component {
             }}
           />
         </Card>
-      )
+      );
     }
-    let channelNodes = _(this.props.channels)
+    const channelNodes = _(this.props.channels)
       .keys()
       .map((k, index) => {
-        let channel = this.props.channels[k];
+        const channel = this.props.channels[k];
         return (
             <Channel channel={channel} key={`${channel.key}${index}`} />
         );
-    })
-    .value()
+      })
+      .value();
 
     return (
         // <div>{messageNodes}</div>
-        <div style={{
-                flexGrow: 1,
-            }}>
-            {/*<textarea
-              value={this.state.channels}
-              onChange={this.onChange}
-              onKeyUp={this.onKeyUp}
-              placeholder="Add a channel"
-              value={this.state.message}
-              onChange={this.onChange}
-              onKeyUp={this.onKeyUp}
-              style={{
-              width: '99%',
-              borderColor: '#D0D0D0',
-              resize: 'none',
-              borderRadius: 3,
-              minHeight: 50,
-              color: '#555',
-              fontSize: 14,
-              outline: 'auto 0px'
-          }} />*/}
+        <div
+          style={{
+            flexGrow: 1,
+          }}>
             <Card>
                 <List>
                     {channelNodes}

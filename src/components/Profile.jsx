@@ -1,113 +1,150 @@
 import React from 'react';
-import { Card, CardText } from 'material-ui/Card';
-import Actions from '../actions/';
-import RB from 'material-ui/RaisedButton';
-import connectToStores from 'alt-utils/lib/connectToStores'
-import ChatStore from '../store/ChatStore'
-import { browserHistory } from 'react-router';
+import connectToStores from 'alt-utils/lib/connectToStores';
 import TextField from 'material-ui/TextField';
-import trim from 'trim'
 import Avatar from 'material-ui/Avatar';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
+import { Card, CardText } from 'material-ui/Card';
+import Actions from '../actions/';
+import ChatStore from '../store/ChatStore';
 
+const firebase = require('firebase/app');
+
+/**
+ * @class Profile
+ * @extends {React.Component}
+ */
 @connectToStores
 class Profile extends React.Component {
+
+  /**
+   * @static
+   * @returns ChatStore
+   * @memberof Profile
+   */
+  static getStores() {
+    return [ChatStore];
+  }
+
+  /**
+   * @static
+   * @returns state
+   * @memberof Profile
+   */
+  static getPropsFromStores() {
+    return ChatStore.getState();
+  }
+
+  /**
+   * Creates an instance of Profile.
+   * @memberof Profile
+   */
   constructor() {
-      super()
+    super();
     this.state = {
       userDetails: {
         phoneNumber: '',
         userName: ''
       },
       profilePicture: ''
-
-    }
-    this.handleChange=this.handleChange.bind(this)
-    this.onSubmit=this.onSubmit.bind(this)
-    this.handleFileUpload=this.handleFileUpload.bind(this)
-    this.setProfilePic=this.setProfilePic.bind(this)
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.handleFileUpload = this.handleFileUpload.bind(this);
+    this.setProfilePic = this.setProfilePic.bind(this);
   }
 
-
-
-  static getStores(){
-        return [ChatStore]
-    }
-
-    static getPropsFromStores(){
-        return ChatStore.getState();
-    }
-
-  componentDidMount(){
-    let state = ChatStore.getState();
-    console.log(this.props.user)
+  /**
+   * @memberof Profile
+   */
+  componentDidMount() {
+    const state = ChatStore.getState();
+    console.log(this.props.user);
   }
 
-  setProfilePic(url){
-    console.log('I got url')
+  /**
+   * @param {any} url
+   * @memberof Profile
+   */
+  setProfilePic(url) {
+    console.log('I got url');
     this.setState({
       profilePicture: url
     });
   }
 
+  /**
+   * @param {any} event
+   * @memberof Profile
+   */
   handleChange(event) {
     const userDetails = this.state.userDetails;
     userDetails[event.target.name] = event.target.value;
     this.setState({ userDetails });
   }
 
-  onSubmit(event){
+  /**
+   * @param {any} event
+   * @memberof Profile
+   */
+  onSubmit(event) {
     event.preventDefault();
     Actions.editDetails(this.state.userDetails);
-    console.log(this.state.userDetails)
+    console.log(this.state.userDetails);
   }
 
-  // Component method
+  /**
+   * @param {any} evt
+   * @memberof Profile
+   */
   handleFileUpload(evt) {
-    // console.log(evt.target.files, 'Na me ')
-    const file  = evt.target.files[0]
-    console.log(evt, 'Nate')
+    const file = evt.target.files[0];
 
-    const reader = new FileReader()
+    const reader = new FileReader();
     reader.onload = function (evt) {
       console.log(evt)
       const mediaRef = firebase.storage().ref('images/').child('pest')
       mediaRef.putString(evt.target.result).then((snap) => {
         console.log(snap);
         // this.setProfilePic(snap.downloadURL);
-      })
-    }
-    reader.readAsDataURL(file)
+      });
+    };
+    reader.readAsDataURL(file);
 
-    firebase.storage().ref('images/').child('pest').getDownloadURL().then(function(url) {
+    firebase.storage().ref('images/').child('pest').getDownloadURL()
+      .then((url) => {
     // `url` is the download URL for 'images/stars.jpg'
 
     // This can be downloaded directly:
-    var xhr = new XMLHttpRequest();
-    xhr.responseType = 'blob';
-    xhr.onload = function(event) {
-      var blob = xhr.response;
-      console.log('this is blob', blob)
-    };
-    xhr.open('GET', url);
-    xhr.send();
+        const xhr = new XMLHttpRequest();
+        xhr.responseType = 'blob';
+        xhr.onload = () => {
+          const blob = xhr.response;
+          console.log('this is blob', blob);
+        };
+        xhr.open('GET', url);
+        xhr.send();
 
-    // Or inserted into an <img> element:
-    var img = document.getElementById('myimg');
+        // Or inserted into an <img> element:
+        const img = document.getElementById('myimg');
 
-      // img.src = url;
-    // this.setState({
-    //   profilePicture: url
-    // });
-      console.log(url, 'Url');
-    }).catch(function(error) {
+        img.src = url;
+        // this.setState({
+        //   profilePicture: url
+        // });
+        // console.log(url, 'Url');
+      })
+        .catch((error) => {
       // Handle any errors
-      console.log(error)
-    });
+          console.log(error);
+        });
   }
 
-  render(){
+  /**
+   * @returns Card
+   * @memberof Profile
+   */
+  render() {
     return (
       <Card style={{
         'maxWidth': '800px',
@@ -115,8 +152,8 @@ class Profile extends React.Component {
         'padding': '50px'
       }}>
       <CardText style={{
-          'textAlign': 'center'
-        }}>
+        'textAlign': 'center'
+      }}>
          Welcome {this.props.user.displayName} you can edit your profile details
         </CardText>
         <Avatar
@@ -127,7 +164,7 @@ class Profile extends React.Component {
           }}
         />
         <FlatButton label="Change Picture" labelPosition="before">
-           <input 
+           <input
             type="file"
             onChange={(e) => this.handleFileUpload(e)}
             id="fileButton"
@@ -161,21 +198,21 @@ class Profile extends React.Component {
           </div>
           <br/><br/>
           <div>
-          <RaisedButton 
-            label="Submit" 
+          <RaisedButton
+            label="Submit"
             type="submit"
-            primary={true} 
-            style={{margin: 12,}} 
+            primary={true}
+            style={{ margin: 12, }}
           />
           </div>
         </form>
       </Card>
-    )
+    );
   }
 }
 
 Profile.contextTypes = {
   router: React.PropTypes.func.isRequired
-}
+};
 
 module.exports = Profile;

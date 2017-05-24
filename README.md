@@ -1,6 +1,6 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/andela-cofor/postit/badges/quality-score.png?b=Development)](https://scrutinizer-ci.com/g/andela-cofor/postit/?branch=Development)
 
-# postit
+# PostIt
 
 PostIt is a simple application that allows friends and colleagues create groups for notifications. This way one person can post notifications to everyone by sending a message once. It is built with NodeJS, Express and Firebase as it's database.
 Source code employs ES6 and ES7 syntax traspiled down to ES5 using Babel.

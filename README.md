@@ -1,5 +1,6 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/andela-cofor/postit/badges/quality-score.png?b=Development)](https://scrutinizer-ci.com/g/andela-cofor/postit/?branch=Development)
 [![Build Status](https://travis-ci.org/andela-cofor/postit.svg?branch=master)](https://travis-ci.org/andela-cofor/postit)
+[![Coverage Status](https://coveralls.io/repos/github/andela-cofor/postit/badge.svg?branch=Development)](https://coveralls.io/github/andela-cofor/postit?branch=Development)
 
 # PostIt
 

@@ -17,7 +17,6 @@ A created user can perform the following:
     - Users should be able to add friends within the applicatio.
     - Logout.
 
-
 - In addition to the general user functions:
     - Send messages to memebers in groups.
     - Send text messages to memebers in groups.

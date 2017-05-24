@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="4">
+
+  <testsuite name="chat.spec"
+    errors="0" failures="0" hostname="" id="" package="chat.spec" skipped="0"
+    tests="4" time="115.5" timestamp="Wed, 24 May 2017 12:38:32 GMT">
+  
+    <testcase name="Add Channel" classname="chat.spec" time="25.59" assertions="6">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Add Friend Email" classname="chat.spec" time="30.73" assertions="6">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Add Friend" classname="chat.spec" time="26.81" assertions="6">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Chat with friend" classname="chat.spec" time="32.40" assertions="9">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+  
+  </testsuite>
+</testsuites>

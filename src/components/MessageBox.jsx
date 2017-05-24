@@ -82,7 +82,6 @@ class MessageBox extends React.Component {
     }
   }
 
-
   /**
    * @returns messages
    * @memberof MessageBox
@@ -95,6 +94,7 @@ class MessageBox extends React.Component {
         padding: 30
       }}>
         <textarea
+          id="messageArea"
           value={this.state.message}
           onChange={this.onChange}
           onKeyUp={this.onKeyUp}
@@ -114,16 +114,19 @@ class MessageBox extends React.Component {
           defaultSelected="not_light"
           onChange={this.handleChange}>
           <RadioButton
+            id="normal"
             value="Normal"
             label="Normal"
             style={{ marginBottom: 16, }}
           />
           <RadioButton
+            id="urgent"
             value="Urgent"
             label="Urgent"
             style={{ marginBottom: 16, }}
           />
           <RadioButton
+            id="critical"
             value="Critical"
             label="Critical"
             style={{ marginBottom: 16, }}

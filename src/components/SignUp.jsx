@@ -77,6 +77,7 @@ class Signup extends React.Component {
           <br /><br /><br /><br />
           <div className="mui-textfield">
             <TextField
+              id="firstName"
               required
               name="firstName"
               value={this.state.firstName}
@@ -87,6 +88,7 @@ class Signup extends React.Component {
           </div>
           <div className="mui-textfield">
             <TextField
+              id="lastName"
               required
               name="lastName"
               value={this.state.lastName}
@@ -97,6 +99,7 @@ class Signup extends React.Component {
           </div>
           <div className="mui-textfield">
             <TextField
+              id="email"
               required
               name="email"
               value={this.state.email}
@@ -107,6 +110,7 @@ class Signup extends React.Component {
           </div>
           <div className="mui-textfield">
             <TextField
+              id="password"
               required
               name="password"
               value={this.state.password}
@@ -117,6 +121,7 @@ class Signup extends React.Component {
           </div>
           <div className="mui-textfield">
             <TextField
+              id="phoneNumber"
               required
               name="phoneNumber"
               value={this.state.phoneNumber}
@@ -125,7 +130,7 @@ class Signup extends React.Component {
               type="number"
             /><br />
           </div>
-          <div className="mui-textfield">
+          {/*<div className="mui-textfield">
             <TextField
               required
               name="photoUrl"
@@ -134,10 +139,11 @@ class Signup extends React.Component {
               placeholder="Enter photo url"
               type="text"
             /><br />
-          </div>
+          </div>*/}
           <br/><br/>
           <div>
             <RaisedButton
+              id="signup"
               label="Sign Up"
               type="submit"
               style={{

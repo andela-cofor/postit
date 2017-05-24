@@ -178,6 +178,7 @@ class Chat extends React.Component {
       }>
         <div>
         <textarea
+          id="addChannel"
           placeholder="Add a group..."
           value={this.state.message}
           onChange={this.onChange}
@@ -196,6 +197,7 @@ class Chat extends React.Component {
           }} />
         <textarea
           placeholder="Invite friend with email..."
+          id="inviteFriendEmail"
           name="email"
           value={this.state.newUserEmail}
           onKeyUp={this.inviteFriend}
@@ -212,6 +214,7 @@ class Chat extends React.Component {
             marginTop: 10
           }} />
         <textarea
+          id="inviteFriend"
           type="number"
           placeholder="Add a a friend with number..."
           onKeyUp={this.addAFriend}

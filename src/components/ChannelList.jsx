@@ -88,7 +88,7 @@ class ChannelList extends React.Component {
           style={{
             flexGrow: 1,
           }}>
-            <Card>
+            <Card id="channelCard">
                 <List>
                     {channelNodes}
                 </List>

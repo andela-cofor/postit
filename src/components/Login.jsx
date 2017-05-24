@@ -111,10 +111,12 @@ class Login extends React.Component {
           <br /><br />
           <a href="#"
             onClick={this.forgetPassword}
+            id="fPassword"
             >Forget Password</a>
           <br /><br /><br /><br />
           <div className="mui-textfield">
             <TextField
+              id="email"
               required
               name="email"
               value={this.state.email}
@@ -126,6 +128,7 @@ class Login extends React.Component {
           <div className="mui-textfield">
             <TextField
               required
+              id="password"
               name="password"
               value={this.state.password}
               onChange={this.handleChange}
@@ -137,15 +140,18 @@ class Login extends React.Component {
           <div>
           <RaisedButton
             onClick={this.loginWithEmail}
+            id="submit"
             label="Submit"
             type="submit"
             style={{ margin: 12, }}
           />
           <RaisedButton
+            id="loginWithGoogle"
             onClick={this.loginWithGoogle}
             label="Google"
           />
           <RaisedButton
+            id="signUp"
             label="Sign Up"
             onClick={this.signUp}
             style={{ margin: 12, }} />

@@ -73,7 +73,7 @@ class MessageList extends React.Component {
             flex: 2,
             marginLeft: 20,
           }}>
-            <Card >
+            <Card id="messageCard">
                 <List>
                     {messageNodes}
                 </List>

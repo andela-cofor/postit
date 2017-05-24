@@ -57,7 +57,7 @@ The frontend was built with the [react](https://facebook.github.io/react/) and [
 ---
 
 1. Fork this repositry to your account.
-2. Clone your repositry: git clone https://github.com/andela-cofor/Document-Management-System.git
+2. Clone your repositry: git clone https://github.com/andela-cofor/postit.git.
 3. Create your feature branch: git checkout -b new-feature
 4. Commit your changes: git commit -m "did something"
 5. Push to the remote branch: git push origin new-feature

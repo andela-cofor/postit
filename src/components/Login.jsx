@@ -137,9 +137,8 @@ class Login extends React.Component {
           <div>
           <RaisedButton
             onClick={this.loginWithEmail}
-            label="Login with Email"
+            label="Submit"
             type="submit"
-            primary={true}
             style={{ margin: 12, }}
           />
           <RaisedButton
@@ -148,7 +147,6 @@ class Login extends React.Component {
           />
           <RaisedButton
             label="Sign Up"
-            secondary={true}
             onClick={this.signUp}
             style={{ margin: 12, }} />
           </div>

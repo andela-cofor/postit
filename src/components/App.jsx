@@ -6,6 +6,7 @@ import * as Colors from 'material-ui/styles/colors';
 import { browserHistory } from 'react-router';
 import Avatar from 'material-ui/Avatar';
 import Login from './Login.jsx';
+import FlatButton from 'material-ui/FlatButton';
 
 const firebase = require('firebase/app');
 require('firebase/auth');
@@ -13,6 +14,7 @@ require('firebase/database');
 
 const ThemeManager = getMuiTheme;
 
+// @connectToStores
 /**
  * @class App
  * @extends {React.Component}
@@ -25,10 +27,15 @@ class App extends React.Component {
    */
   constructor() {
     super();
+    this.state = {
+      profilePicture: ''
+    }
     ThemeManager({ palette: {
       primary1Color: Colors.blue500,
       accent1Color: Colors.pink400
     } });
+
+    this.logout = this.logout.bind(this);
 
     const config = {
       apiKey: 'AIzaSyA60fC3LsXyi-WPNlEYIlEu6kfNv3CKsqM',
@@ -48,6 +55,22 @@ class App extends React.Component {
     browserHistory.push('/profile');
   }
 
+  /**
+   * @memberof Chat
+   */
+  loginPage() {
+    console.log('state');
+    browserHistory.push('/profile');
+  }
+
+  /**
+   * @memberof Chat
+   */
+  logout() {
+    localStorage.clear();
+    localStorage.removeItem('state');
+    browserHistory.push('/');
+  }
 
   /**
    * @returns view
@@ -63,15 +86,27 @@ class App extends React.Component {
           <div>
             <AppBar
               title="PostIt"
-            iconElementRight={
-              <Avatar
+              iconElementLeft={
+                (localStorage.getItem('state'))
+                ? <Avatar
                 onClick={this.onClick}
-                src=""
+                src={this.state.profilePicture}
                 size={50}
                 style={{
                   margin: 5
                 }}
               />
+              
+              : ''
+            }
+            iconElementRight={
+              (localStorage.getItem('state'))
+              ? <FlatButton
+                  onClick={this.logout}
+                  label="Logout"
+                  />
+                  
+              : ''
             }
           />
           {this.props.children}

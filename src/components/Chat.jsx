@@ -37,7 +37,6 @@ class Chat extends React.Component {
     this.onClick = this.onClick.bind(this);
     this.loginPage = this.loginPage.bind(this);
     this.addAFriend = this.addAFriend.bind(this);
-    this.logout = this.logout.bind(this);
     this.inviteFriend = this.inviteFriend.bind(this);
   }
 
@@ -136,18 +135,6 @@ class Chat extends React.Component {
     }
   }
 
-
-  /**
-   * @memberof Chat
-   */
-  logout() {
-    console.log('Someone clicked me');
-    localStorage.clear();
-    localStorage.removeItem('state');
-    browserHistory.push('/');
-    console.log('state');
-  }
-
   /**
    * @param {any} event
    * @memberof Chat
@@ -189,15 +176,6 @@ class Chat extends React.Component {
           onClick={this.loginPage}
             />
       }>
-        <div>
-          <RaisedButton
-            onClick={this.logout}
-            label="Logout"
-            style={{
-              marginLeft: 1150,
-            }}
-          />
-        </div>
         <div>
         <textarea
           placeholder="Add a group..."

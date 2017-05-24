@@ -50,16 +50,12 @@ class Profile extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    // this.handleFileUpload = this.handleFileUpload.bind(this);
-    // this.setProfilePic = this.setProfilePic.bind(this);
   }
 
   /**
    * @memberof Profile
    */
   componentWillMount() {
-    // const user = JSON.parse(localStorage.getItem('state'));
-    // console.log(user, 'localStorage');
     const state = ChatStore.getState();
     console.log(state, 'Hello world');
     // console.log(state.selectedChannel.name, 'was selectedChannel')
@@ -77,8 +73,6 @@ class Profile extends React.Component {
         })
       }
     }
-    // const state = ChatStore.getState();
-    // console.log(this.state, 'new state');
   }
 
   /**

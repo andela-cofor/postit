@@ -117,9 +117,8 @@ class Chat extends React.Component {
   onKeyUp(evt) {
     if (evt.keyCode === 13 && trim(evt.target.value) !== '') {
       evt.preventDefault();
-
       Actions.addChannel(this.state.channel);
-
+      Materialize.toast(`${this.state.channel} has been added `, 4000, 'rounded')
       this.setState({
         channel: ''
       });
@@ -143,8 +142,10 @@ class Chat extends React.Component {
    */
   logout() {
     console.log('Someone clicked me');
-    localStorage.removeItem("");
+    localStorage.clear();
+    localStorage.removeItem('state');
     browserHistory.push('/');
+    console.log('state');
   }
 
   /**
@@ -166,7 +167,6 @@ class Chat extends React.Component {
           channelName: state.selectedChannel.name
         }
       }));
-      console.log(this.state, 'Have u changed state ?');
       Actions.inviteFriendToChannel(this.state.emailDetails);
     }
   }
@@ -178,7 +178,10 @@ class Chat extends React.Component {
    */
   render() {
     return (
-      <div
+      <div style={{
+        overflow: scroll,
+        maxHeight: 10,
+      }}
       iconElementRight={
         <RaisedButton
           label='Profile'

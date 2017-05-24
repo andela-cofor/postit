@@ -55,11 +55,13 @@ class Actions {
             sender: 'PostIt App',
             message
           }).then((response) => {
-            console.log(response);
+            console.log(response, 'Res')
+            Materialize.toast(response, 4000, 'rounded')
           }).catch((error) => {
-            console.log(error);
+            // console.log(error, 'Error')
           });
         });
+        Materialize.toast(`Message and Text notification sent to members of ${channelName} group`, 4000, 'rounded')
       });
     };
   }
@@ -81,11 +83,11 @@ class Actions {
             sender: senderEmail,
             message
           }).then((response) => {
-            console.log(response);
+            Materialize.toast(response, 4000, 'rounded')
           }).catch((error) => {
-            console.log(error);
           });
         });
+        Materialize.toast(`Email notification sent to members of ${channelName} group`, 4000, 'rounded')
       });
     };
   }
@@ -102,8 +104,11 @@ class Actions {
         channel: channelName,
         sender: senderEmail
       }).then((response) => {
-        console.log(response);
+        Materialize.toast(response, 4000, 'rounded')
+        console.log(error)
+        console.log(`${receiverEmail} has been invited to join channel`);
       }).catch((error) => {
+        Materialize.toast(`${receiverEmail} is an invalid email address`, 4000, 'rounded')
         console.log(error);
       });
     };
@@ -119,9 +124,9 @@ class Actions {
       firebase.database().ref('/contacts/' + userNumber).on('value', (dataSnapshot) => {
         const contact = dataSnapshot.val();
         if (!contact) {
-          console.log('Contact has not joined PostIt');
+          Materialize.toast('Contact has not joined PostIt', 4000, 'rounded');
         } else {
-          console.log('Add User');
+          Materialize.toast('Adding... User', 4000, 'rounded');
           Object.keys(contact).forEach((contactDetails) => {
             console.log(contact[contactDetails], '');
             const email = contact[contactDetails].email;
@@ -146,11 +151,10 @@ class Actions {
                   'email': email,
                   'number': number
                 });
-              } else {
-                console.log('u have him');
               }
             });
           });
+          Materialize.toast(`${userNumber} has been added reload page`, 4000, 'rounded');
         }
       });
       browserHistory.push('chat')
@@ -189,6 +193,7 @@ class Actions {
         .catch((error) => {
         // Handle Errors here.
           const errorCode = error.code;
+           Materialize.toast(errorCode, 4000) 
           console.log(errorCode, 'errorCode');
           const errorMessage = error.message;
           console.log(errorMessage, 'errorMessage');
@@ -204,6 +209,7 @@ class Actions {
       const displayName = userDetails.firstName + ' ' + userDetails.lastName;
       const email = userDetails.email;
       const password = userDetails.password;
+      const profilePic = userDetails.photoUrl
 
       firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((res) => {
@@ -212,7 +218,8 @@ class Actions {
             email: userDetails.email,
             password: userDetails.password,
             phoneNumber: userDetails.phoneNumber,
-            uid: res.uid
+            uid: res.uid,
+            'profilePic': profilePic
           };
           dispatch(user);
           // browserHistory.push('chat')
@@ -220,9 +227,8 @@ class Actions {
         .catch((error) => {
           // Handle Errors here.
           const errorCode = error.code;
-          console.log(errorCode, 'errorCode');
+          Materialize.toast(errorCode, 4000, 'rounded')
           const errorMessage = error.message;
-          console.log(errorMessage, 'errorMessage');
           // ...
         });
     };
@@ -278,6 +284,7 @@ class Actions {
         // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
+        Materialize.toast(errorCode, 4000, 'rounded')
         // The email of the user's account used.
         const email = error.email;
         // The firebase.auth.AuthCredential type that was used.
@@ -304,11 +311,13 @@ class Actions {
     const emailAddress = userDetails;
     console.log(emailAddress);
 
-    auth.sendPasswordResetEmail(emailAddress).then(function(res) {
+    auth.sendPasswordResetEmail(emailAddress).then((res) => {
       // Email sent.
+      Materialize.toast(res, 4000, 'rounded')
       console.log(res, 'from firebase')
     }, function(error) {
       // An error happened.
+      Materialize.toast(error, 4000, 'rounded')
       console.log(error, 'from firebase');
     });
   }

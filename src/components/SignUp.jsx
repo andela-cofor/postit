@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardText } from 'material-ui/Card';
-import RB from 'material-ui/RaisedButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Actions from '../actions/';
 
@@ -22,7 +22,8 @@ class Signup extends React.Component {
         lastName: '',
         email: '',
         password: '',
-        phoneNumber: ''
+        phoneNumber: '',
+        photoUrl: ''
       }
     };
     // this.onClick=this.onClick.bind(this)
@@ -41,14 +42,19 @@ class Signup extends React.Component {
     this.setState({ userDetails });
   }
 
-
   /**
    * @param {any} event
    * @memberof Signup
    */
   signUp(event) {
     event.preventDefault();
-    Actions.createUserWithEmailAndPassword(this.state.userDetails);
+    console.log(this.state.userDetails.phoneNumber, 'Gotcha')
+    if(this.state.userDetails.phoneNumber.length !== 11){
+      Materialize.toast('Number must be 11 digits', 4000, 'rounded')
+    } else{
+      // Materialize.toast('Sign up was successful', 4000, 'rounded')
+      Actions.createUserWithEmailAndPassword(this.state.userDetails);
+    }
   }
 
   /**
@@ -117,6 +123,16 @@ class Signup extends React.Component {
               onChange={this.handleChange}
               placeholder="Enter phone number"
               type="number"
+            /><br />
+          </div>
+          <div className="mui-textfield">
+            <TextField
+              required
+              name="photoUrl"
+              value={this.state.photoUrl}
+              onChange={this.handleChange}
+              placeholder="Enter photo url"
+              type="text"
             /><br />
           </div>
           <br/><br/>

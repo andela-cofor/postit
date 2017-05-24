@@ -14,8 +14,9 @@ class Message extends React.Component {
    */
   render() {
     return (
-      <ListItem disabled={true}
-      leftAvatar={
+      <ListItem
+        disabled={true}
+        leftAvatar={
       <Avatar src={this.props.message.profilePic} />
       } >
           {this.props.message.message}

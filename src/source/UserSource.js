@@ -85,12 +85,13 @@ const UserSource = {
   },
   addUser1: {
     remote(state) {
-      // console.log('Adding ', state.user);
+      console.log('Adding ', state.user);
       return new Promise((resolve, reject) => {
         const number = state.user.phoneNumber;
         const userName = state.user.displayName;
         const userEmail = state.user.email;
         const userId = state.user.uid;
+        const profilePic = state.user.profilePic
         const defualtChannel = 'Lagos All';
         console.log(userId);
 
@@ -100,7 +101,8 @@ const UserSource = {
           'email': userEmail,
           'userId': userId,
           'username': userName,
-          'password': state.user.password
+          'password': state.user.password,
+          // 'profilePic': profilePic
         });
         firebase.database().ref('/contacts/' + number).push({
           'email': userEmail,

@@ -108,7 +108,11 @@ class MessageBox extends React.Component {
             fontSize: 14,
             outline: 'auto 0px'
           }} />
-        <RadioButtonGroup valueSelected={this.state.value} name="shipSpeed" defaultSelected="not_light" onChange={this.handleChange}>
+        <RadioButtonGroup
+          valueSelected={this.state.value}
+          name="shipSpeed"
+          defaultSelected="not_light"
+          onChange={this.handleChange}>
           <RadioButton
             value="Normal"
             label="Normal"

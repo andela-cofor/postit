@@ -58,6 +58,7 @@ function sendUrgentMail(receiver, channel, sender, message) {
       return false;
     }
     console.log('Message %s sent: %s', info.messageId, info.response);
+    Materialize.toast('errorCode', 4000, 'rounded')
     return true;
   });
 }

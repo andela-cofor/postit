@@ -103,9 +103,6 @@ class Login extends React.Component {
           style = { {
           'textAlign': 'center'
         }}>
-          {/*<RaisedButton
-            label="Login"
-            style={{margin: 12,}} />*/}
             <h6>Login</h6>
         </CardText>
         <form className="mui-form" onSubmit={this.signInWithEmailAndPassword}>

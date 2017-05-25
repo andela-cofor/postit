@@ -26,8 +26,6 @@ class Signup extends React.Component {
         photoUrl: ''
       }
     };
-    // this.onClick=this.onClick.bind(this)
-    // this.createUserWithEmailAndPassword=this.createUserWithEmailAndPassword.bind(this)
     this.handleChange = this.handleChange.bind(this);
     this.signUp = this.signUp.bind(this);
   }
@@ -52,7 +50,6 @@ class Signup extends React.Component {
     if(this.state.userDetails.phoneNumber.length !== 11){
       Materialize.toast('Number must be 11 digits', 4000, 'rounded')
     } else{
-      // Materialize.toast('Sign up was successful', 4000, 'rounded')
       Actions.createUserWithEmailAndPassword(this.state.userDetails);
     }
   }
@@ -71,10 +68,9 @@ class Signup extends React.Component {
         <CardText style={{
           'textAlign': 'center'
         }}>
-          <RaisedButton label="Signup" style={{ margin: 12, }} />
+        <h6>Signup</h6>
         </CardText>
         <form className="mui-form" onSubmit={this.signUp}>
-          <br /><br /><br /><br />
           <div className="mui-textfield">
             <TextField
               id="firstName"

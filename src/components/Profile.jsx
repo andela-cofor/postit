@@ -46,7 +46,7 @@ class Profile extends React.Component {
         phoneNumber: '',
         userName: ''
       },
-      profilePicture: ''
+      photoURL: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -64,13 +64,23 @@ class Profile extends React.Component {
         browserHistory.push('/');
       } else {
         const user = JSON.parse(localStorage.getItem('state'));
-        console.log(user, 'Local User')
+        console.log(user, 'from local')
         Actions.resendUser(user);
-        const state = ChatStore.getState();
-        console.log(state, 'was selectedChannel');
-        this.setState({
-          profilePicture: state.user.photoURL
-        })
+        console.log(user)
+        console.log(this.state, 'was selectedChannel');
+        if(user.photoURL){
+          console.log(user.photoURL, 'Have photoURL')
+          this.state = (Object.assign({}, this.state, {
+            photoURL: user.photoURL
+          }));
+        }
+        if (user.profilePic){
+          console.log(user.profilePic, 'Have propic')
+          this.state = (Object.assign({}, this.state, {
+            photoURL: user.profilePic
+          }));
+        }
+        console.log(state, 'Pic');
       }
     }
   }
@@ -169,7 +179,7 @@ class Profile extends React.Component {
       }}>
         </CardText>
         <Avatar
-          src={this.state.profilePicture}
+          src={this.state.photoURL}
           size={50}
           style={{
             margin: 5
@@ -208,14 +218,24 @@ class Profile extends React.Component {
               type="text"
             /><br />
           </div>
+          {/*<div className="mui-textfield">
+            <TextField
+              required
+              name="photoUrl"
+              value={this.state.photoUrl}
+              onChange={this.handleChange}
+              placeholder="Enter photo url"
+              type="text"
+            /><br />
+          </div>*/}
           <br/><br/>
           <div>
-          <RaisedButton
-            label="Submit"
-            type="submit"
-            primary={true}
-            style={{ margin: 12, }}
-          />
+            <RaisedButton
+              label="Submit"
+              type="submit"
+              primary={true}
+              style={{ margin: 12, }}
+            />
           </div>
         </form>
       </Card>

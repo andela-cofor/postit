@@ -86,20 +86,7 @@ class App extends React.Component {
           <div>
             <AppBar
               title="PostIt"
-              iconElementLeft={
-                (localStorage.getItem('state'))
-                ? <Avatar
-                onClick={this.onClick}
-                src={this.state.profilePicture}
-                size={50}
-                style={{
-                  margin: 5
-                }}
-              />
-              
-              : ''
-            }
-            iconElementRight={
+              iconElementRight={
               (localStorage.getItem('state'))
               ? <FlatButton
                   onClick={this.logout}

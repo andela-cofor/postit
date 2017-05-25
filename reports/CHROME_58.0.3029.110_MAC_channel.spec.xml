@@ -5,9 +5,9 @@
 
   <testsuite name="channel.spec"
     errors="0" failures="0" hostname="" id="" package="channel.spec" skipped="0"
-    tests="1" time="28.47" timestamp="Wed, 24 May 2017 12:38:04 GMT">
+    tests="1" time="29.21" timestamp="Wed, 24 May 2017 16:39:07 GMT">
   
-    <testcase name="Channel Card" classname="channel.spec" time="28.47" assertions="6">
+    <testcase name="Channel Card" classname="channel.spec" time="29.21" assertions="6">
 
     
 

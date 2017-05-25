@@ -27,7 +27,9 @@ const UserSource = {
           'profilePic': userPic,
           'email': userEmail,
           'userId': userId,
-        });
+        }).then((res) => {
+          console.log(res, 'result')
+        })
     }
   },
 
@@ -86,6 +88,7 @@ const UserSource = {
   addUser1: {
     remote(state) {
       console.log('Adding ', state.user);
+      localStorage.setItem('state', JSON.stringify(state.user));
       return new Promise((resolve, reject) => {
         const number = state.user.phoneNumber;
         const userName = state.user.displayName;
@@ -102,7 +105,7 @@ const UserSource = {
           'userId': userId,
           'username': userName,
           'password': state.user.password,
-          // 'profilePic': profilePic
+          'profilePic': profilePic
         });
         firebase.database().ref('/contacts/' + number).push({
           'email': userEmail,
@@ -110,22 +113,20 @@ const UserSource = {
           'username': userName,
           'number': number,
         });
-        // firebase.database().ref('/channelsList/').set({
-        //   "name": 'Lagos All',
-        // });
         firebase.database().ref('/Lagos All/' + userId).push({
           'email': userEmail,
           'username': userName,
           'number': number,
         });
         firebase.database().ref('/channels/' + userId).push({
-          'number': defualtChannel,
+          'name': defualtChannel,
         });
         firebase.database().ref('/messages/' + 'Lagos All/').push({
           'message': `${userName} just joined this Group... Welcome Him`,
           'date': new Date().toUTCString(),
           'author': userName,
-          'userId': userId
+          'userId': userId,
+          'profilePic': profilePic
         });
         resolve();
       });
@@ -136,6 +137,8 @@ const UserSource = {
   homepage: {
     remote(state) {
       console.log('Routing......');
+      console.log('Success', state);
+      console.log(JSON.parse(localStorage.getItem('state')), 'Storage')
       browserHistory.push('chat');
     }
   }

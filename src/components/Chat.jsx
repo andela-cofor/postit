@@ -9,6 +9,8 @@ import FriendList from './FriendList.jsx';
 import MessageBox from './MessageBox.jsx';
 import ChatStore from '../store/ChatStore';
 import Actions from '../actions/index';
+import FlatButton from 'material-ui/FlatButton';
+import Avatar from 'material-ui/Avatar';
 
 /**
  * @class Chat
@@ -30,7 +32,8 @@ class Chat extends React.Component {
       emailDetails: {
         email: '',
         channelName: ''
-      }
+      },
+      photoURL: ''
     };
     this.onChange = this.onChange.bind(this);
     this.onKeyUp = this.onKeyUp.bind(this);
@@ -44,7 +47,7 @@ class Chat extends React.Component {
   /**
    * @memberof Chat
    */
-  componentDidMount() {
+  componentWillMount() {
     const state = ChatStore.getState();
     console.log(state, 'Hello world');
     // console.log(state.selectedChannel.name, 'was selectedChannel')
@@ -53,11 +56,23 @@ class Chat extends React.Component {
         browserHistory.push('/');
       } else {
         const user = JSON.parse(localStorage.getItem('state'));
+        console.log(user, 'from local')
         Actions.resendUser(user);
+        console.log(user)
         console.log(this.state, 'was selectedChannel');
+        if(user.photoURL){
+          console.log(user.photoURL, 'Have photoURL')
+          this.state = (Object.assign({}, this.state, {
+            photoURL: user.photoURL
+          }));
+        }
+        if (user.profilePic){
+          console.log(user.profilePic, 'Have propic')
+          this.state = (Object.assign({}, this.state, {
+            photoURL: user.profilePic
+          }));
+        }
       }
-    } else {
-      console.log(state);
     }
   }
 
@@ -104,7 +119,7 @@ class Chat extends React.Component {
    * @memberof Chat
    */
   loginPage() {
-    console.log('state');
+    console.log(this.state.profilePicture);
     browserHistory.push('/profile');
   }
 
@@ -176,6 +191,15 @@ class Chat extends React.Component {
           onClick={this.loginPage}
             />
       }>
+        <Avatar
+          onClick={this.loginPage}
+          src={this.state.photoURL}
+          size={50}
+          style={{
+            margin: 5,
+            marginLeft: 1200
+          }}
+        />
         <div>
         <textarea
           id="addChannel"

@@ -5,16 +5,16 @@
 
   <testsuite name="login.spec"
     errors="0" failures="0" hostname="" id="" package="login.spec" skipped="0"
-    tests="3" time="55.27" timestamp="Wed, 24 May 2017 12:40:45 GMT">
+    tests="3" time="50.36" timestamp="Wed, 24 May 2017 16:41:08 GMT">
   
-    <testcase name="Forget Password" classname="login.spec" time="17.73" assertions="2">
+    <testcase name="Forget Password" classname="login.spec" time="10.18" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="Login with Email" classname="login.spec" time="26.91" assertions="5">
+    <testcase name="Login with Email" classname="login.spec" time="28.19" assertions="5">
 
     
 
@@ -27,7 +27,7 @@
     
     </testcase>
   
-    <testcase name="Login with Google Account" classname="login.spec" time="10.62" assertions="2">
+    <testcase name="Login with Google Account" classname="login.spec" time="11.98" assertions="2">
 
     
 

@@ -5,9 +5,9 @@
 
   <testsuite name="message.spec"
     errors="0" failures="0" hostname="" id="" package="message.spec" skipped="0"
-    tests="1" time="28.64" timestamp="Wed, 24 May 2017 12:41:40 GMT">
+    tests="1" time="38.96" timestamp="Wed, 24 May 2017 16:41:58 GMT">
   
-    <testcase name="Message Card" classname="message.spec" time="28.64" assertions="6">
+    <testcase name="Message Card" classname="message.spec" time="38.96" assertions="6">
 
     
 

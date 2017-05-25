@@ -130,7 +130,7 @@ class Signup extends React.Component {
               type="number"
             /><br />
           </div>
-          {/*<div className="mui-textfield">
+          <div className="mui-textfield">
             <TextField
               required
               name="photoUrl"
@@ -139,7 +139,7 @@ class Signup extends React.Component {
               placeholder="Enter photo url"
               type="text"
             /><br />
-          </div>*/}
+          </div>
           <br/><br/>
           <div>
             <RaisedButton

@@ -219,9 +219,10 @@ class Actions {
             password: userDetails.password,
             phoneNumber: userDetails.phoneNumber,
             uid: res.uid,
-            'profilePic': profilePic
+            profilePic: profilePic
           };
           dispatch(user);
+          console.log(user, 'from firebase')
           // browserHistory.push('chat')
         })
         .catch((error) => {
@@ -274,7 +275,6 @@ class Actions {
             browserHistory.push('/phone');
           } else if (userFirebase) {
             localStorage.setItem('state', JSON.stringify(user));
-              // browserHistory.push('chat')
             browserHistory.push('chat');
           }
         });
@@ -292,10 +292,6 @@ class Actions {
         // ...
       });
     };
-  }
-
-  logout() {
-    console.log('I was also called');
   }
 
   phoneNumber(number) {

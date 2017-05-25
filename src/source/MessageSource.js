@@ -16,9 +16,20 @@ const MessageSource = {
         }
         // console.log(JSON.parse(localStorage.getItem('state')))
         const user = JSON.parse(localStorage.getItem('state'));
-        const userPic = user.photoURL;
+        console.log(user, 'this is the u')
+        // const userPic = user.photoURL;
+        let userPic;
+        if(user.profilePic){
+          console.log('pu')
+          userPic = user.profilePic;
+        } else if(user.photoURL){
+          console.log('pp')
+          userPic = user.photoURL;
+        }
+        console.log(userPic)
         messageSent = state.user.uid;
-        firebase.database().ref('/messages/' + state.selectedChannel.name).push({
+        console.log('got her chan', state.selectedChannel.name)
+        firebase.database().ref('/messages/' + `/${state.selectedChannel.name}/`).push({
           'message': state.message,
           'date': new Date().toUTCString(),
           'author': state.user.displayName,

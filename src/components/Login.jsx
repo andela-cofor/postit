@@ -113,7 +113,7 @@ class Login extends React.Component {
             onClick={this.forgetPassword}
             id="fPassword"
             >Forget Password</a>
-          <br /><br /><br /><br />
+          <br /><br />
           <div className="mui-textfield">
             <TextField
               id="email"
@@ -145,6 +145,10 @@ class Login extends React.Component {
             type="submit"
             style={{ margin: 12, }}
           />
+          <button type="submit"
+            name="submit">
+            <i className="fa fa-google-plus" aria-hidden="true"></i>
+          </button>
           <RaisedButton
             id="loginWithGoogle"
             onClick={this.loginWithGoogle}

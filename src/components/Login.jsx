@@ -58,7 +58,6 @@ class Login extends React.Component {
     const userDetails = this.state.userDetails;
     userDetails[event.target.name] = event.target.value;
     this.setState({ userDetails });
-    console.log(this.state.userDetails)
   }
 
   /**
@@ -79,9 +78,7 @@ class Login extends React.Component {
 
   forgetPassword(event){
     event.preventDefault();
-    // console.log(this.state.userDetails)
     if(this.state.userDetails.email === ''){
-      console.log('Enter Email');
     } else {
       Actions.sendPasswordResetEmail(this.state.userDetails.email);
     }

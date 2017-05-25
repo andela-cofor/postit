@@ -98,7 +98,6 @@ class ChatStore {
       .value();
 
     selectedChannel.selected = true;
-    console.log(selectedChannel);
     this.setState({
       selectedChannel,
       channels: this.state.channels
@@ -261,7 +260,6 @@ class ChatStore {
    */
   @bind(Actions.editDetails)
   editDetails(userDetails) {
-    console.log(userDetails, 'User Details in store');
     this.setState({ userDetails });
     setTimeout(this.getInstance().editUserDetails, 10);
   }
@@ -280,7 +278,6 @@ class ChatStore {
    */
   @bind(Actions.addToFriends)
   addToFriends(number) {
-    console.log('I am in store now', number);
     setTimeout(this.getInstance().getFriends, 10)
   }
 }

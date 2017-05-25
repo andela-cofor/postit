@@ -10,19 +10,15 @@ const ChannelSource = {
     remote(state) {
       return new Promise((resolve, reject) => {
         const userId = state.user.uid;
-        console.log(state);
         const userEmail = state.user.email;
         const username = state.user.displayName;
         const chan = state.channel.trim();
         firebase.database().ref('/users/' + state.user.uid + '/profileDetails/' + '/number/' ).on('value', (dataSnapshot) => {
           const userPhone = dataSnapshot.val();
-          // console.log(userDetails)
           const phoneNumber = userPhone;
           firebase.database().ref(`/${chan}/` + userId).on('value', (dataSnapshot) => {
             const channelDetails = dataSnapshot.val();
-            // console.log(channelDetails)
             if (channelDetails) {
-              console.log('channel alreadt exists');
             } else {
               firebase.database().ref('/users/' + userId + '/channels/').set({
                 'name': chan,

@@ -46,7 +46,6 @@ class Signup extends React.Component {
    */
   signUp(event) {
     event.preventDefault();
-    console.log(this.state.userDetails.phoneNumber, 'Gotcha')
     if(this.state.userDetails.phoneNumber.length !== 11){
       Materialize.toast('Number must be 11 digits', 4000, 'rounded')
     } else{

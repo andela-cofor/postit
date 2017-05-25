@@ -14,21 +14,14 @@ const MessageSource = {
         if (!firebase) {
           return resolve();
         }
-        // console.log(JSON.parse(localStorage.getItem('state')))
         const user = JSON.parse(localStorage.getItem('state'));
-        console.log(user, 'this is the u')
-        // const userPic = user.photoURL;
         let userPic;
         if(user.profilePic){
-          console.log('pu')
           userPic = user.profilePic;
         } else if(user.photoURL){
-          console.log('pp')
           userPic = user.photoURL;
         }
-        console.log(userPic)
         messageSent = state.user.uid;
-        console.log('got her chan', state.selectedChannel.name)
         firebase.database().ref('/messages/' + `/${state.selectedChannel.name}/`).push({
           'message': state.message,
           'date': new Date().toUTCString(),
@@ -36,7 +29,6 @@ const MessageSource = {
           'userId': state.user.uid,
           'profilePic': userPic
         });
-        // alert(`I ${state.user.uid} am sending an awesome message to every mnember in the group :)`);
         resolve();
       });
     },

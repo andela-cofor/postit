@@ -59,7 +59,6 @@ class App extends React.Component {
    * @memberof Chat
    */
   loginPage() {
-    console.log('state');
     browserHistory.push('/profile');
   }
 

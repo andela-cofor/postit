@@ -10,15 +10,12 @@ let firebase = require('firebase/app');
 const UserSource = {
   editUserDetails: {
     remote(state) {
-      console.log('Profile State of User', state);
       // return new Promise((resolve, reject) => {
         const number = state.userDetails.phoneNumber;
         const userName = state.userDetails.userName;
         const userEmail = state.user.email;
         const userId = state.user.uid;
         const userPic = state.user.photoURL
-
-        console.log('I got here ')
 
         firebase = require('firebase/app');
         firebase.database().ref('/users/' + userId + '/profileDetails').set({
@@ -27,8 +24,6 @@ const UserSource = {
           'profilePic': userPic,
           'email': userEmail,
           'userId': userId,
-        }).then((res) => {
-          console.log(res, 'result')
         })
     }
   },
@@ -87,7 +82,6 @@ const UserSource = {
   },
   addUser1: {
     remote(state) {
-      console.log('Adding ', state.user);
       localStorage.setItem('state', JSON.stringify(state.user));
       return new Promise((resolve, reject) => {
         const number = state.user.phoneNumber;
@@ -96,7 +90,6 @@ const UserSource = {
         const userId = state.user.uid;
         const profilePic = state.user.profilePic
         const defualtChannel = 'Lagos All';
-        console.log(userId);
 
         // firebase = require("firebase/app");
         firebase.database().ref('/users/' + userId + '/profileDetails').set({
@@ -136,9 +129,6 @@ const UserSource = {
   },
   homepage: {
     remote(state) {
-      console.log('Routing......');
-      console.log('Success', state);
-      console.log(JSON.parse(localStorage.getItem('state')), 'Storage')
       browserHistory.push('chat');
     }
   }

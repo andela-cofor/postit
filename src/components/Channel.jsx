@@ -19,7 +19,6 @@ class Channel extends React.Component {
     this.onClick = this.onClick.bind(this);
   }
 
-
   /**
    * Monitor Channel clicked
    * @memberof Channel

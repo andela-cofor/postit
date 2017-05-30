@@ -86,7 +86,6 @@ class Login extends React.Component {
     Actions.loginWithEmail(this.state.userDetails);
   }
 
-
   /**
    * Allows user change password
    * @param {object} event

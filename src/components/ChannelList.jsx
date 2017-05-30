@@ -13,7 +13,6 @@ require('firebase/database');
 const Card = mui;
 const List = li;
 
-
 /**
  * @class ChannelList
  * @extends {React.Component}

@@ -23,7 +23,6 @@ class PhoneBook extends React.Component {
     return [ChatStore];
   }
 
-
   /**
    * Returns props in the store
    * @static

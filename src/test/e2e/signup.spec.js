@@ -14,7 +14,7 @@ module.exports = {
       .assert.elementPresent('#lastName')
       .setValue('#lastName', 'ofor')
       .assert.elementPresent('#email')
-      .setValue('#email', 'yttt@wwwww.com')
+      .setValue('#email', 'bbb@wwwww.com')
       .assert.elementPresent('#password')
       .setValue('#password', 'netbeans')
       .assert.elementPresent('#phoneNumber')

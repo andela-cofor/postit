@@ -20,7 +20,6 @@ const List = li;
 @connectToStores
 class MessageList extends React.Component {
 
-
   /**
    * Returns available store
    * @static
@@ -53,7 +52,6 @@ class MessageList extends React.Component {
       messages: {}
     };
   }
-
 
   /**
    * @returns message

@@ -47,7 +47,6 @@ class Chat extends React.Component {
     this.addNumber = this.addNumber.bind(this);
   }
 
-
   /**
    * Execute before component mounts
    * @memberof Chat class
@@ -96,7 +95,6 @@ class Chat extends React.Component {
   static getPropsFromStores() {
     return ChatStore.getState();
   }
-
 
   /**
    * Calls Add channel

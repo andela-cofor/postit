@@ -41,24 +41,21 @@ class Actions {
 
   sendTextToUsers(value) {
     return () => {
-      console.log(value, 'Received value from Critical');
       const channelName = value.channel;
       const message = value.message;
 
       firebase.database().ref(`/${channelName}/`).on('value', (dataSnapshot) => {
         const channelDetails = dataSnapshot.val();
         Object.keys(channelDetails).forEach((details) => {
-          console.log(channelDetails[details].number, 'lalalal');
           axios.post('/api/critical', {
             receiver: channelDetails[details].number,
             channel: channelName,
             sender: 'PostIt App',
             message
           }).then((response) => {
-            console.log(response, 'Res')
             Materialize.toast(response, 4000, 'rounded')
           }).catch((error) => {
-            // console.log(error, 'Error')
+            Materialize.toast(error, 4000, 'rounded')
           });
         });
         Materialize.toast(`Message and Text notification sent to members of ${channelName} group`, 4000, 'rounded')
@@ -74,9 +71,7 @@ class Actions {
       const senderEmail = user.email;
       firebase.database().ref(`/${channelName}/`).on('value', (dataSnapshot) => {
         const channelDetails = dataSnapshot.val();
-        // console.log(channelDetails, 'for Emma tope');
         Object.keys(channelDetails).forEach((details) => {
-          console.log(channelDetails[details].email, 'lalalal');
           axios.post('/api/urgent', {
             receiver: channelDetails[details].email,
             channel: channelName,
@@ -94,7 +89,6 @@ class Actions {
 
   inviteFriendToChannel(emailDetails) {
     return () => {
-      console.log(emailDetails);
       const receiverEmail = emailDetails.email;
       const channelName = emailDetails.channelName;
       const user = JSON.parse(localStorage.getItem('state'));
@@ -105,11 +99,8 @@ class Actions {
         sender: senderEmail
       }).then((response) => {
         Materialize.toast(response, 4000, 'rounded')
-        console.log(error)
-        console.log(`${receiverEmail} has been invited to join channel`);
       }).catch((error) => {
         Materialize.toast(`${receiverEmail} is an invalid email address`, 4000, 'rounded')
-        console.log(error);
       });
     };
   }
@@ -117,9 +108,7 @@ class Actions {
   addToFriends(newUser) {
     return () => {
       const userNumber = newUser.trim();
-      console.log(newUser, 'adding this to user');
       const user = JSON.parse(localStorage.getItem('state'));
-      console.log(user);
       const localUserId = user.uid;
       firebase.database().ref('/contacts/' + userNumber).on('value', (dataSnapshot) => {
         const contact = dataSnapshot.val();
@@ -128,7 +117,6 @@ class Actions {
         } else {
           Materialize.toast('Adding... User', 4000, 'rounded');
           Object.keys(contact).forEach((contactDetails) => {
-            console.log(contact[contactDetails], '');
             const email = contact[contactDetails].email;
             const username = contact[contactDetails].username;
             const number = contact[contactDetails].number;
@@ -136,9 +124,7 @@ class Actions {
 
             firebase.database().ref('/allfriends/' + localUserId + `/${userNumber}/`).on('value', (dataSnapshot) => {
               const myfriends = dataSnapshot.val();
-              console.log(myfriends, 'All my friends');
               if (myfriends === null){
-                console.log('User has not been added to you')
                 firebase.database().ref('/friends/' + localUserId).push({
                   'userId': userId,
                   'username': username,
@@ -163,14 +149,12 @@ class Actions {
 
   resendUser(user) {
     return (dispatch) => {
-      console.log(user, 'got to resendUser');
       dispatch(user);
       
     };
   }
 
   loginWithEmail(userDetails) {
-    // console.log('Login was called...')
     return (dispatch) => {
       const email = userDetails.email;
       const password = userDetails.password;
@@ -182,9 +166,7 @@ class Actions {
           firebase.database().ref('/users/' + user.uid).on('value', (dataSnapshot) => {
             const userFirebase = dataSnapshot.val();
             if (userFirebase === null) {
-              console.log('not in dbb');
             } else if (userFirebase) {
-              console.log(user);
               localStorage.setItem('state', JSON.stringify(user));
               browserHistory.push('chat');
             }
@@ -193,10 +175,8 @@ class Actions {
         .catch((error) => {
         // Handle Errors here.
           const errorCode = error.code;
-           Materialize.toast(errorCode, 4000) 
-          console.log(errorCode, 'errorCode');
+           Materialize.toast(errorCode, 4000);
           const errorMessage = error.message;
-          console.log(errorMessage, 'errorMessage');
           // ...
         });
       email.html;
@@ -205,7 +185,6 @@ class Actions {
 
   createUserWithEmailAndPassword(userDetails) {
     return (dispatch) => {
-      // console.log(userDetails, 'userDetails')
       const displayName = userDetails.firstName + ' ' + userDetails.lastName;
       const email = userDetails.email;
       const password = userDetails.password;
@@ -222,7 +201,6 @@ class Actions {
             profilePic: profilePic
           };
           dispatch(user);
-          console.log(user, 'from firebase')
           // browserHistory.push('chat')
         })
         .catch((error) => {
@@ -237,20 +215,16 @@ class Actions {
 
   signInWithEmailAndPassword(userDetails) {
     return () => {
-      console.log(userDetails);
       const email = userDetails.email;
       const password = userDetails.password;
 
       firebase.auth().signInWithEmailAndPassword(email, password)
         .then((res) => {
-          console.log(res, 'respond');
         })
         .catch((error) => {
           // Handle Errors here.
           const errorCode = error.code;
-          console.log(errorCode, 'err code');
           const errorMessage = error.message;
-          console.log(errorMessage, 'err msg');
           // ...
         });
     };
@@ -266,12 +240,10 @@ class Actions {
         const user = result.user;
         // ...
         dispatch(user);
-        console.log(user, 'User Details');
 
         firebase.database().ref('/users/' + user.uid).on('value', (dataSnapshot) => {
           const userFirebase = dataSnapshot.val();
           if (userFirebase === null) {
-            console.log('not in dbb');
             browserHistory.push('/phone');
           } else if (userFirebase) {
             localStorage.setItem('state', JSON.stringify(user));
@@ -296,25 +268,20 @@ class Actions {
 
   phoneNumber(number) {
     return (dispatch) => {
-      console.log(number, 'from actions');
       dispatch(number);
     };
   }
 
   sendPasswordResetEmail(userDetails){
-    console.log(userDetails, 'User Details');
     const auth = firebase.auth();
     const emailAddress = userDetails;
-    console.log(emailAddress);
 
     auth.sendPasswordResetEmail(emailAddress).then((res) => {
       // Email sent.
       Materialize.toast(res, 4000, 'rounded')
-      console.log(res, 'from firebase')
     }, function(error) {
       // An error happened.
       Materialize.toast(error, 4000, 'rounded')
-      console.log(error, 'from firebase');
     });
   }
 }

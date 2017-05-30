@@ -4,10 +4,10 @@
             tests="4">
 
   <testsuite name="chat.spec"
-    errors="0" failures="1" hostname="" id="" package="chat.spec" skipped="1"
-    tests="4" time="79.85" timestamp="Wed, 24 May 2017 16:39:37 GMT">
+    errors="0" failures="1" hostname="" id="" package="chat.spec" skipped="3"
+    tests="4" time="81.06" timestamp="Tue, 30 May 2017 10:10:05 GMT">
   
-    <testcase name="Add Channel" classname="chat.spec" time="28.83" assertions="6">
+    <testcase name="Add Channel" classname="chat.spec" time="81.06" assertions="5">
 
     
 
@@ -15,43 +15,23 @@
 
     
 
-    
-
-    
-
-    
-    </testcase>
-  
-    <testcase name="Add Friend Email" classname="chat.spec" time="25.17" assertions="6">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    </testcase>
-  
-    <testcase name="Add Friend" classname="chat.spec" time="25.85" assertions="5">
-
-    
-
-    
-
-    
-
-      <failure message="Testing if the URL equals &quot;http://localhost:8080/chat&quot;.">    at Object.AddFriend [as Add Friend] (/Users/chineduofor/Desktop/PostIt/postit/postit/src/test/e2e/chat.spec.js:47:15)
+      <failure message="Testing if the URL equals &quot;http://localhost:8080/chat&quot;.">    at Object.AddChannel [as Add Channel] (/Users/chineduofor/Desktop/PostIt/postit/postit/src/test/e2e/chat.spec.js:15:15)
     at _combinedTickCallback (internal/process/next_tick.js:67:7)</failure>
 
     
     </testcase>
   
   
+    
+    <testcase
+      name="Add Friend Email" classname="chat.spec">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Add Friend" classname="chat.spec">
+      <skipped />
+    </testcase>
     
     <testcase
       name="Chat with friend" classname="chat.spec">

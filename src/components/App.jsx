@@ -7,6 +7,8 @@ import { browserHistory } from 'react-router';
 import Avatar from 'material-ui/Avatar';
 import Login from './Login.jsx';
 import FlatButton from 'material-ui/FlatButton';
+import NavigationClose from 'material-ui/svg-icons/navigation/close';
+import IconButton from 'material-ui/IconButton';
 
 const firebase = require('firebase/app');
 require('firebase/auth');
@@ -49,6 +51,7 @@ class App extends React.Component {
   }
 
   /**
+   * Routes User to profile page.
    * @memberof App
    */
   onClick() {
@@ -56,6 +59,7 @@ class App extends React.Component {
   }
 
   /**
+   * Routes User to profile page.
    * @memberof Chat
    */
   loginPage() {
@@ -63,6 +67,7 @@ class App extends React.Component {
   }
 
   /**
+   * Remove state from localStorage
    * @memberof Chat
    */
   logout() {
@@ -72,7 +77,7 @@ class App extends React.Component {
   }
 
   /**
-   * @returns view
+   * Renders View
    * @memberof App
    */
   render() {
@@ -85,13 +90,13 @@ class App extends React.Component {
           <div>
             <AppBar
               title="PostIt"
+              iconElementLeft={<IconButton></IconButton>}
               iconElementRight={
               (localStorage.getItem('state'))
               ? <FlatButton
                   onClick={this.logout}
                   label="Logout"
-                  />
-                  
+                  />  
               : ''
             }
           />

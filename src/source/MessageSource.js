@@ -48,8 +48,7 @@ const MessageSource = {
           const messages = dataSnapshot.val();
           if (!messageSent && !initialLoad) {
             if(window.Notification && Notification.permission !== "denied") {
-              // alert(`You have a new message from ${state.selectedChannel.name} Group`);
-              Notification.requestPermission(function(status) {  // status is "granted", if accepted by user
+              Notification.requestPermission(function(status) {
                 var ms = 15000;
                 var en = new Notification(`You have a new message from ${state.selectedChannel.name} Group`, { 
                     body: 'From: PostIt App',
@@ -60,11 +59,8 @@ const MessageSource = {
             messageSent = null;
           }
           resolve(messages);
-          // alert('i am called upon :) :)');
           initialLoad = false;
-          // messageSent = null;
           firebase.database().ref('/messages/' + state.selectedChannel.name).on('child_added', (msg) => {
-            // alert();
             const msgVal = msg.val();
             msgVal.key = msg.key;
             Actions.messageReceived(msgVal);

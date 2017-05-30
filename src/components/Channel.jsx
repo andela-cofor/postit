@@ -11,7 +11,7 @@ class Channel extends React.Component {
 
   /**
    * Creates an instance of Channel.
-   * @param {any} props
+   * @param {object} props
    * @memberof Channel
    */
   constructor(props) {
@@ -21,14 +21,16 @@ class Channel extends React.Component {
 
 
   /**
+   * Monitor Channel clicked
    * @memberof Channel
+   * @return {void}
    */
   onClick() {
     Actions.channelOpened(this.props.channel);
   }
 
   /**
-   * @returns ListItem
+   * @returns ListItem containing list of channels
    * @memberof Channel
    */
   render() {

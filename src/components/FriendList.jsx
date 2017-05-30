@@ -19,15 +19,15 @@ class FriendList extends React.Component {
 
   /**
    * Creates an instance of FriendList.
-   * @param {any} props
+   * @param {object} props
    * @memberof FriendList
    */
   constructor(props) {
     super(props);
-    // ChatStore.getFriends();
   }
 
   /**
+   * Returns ChatStore containing functions states and props
    * @static
    * @returns ChatStore
    * @memberof FriendList
@@ -38,6 +38,7 @@ class FriendList extends React.Component {
 
 
   /**
+   * Returns props in the chat store
    * @static
    * @returns state
    * @memberof FriendList
@@ -80,7 +81,11 @@ class FriendList extends React.Component {
         style={{
           flex: 1,
           marginLeft: 20,
-        }}>
+          overflow: 'scroll',
+          height: 200
+        }}
+        >
+        <h6>Contact List</h6>
         <List>
           {FriendNodes}
         </List>

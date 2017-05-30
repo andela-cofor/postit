@@ -10,7 +10,6 @@ let firebase = require('firebase/app');
 const UserSource = {
   editUserDetails: {
     remote(state) {
-      // return new Promise((resolve, reject) => {
         const number = state.userDetails.phoneNumber;
         const userName = state.userDetails.userName;
         const userEmail = state.user.email;
@@ -46,12 +45,6 @@ const UserSource = {
           'userId': userId,
           'username': userName
         });
-        // firebase.database().ref('/friends/' + `/${userId}/`).push({
-        //   'userId': state.user.uid,
-        //   'username': userName,
-        //   'email': userEmail,
-        //   'number': number
-        // });
         firebase.database().ref('/contacts/' + number).push({
           'email': userEmail,
           'userId': userId,
@@ -91,7 +84,6 @@ const UserSource = {
         const profilePic = state.user.profilePic
         const defualtChannel = 'Lagos All';
 
-        // firebase = require("firebase/app");
         firebase.database().ref('/users/' + userId + '/profileDetails').set({
           'number': number,
           'email': userEmail,

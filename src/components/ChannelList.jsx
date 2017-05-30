@@ -23,8 +23,9 @@ class ChannelList extends React.Component {
 
   /**
    * Creates an instance of ChannelList.
-   * @param {any} props
+   * @param {object} props
    * @memberof ChannelList
+   * @return {void}
    */
   constructor(props) {
     super(props);
@@ -32,18 +33,22 @@ class ChannelList extends React.Component {
   }
 
   /**
+   * Return the store from chat store
    * @static
    * @returns store
    * @memberof ChannelList
+   * @return {void}
    */
   static getStores() {
     return [ChatStore];
   }
 
   /**
+   * Gets props from chat store
    * @static
    * @returns state
    * @memberof ChannelList
+   * @return {object}
    */
   static getPropsFromStores() {
     return ChatStore.getState();
@@ -83,12 +88,16 @@ class ChannelList extends React.Component {
       .value();
 
     return (
-        // <div>{messageNodes}</div>
         <div
           style={{
             flexGrow: 1,
           }}>
-            <Card id="channelCard">
+            <Card id="channelCard"
+            style={{
+                overflow: 'scroll',
+                height: 200
+              }}>
+              <h6>Channel List</h6>
                 <List>
                     {channelNodes}
                 </List>

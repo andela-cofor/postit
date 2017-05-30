@@ -14,6 +14,7 @@ import Actions from '../actions/';
 class PhoneBook extends React.Component {
 
   /**
+   * Returns available store
    * @static
    * @returns ChatStore
    * @memberof PhoneBook
@@ -23,6 +24,12 @@ class PhoneBook extends React.Component {
   }
 
 
+  /**
+   * Returns props in the store
+   * @static
+   * @returns {object} ChatStore
+   * @memberof PhoneBook
+   */
   static getPropsFromStores() {
     return ChatStore.getState();
   }
@@ -42,14 +49,17 @@ class PhoneBook extends React.Component {
   }
 
   /**
+   * Wait for component to mount before executing
    * @memberof PhoneBook
+   * @returns {void}
    */
   componentDidMount() {
     const state = ChatStore.getState();
   }
 
   /**
-   * @param {any} evt
+   * Set states of phoneNumber
+   * @param {object} evt
    * @memberof PhoneBook
    */
   onChange(evt) {
@@ -60,7 +70,8 @@ class PhoneBook extends React.Component {
 
 
   /**
-   * @param {any} evt
+   * Monitors on key changes
+   * @param {object} evt
    * @memberof PhoneBook
    */
   onKeyUp(evt) {
@@ -71,9 +82,7 @@ class PhoneBook extends React.Component {
         this.setState({
           phoneNumber: this.state.phoneNumber
         });
-      } else {
-        // console.log('Enter Number')
-      }
+      } 
     }
   }
 

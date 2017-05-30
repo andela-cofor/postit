@@ -18,6 +18,7 @@ const firebase = require('firebase/app');
 class Profile extends React.Component {
 
   /**
+   * Returns available store
    * @static
    * @returns ChatStore
    * @memberof Profile
@@ -27,6 +28,7 @@ class Profile extends React.Component {
   }
 
   /**
+   * Returns Props from store
    * @static
    * @returns state
    * @memberof Profile
@@ -53,52 +55,36 @@ class Profile extends React.Component {
   }
 
   /**
+   * Executes before componentWillMount
    * @memberof Profile
    */
   componentWillMount() {
     const state = ChatStore.getState();
-    console.log(state, 'Hello world');
-    // console.log(state.selectedChannel.name, 'was selectedChannel')
     if (state.user === null) {
       if (!JSON.parse(localStorage.getItem('state'))) {
         browserHistory.push('/');
       } else {
         const user = JSON.parse(localStorage.getItem('state'));
-        console.log(user, 'from local')
         Actions.resendUser(user);
-        console.log(user)
-        console.log(this.state, 'was selectedChannel');
         if(user.photoURL){
-          console.log(user.photoURL, 'Have photoURL')
           this.state = (Object.assign({}, this.state, {
             photoURL: user.photoURL
           }));
         }
         if (user.profilePic){
-          console.log(user.profilePic, 'Have propic')
           this.state = (Object.assign({}, this.state, {
             photoURL: user.profilePic
           }));
         }
-        console.log(state, 'Pic');
       }
     }
   }
 
   /**
-   * @param {any} url
+   * Set state of userDetails
+   * @param {object} event
    * @memberof Profile
-   */
-  // setProfilePic(url) {
-  //   console.log('I got url');
-  //   this.setState({
-  //     profilePicture: url
-  //   });
-  // }
-
-  /**
-   * @param {any} event
-   * @memberof Profile
+   * @returns {void}
    */
   handleChange(event) {
     const userDetails = this.state.userDetails;
@@ -107,61 +93,16 @@ class Profile extends React.Component {
   }
 
   /**
-   * @param {any} event
+   * Sends user details onclick of submit button
+   * @param {object} event
    * @memberof Profile
+   * @return {void}
    */
   onSubmit(event) {
     event.preventDefault();
     Actions.editDetails(this.state.userDetails);
     console.log(this.state.userDetails);
   }
-
-  // /**
-  //  * @param {any} evt
-  //  * @memberof Profile
-  //  */
-  // handleFileUpload(evt) {
-  //   const file = evt.target.files[0];
-
-  //   const reader = new FileReader();
-  //   reader.onload = function (evt) {
-  //     console.log(evt)
-  //     const mediaRef = firebase.storage().ref('images/').child('pest')
-  //     mediaRef.putString(evt.target.result).then((snap) => {
-  //       console.log(snap);
-  //       // this.setProfilePic(snap.downloadURL);
-  //     });
-  //   };
-  //   reader.readAsDataURL(file);
-
-  //   firebase.storage().ref('images/').child('pest').getDownloadURL()
-  //     .then((url) => {
-  //   // `url` is the download URL for 'images/stars.jpg'
-
-  //   // This can be downloaded directly:
-  //       const xhr = new XMLHttpRequest();
-  //       xhr.responseType = 'blob';
-  //       xhr.onload = () => {
-  //         const blob = xhr.response;
-  //         console.log('this is blob', blob);
-  //       };
-  //       xhr.open('GET', url);
-  //       xhr.send();
-
-  //       // Or inserted into an <img> element:
-  //       const img = document.getElementById('myimg');
-
-  //       img.src = url;
-  //       // this.setState({
-  //       //   profilePicture: url
-  //       // });
-  //       // console.log(url, 'Url');
-  //     })
-  //       .catch((error) => {
-  //     // Handle any errors
-  //         console.log(error);
-  //       });
-  // }
 
   /**
    * @returns Card
@@ -185,19 +126,11 @@ class Profile extends React.Component {
             margin: 5
           }}
         />
-        {/*<FlatButton label="Change Picture" labelPosition="before">
-           <input
-            type="file"
-            onChange={(e) => this.handleFileUpload(e)}
-            id="fileButton"
-          />
-         </FlatButton>*/}
         <form className="mui-form" onSubmit={this.onSubmit}>
           <br /><br /><br /><br />
           <div className="mui-textfield">
             <TextField
               name="phoneNumber"
-              /*value={this.state.phoneNumber}*/
               onChange={this.handleChange}
               placeholder="Enter your new phone number"
               style={{
@@ -209,7 +142,6 @@ class Profile extends React.Component {
           <div className="mui-textfield">
             <TextField
               name="userName"
-              /*value={this.state.userName}*/
               onChange={this.handleChange}
               placeholder="Enter your new userName"
               style={{
@@ -218,16 +150,6 @@ class Profile extends React.Component {
               type="text"
             /><br />
           </div>
-          {/*<div className="mui-textfield">
-            <TextField
-              required
-              name="photoUrl"
-              value={this.state.photoUrl}
-              onChange={this.handleChange}
-              placeholder="Enter photo url"
-              type="text"
-            /><br />
-          </div>*/}
           <br/><br/>
           <div>
             <RaisedButton

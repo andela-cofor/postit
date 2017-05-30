@@ -31,8 +31,10 @@ class Signup extends React.Component {
   }
 
   /**
-   * @param {any} event
+   * Handle change events
+   * @param {object} event
    * @memberof Signup
+   * @returns {void}
    */
   handleChange(event) {
     const userDetails = this.state.userDetails;
@@ -41,8 +43,10 @@ class Signup extends React.Component {
   }
 
   /**
-   * @param {any} event
+   * Handle User signup
+   * @param {object} event
    * @memberof Signup
+   * @returns {void}
    */
   signUp(event) {
     event.preventDefault();
@@ -69,7 +73,7 @@ class Signup extends React.Component {
         }}>
         <h6>Signup</h6>
         </CardText>
-        <form className="mui-form" onSubmit={this.signUp}>
+        <form className="mui-form center" onSubmit={this.signUp}>
           <div className="mui-textfield">
             <TextField
               id="firstName"

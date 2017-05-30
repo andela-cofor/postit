@@ -26,9 +26,6 @@ const ChannelSource = {
               firebase.database().ref('/channels/' + userId).push({
                 'name': chan,
               });
-              // firebase.database().ref('/channelsList/').push({
-              //   "name": chan,
-              // });
               firebase.database().ref(`/${chan}/` + userId).set({
                 'email': userEmail,
                 'username': username,
@@ -52,7 +49,6 @@ const ChannelSource = {
   },
   getChannels: {
     remote(state) {
-      // console.log(state, 'state in channels')
       return new Promise((resolve, reject) => {
         firebase.database().ref('/channels/' +  state.user.uid).on('value', (dataSnapshot) => {
           const channels = dataSnapshot.val();

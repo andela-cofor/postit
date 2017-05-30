@@ -20,17 +20,31 @@ const List = li;
 @connectToStores
 class MessageList extends React.Component {
 
+
+  /**
+   * Returns available store
+   * @static
+   * @returns {object} ChatStore
+   * @memberof MessageList
+   */
   static getStores() {
     return [ChatStore];
   }
 
+
+  /**
+   * Returns props in the store
+   * @static
+   * @returns {object} ChatStore
+   * @memberof MessageList
+   */
   static getPropsFromStores() {
     return ChatStore.getState();
   }
 
   /**
    * Creates an instance of MessageList.
-   * @param {any} props
+   * @param {object} props
    * @memberof MessageList
    */
   constructor(props) {
@@ -73,7 +87,12 @@ class MessageList extends React.Component {
             flex: 2,
             marginLeft: 20,
           }}>
-            <Card id="messageCard">
+            <Card id="messageCard"
+              style={{
+                overflow: 'scroll',
+                height: 200
+              }}>
+              <h6>Group Messages</h6>
                 <List>
                     {messageNodes}
                 </List>

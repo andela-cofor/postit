@@ -1,26 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites errors="0"
             failures="0"
-            tests="1">
+            tests="0">
 
   <testsuite name="message.spec"
     errors="0" failures="0" hostname="" id="" package="message.spec" skipped="0"
-    tests="1" time="38.96" timestamp="Wed, 24 May 2017 16:41:58 GMT">
-  
-    <testcase name="Message Card" classname="message.spec" time="38.96" assertions="6">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    </testcase>
+    tests="0" time="0.000" timestamp="Tue, 30 May 2017 10:12:26 GMT">
   
   
   </testsuite>

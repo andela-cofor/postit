@@ -21,7 +21,7 @@ class Chat extends React.Component {
 
   /**
    * Creates an instance of Chat.
-   * @param {any} props
+   * @param {object} props
    * @memberof Chat
    */
   constructor(props) {
@@ -31,7 +31,8 @@ class Chat extends React.Component {
       channel: '',
       emailDetails: {
         email: '',
-        channelName: ''
+        channelName: '',
+        number: ''
       },
       photoURL: ''
     };
@@ -41,33 +42,31 @@ class Chat extends React.Component {
     this.loginPage = this.loginPage.bind(this);
     this.addAFriend = this.addAFriend.bind(this);
     this.inviteFriend = this.inviteFriend.bind(this);
+    this.addChannel = this.addChannel.bind(this);
+    this.inviteFriend2Channel = this.inviteFriend2Channel.bind(this);
+    this.addNumber = this.addNumber.bind(this);
   }
 
 
   /**
-   * @memberof Chat
+   * Execute before component mounts
+   * @memberof Chat class
+   * @return {void}
    */
   componentWillMount() {
     const state = ChatStore.getState();
-    console.log(state, 'Hello world');
-    // console.log(state.selectedChannel.name, 'was selectedChannel')
     if (state.user === null) {
       if (!JSON.parse(localStorage.getItem('state'))) {
         browserHistory.push('/');
       } else {
         const user = JSON.parse(localStorage.getItem('state'));
-        console.log(user, 'from local')
         Actions.resendUser(user);
-        console.log(user)
-        console.log(this.state, 'was selectedChannel');
         if(user.photoURL){
-          console.log(user.photoURL, 'Have photoURL')
           this.state = (Object.assign({}, this.state, {
             photoURL: user.photoURL
           }));
         }
         if (user.profilePic){
-          console.log(user.profilePic, 'Have propic')
           this.state = (Object.assign({}, this.state, {
             photoURL: user.profilePic
           }));
@@ -77,18 +76,22 @@ class Chat extends React.Component {
   }
 
   /**
+   * Returns store from chat store
    * @static
    * @returns ChatStore
    * @memberof Chat
+   * @return {void}
    */
   static getStores() {
     return [ChatStore];
   }
 
   /**
+   * Get props from chat store
    * @static
    * @returns state
    * @memberof Chat
+   * @return {void}
    */
   static getPropsFromStores() {
     return ChatStore.getState();
@@ -96,17 +99,20 @@ class Chat extends React.Component {
 
 
   /**
+   * Calls Add channel
    * @memberof Chat
+   * @return {void}
    */
   onClick() {
-    console.log('On Click works');
     ChatStore.addChannel();
   }
 
 
   /**
-   * @param {any} evt
+   * Set state of value
+   * @param {object} evt
    * @memberof Chat
+   * @return {void}
    */
   onChange(evt) {
     this.setState({
@@ -116,16 +122,18 @@ class Chat extends React.Component {
 
 
   /**
+   * Routes user to profile page
+   * @returns {void}
    * @memberof Chat
    */
   loginPage() {
-    console.log(this.state.profilePicture);
     browserHistory.push('/profile');
   }
 
 
   /**
-   * @param {any} evt
+   * Monitor click on enter key
+   * @param {object} evt
    * @memberof Chat
    */
   onKeyUp(evt) {
@@ -133,46 +141,97 @@ class Chat extends React.Component {
       evt.preventDefault();
       Actions.addChannel(this.state.channel);
       Materialize.toast(`${this.state.channel} has been added `, 4000, 'rounded')
-      this.setState({
+      document.getElementById('addChannel').value = '';
+      this.state = (Object.assign({}, this.state, {
         channel: ''
-      });
+      }));
     }
   }
 
   /**
-   * @param {any} event
+   * Add a cahannel to channel list
+   * @memberof Chat
+   * @returns {void}
+   */
+  addChannel() {
+    if(this.state.channel == ''){
+      Materialize.toast('Enter a valid channel name', 4000, 'rounded')
+    } else {
+      Actions.addChannel(this.state.channel);
+      Materialize.toast(`${this.state.channel} has been added `, 4000, 'rounded');
+      this.state = (Object.assign({}, this.state, {
+        channel: ''
+      }));
+      document.getElementById('inviteFriend').value = '';
+    }
+    document.getElementById('addChannel').value = '';
+  }
+
+  /**
+   * Add a friend to friend list
+   * @param {object} event
    * @memberof Chat
    */
   addAFriend(event) {
+    const number = event.target.value.trim();
+    this.state = (Object.assign({}, this.state, {
+      number: number
+    }));
     if (event.keyCode === 13 && trim(event.target.value) !== '') {
       event.preventDefault();
       Actions.addToFriends(event.target.value);
+      document.getElementById('inviteFriend').value = '';
     }
   }
 
   /**
-   * @param {any} event
+   * Add user number to contact list
    * @memberof Chat
+   * @return {void}
    */
-  inviteFriend(event) {
-    if (event.keyCode === 13 && trim(event.target.value) !== '') {
-      event.preventDefault();
-      const email = event.target.value.trim();
-      // console.log(this.state)
-      const state = ChatStore.getState();
-      console.log(state.selectedChannel.name, 'Hey you were clicked');
-      // console.log(email)
-      // Actions.addChannel(this.state.channel); 
-      this.state = (Object.assign({}, this.state, {
-        emailDetails:{
-          email: email,
-          channelName: state.selectedChannel.name
-        }
-      }));
-      Actions.inviteFriendToChannel(this.state.emailDetails);
+  addNumber(){
+    if(this.state.number == ''){
+      Materialize.toast('Number cannot be empty', 4000, 'rounded');
+    } else {
+      Actions.addToFriends(this.state.number);
+      document.getElementById('inviteFriend').value = '';
     }
   }
 
+  /**
+   * Invite friend via email
+   * @param {object} event
+   * @memberof Chat
+   */
+  inviteFriend(event) {
+    event.preventDefault();
+    const email = event.target.value.trim();
+    const state = ChatStore.getState();
+    this.state = (Object.assign({}, this.state, {
+      emailDetails:{
+        email: email,
+        channelName: state.selectedChannel.name
+      }
+    }));
+    if (event.keyCode === 13 && trim(event.target.value) !== '') {
+      Actions.inviteFriendToChannel(this.state.emailDetails);
+      document.getElementById('inviteFriendEmail').value = '';
+    }
+  }
+
+  /**
+   * Invites friend to channel
+   * @memberof Chat
+   * @return null
+   */
+  inviteFriend2Channel() {
+    if(this.state.emailDetails.email == ''){
+      Materialize.toast('Email cannot be null', 4000, 'rounded');
+    } else {
+      Actions.inviteFriendToChannel(this.state.emailDetails);
+      document.getElementById('inviteFriendEmail').value = '';
+    }
+  }
 
   /**
    * @returns textarea
@@ -200,75 +259,99 @@ class Chat extends React.Component {
             marginLeft: 1200
           }}
         />
-        <div>
-        <textarea
-          id="addChannel"
-          placeholder="Add a group..."
-          value={this.state.message}
-          onChange={this.onChange}
-          onKeyUp={this.onKeyUp}
-          style={{
-            width: '20%',
-            borderColor: '#D0D0D0',
-            resize: 'none',
-            borderRadius: 3,
-            minHeight: 50,
-            color: '#555',
-            fontSize: 14,
-            outline: 'auto 0px',
-            marginLeft: 40,
-            marginTop: 10
-          }} />
-        <textarea
-          placeholder="Invite friend with email..."
-          id="inviteFriendEmail"
-          name="email"
-          value={this.state.newUserEmail}
-          onKeyUp={this.inviteFriend}
-          style={{
-            width: '20%',
-            borderColor: '#D0D0D0',
-            resize: 'none',
-            borderRadius: 3,
-            minHeight: 50,
-            color: '#555',
-            fontSize: 14,
-            outline: 'auto 0px',
-            marginLeft: 218,
-            marginTop: 10
-          }} />
-        <textarea
-          id="inviteFriend"
-          type="number"
-          placeholder="Add a a friend with number..."
-          onKeyUp={this.addAFriend}
-          style={{
-            width: '20%',
-            borderColor: '#D0D0D0',
-            resize: 'none',
-            borderRadius: 3,
-            minHeight: 50,
-            color: '#555',
-            fontSize: 14,
-            outline: 'auto 0px',
-            marginLeft: 200,
-            marginTop: 10
-          }} />
+        <div className="row">
+          <div className="col s4">
+            <textarea
+              id="addChannel"
+              placeholder="Add a group..."
+              value={this.state.message}
+              onChange={this.onChange}
+              onKeyUp={this.onKeyUp}
+              className="col s6"
+              style={{
+                borderColor: '#D0D0D0',
+                resize: 'none',
+                borderRadius: 3,
+                minHeight: 50,
+                color: '#555',
+                fontSize: 14,
+                outline: 'auto 0px',
+                marginTop: 10
+              }} />
+              <RaisedButton
+              label='ADD'
+              onClick={this.addChannel}
+              className="col s3 offset-s1"
+                style={{marginTop: 15}}
+                />
+          </div>
+          <div className="col s4">
+            <textarea
+              placeholder="Invite friend with email..."
+              id="inviteFriendEmail"
+              name="email"
+              value={this.state.newUserEmail}
+              onKeyUp={this.inviteFriend}
+              className="col s6 offset-s1"
+              style={{
+                borderColor: '#D0D0D0',
+                resize: 'none',
+                borderRadius: 3,
+                minHeight: 50,
+                color: '#555',
+                fontSize: 14,
+                outline: 'auto 0px',
+                marginTop: 10,
+              }} />
+              <RaisedButton
+                className="col s3 offset-s1"
+                onClick={this.inviteFriend2Channel}
+                style={{marginTop: 15}}
+                label='INVITE'
+                />
+          </div>
+          <div className="col s4">
+            <textarea
+              id="inviteFriend"
+              type="number"
+              placeholder="Add a a friend with number..."
+              onKeyUp={this.addAFriend}
+              className="col s6 offset-s1"
+              style={{
+                borderColor: '#D0D0D0',
+                resize: 'none',
+                borderRadius: 3,
+                minHeight: 50,
+                color: '#555',
+                fontSize: 14,
+                outline: 'auto 0px',
+                marginTop: 10
+              }} />
+              <RaisedButton
+              onClick={this.addNumber}
+              style={{marginTop: 15}}
+              label='ADD'
+              className="col s3 offset-s1"
+                />
+          </div>
         </div>
-        <div
-          style={{
-            display: 'flex',
-            flexFlow: 'row wrap',
-            maxWidth: 1200,
-            width: '100%',
-            margin: '30px auto 30px',
-          }}>
-          <ChannelList {...this.props}/>
-          <MessageList />
-          <FriendList />
+        <div className="row">
+          <div className="col s3">
+            <ChannelList {...this.props}/>
+          </div>
+          <div className="col s6">
+            <MessageList />
+          </div>
+          <div className="col s3">
+            <FriendList />
+          </div>
         </div>
-        <MessageBox />
-    </div>
+        <div className="row">
+          <div className="col s12">
+            <MessageBox />
+          </div>
+        </div>
+      </div>
     );
   }
 }

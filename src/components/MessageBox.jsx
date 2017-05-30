@@ -5,10 +5,6 @@ import trim from 'trim';
 import Actions from '../actions/';
 import ChatStore from '../store/ChatStore';
 
-// var firebase = require("firebase/app");
-// require("firebase/auth");
-// require("firebase/database");
-
 const Card = mui;
 
 /**
@@ -19,7 +15,7 @@ class MessageBox extends React.Component {
 
   /**
    * Creates an instance of MessageBox.
-   * @param {any} props
+   * @param {object} props
    * @memberof MessageBox
    */
   constructor(props) {
@@ -35,8 +31,10 @@ class MessageBox extends React.Component {
   }
 
   /**
-   * @param {any} event
+   * Handles change
+   * @param {object} event
    * @memberof MessageBox
+   * @return {void}
    */
   handleChange(event) {
     this.state = (Object.assign({}, this.state, {
@@ -45,8 +43,10 @@ class MessageBox extends React.Component {
   }
 
   /**
-   * @param {any} evt
+   * Displays messages from the database
+   * @param {object} evt
    * @memberof MessageBox
+   * @return {void}
    */
   onChange(evt){
     this.setState({
@@ -55,8 +55,10 @@ class MessageBox extends React.Component {
   }
 
   /**
-   * @param {any} evt
+   * Monitors onKeyUp
+   * @param {object} evt
    * @memberof MessageBox
+   * @return {void}
    */
   onKeyUp(evt) {
     if (evt.keyCode === 13 && trim(evt.target.value) !== '') {

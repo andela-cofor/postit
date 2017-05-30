@@ -34,7 +34,9 @@ class Login extends React.Component {
   }
 
   /**
+   * Login with google firebase
    * @memberof Login
+   * @returns {void}
    */
   loginWithGoogle() {
     event.preventDefault();
@@ -42,8 +44,10 @@ class Login extends React.Component {
   }
 
   /**
-   * @param {any} event
+   * Signin with Email using firebase
+   * @param {object} event
    * @memberof Login
+   * @returns {void}
    */
   signInWithEmailAndPassword(event) {
     event.preventDefault();
@@ -51,8 +55,10 @@ class Login extends React.Component {
   }
 
   /**
-   * @param {any} event
+   * Listen for change event
+   * @param {object} event
    * @memberof Login
+   * @returns {void}
    */
   handleChange(event) {
     const userDetails = this.state.userDetails;
@@ -61,32 +67,45 @@ class Login extends React.Component {
   }
 
   /**
+   * Routes to Signup page
    * @memberof Login
+   * @returns {void}
    */
   signUp() {
     browserHistory.push('/signup');
   }
 
   /**
-   * @param {any} event
+   * Login with Email and Password
+   * @param {object} event
    * @memberof Login
+   * @returns {void}
    */
   loginWithEmail(event) {
     event.preventDefault();
     Actions.loginWithEmail(this.state.userDetails);
   }
 
+
+  /**
+   * Allows user change password
+   * @param {object} event
+   * @memberof Login
+   * @return {void}
+   */
   forgetPassword(event){
     event.preventDefault();
     if(this.state.userDetails.email === ''){
+      Materialize.toast('Enter your email address', 4000, 'rounded');
     } else {
       Actions.sendPasswordResetEmail(this.state.userDetails.email);
+      Materialize.toast('Password reset link has been sent to your email', 4000, 'rounded');
     }
-    // console.log(this.state.userDetails)
   }
 
   /**
-   * @returns
+   * Renders Login View
+   * @returns Cards
    * @memberof Login
    */
   render() {
@@ -102,12 +121,7 @@ class Login extends React.Component {
         }}>
             <h6>Login</h6>
         </CardText>
-        <form className="mui-form" onSubmit={this.signInWithEmailAndPassword}>
-          <br /><br />
-          <a href="#"
-            onClick={this.forgetPassword}
-            id="fPassword"
-            >Forget Password</a>
+        <form className="mui-form center" onSubmit={this.signInWithEmailAndPassword}>
           <br /><br />
           <div className="mui-textfield">
             <TextField
@@ -151,7 +165,12 @@ class Login extends React.Component {
             onClick={this.signUp}
             style={{ margin: 12, }} />
           </div>
+          <a href="#"
+            onClick={this.forgetPassword}
+            id="fPassword"
+            ><h6>Forget Password</h6></a>
         </form>
+        
       </Card>
     );
   }

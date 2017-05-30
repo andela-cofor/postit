@@ -7,9 +7,6 @@ import Profile from '../components/Profile.jsx'
 import SignUp from '../components/SignUp.jsx'
 import { Router, browserHistory, Route, IndexRoute} from 'react-router';
 
-// let Route = Router.Route;
-// let DefaultRoute = Router.DefaultRoute;
-
 let routes = (
   <Route path="/" component={App}>
     <Route component={Chat} />
@@ -17,7 +14,7 @@ let routes = (
     <Route path="phone" component={Phone} />
     <Route path="signup" component={SignUp} />
     <Route path="profile" component={Profile} />
-    <IndexRoute path="/login" component={Login} />
+    <IndexRoute component={Login} />
   </Route>
 );
 
@@ -28,7 +25,3 @@ class AppRoutes extends React.Component {
 }
 
 export default AppRoutes;
-
-// Router.run(routes, Router.HashLocation, (Root)=> {
-//   React.render(<Root />, document.getElementById('container'))
-// });

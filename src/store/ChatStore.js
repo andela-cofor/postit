@@ -23,8 +23,9 @@ class ChatStore {
   }
 
   /**
-   * @param {any} friends
+   * @param {object} friends
    * @memberof ChatStore
+   * @return {void}
    */
   @bind(Actions.FriendsReceived)
   receivedFriends(friends) {
@@ -44,13 +45,12 @@ class ChatStore {
       friends,
       selectedFriend
     });
-    // setTimeout(this.getInstance().getMessages, 100);
   }
 
 
   /**
-   * @param {any} msg
-   * @returns null
+   * @param {object} msg
+   * @return {void}
    * @memberof ChatStore
    */
   @bind(Actions.messageReceived)
@@ -67,8 +67,8 @@ class ChatStore {
   }
 
   /**
-   * @param {any} chan
-   * @returns null
+   * @param {object} chan
+   * @return {void}
    * @memberof ChatStore
    */
   @bind(Actions.channelReceived)
@@ -85,8 +85,9 @@ class ChatStore {
   }
 
   /**
-   * @param {any} selectedChannel
+   * @param {object} selectedChannel
    * @memberof ChatStore
+   * @return {void}
    */
   @bind(Actions.channelOpened)
   channelOpened(selectedChannel) {
@@ -102,10 +103,14 @@ class ChatStore {
       selectedChannel,
       channels: this.state.channels
     });
-    // console.log(this.state, 'Emma');
     setTimeout(this.getInstance().getMessages, 100);
   }
 
+  /**
+   * @param {object} selectedFriend
+   * @memberof ChatStore
+   * @return {void}
+   */
   @bind(Actions.FriendOpened)
   FriendOpened(selectedFriend) {
     _(this.state.friends)
@@ -121,12 +126,13 @@ class ChatStore {
       selectedFriend,
       friends: this.state.friends
     });
-
-      // setTimeout(this.getInstance().getMessages, 100);
   }
 
+  
   /**
+   * @param {void}
    * @memberof ChatStore
+   * @return {void}
    */
   @bind(Actions.messagesLoading)
   messagesLoading() {
@@ -136,8 +142,9 @@ class ChatStore {
   }
 
   /**
-   * @param {any} messages
+   * @param {object} messages
    * @memberof ChatStore
+   * @return {void}
    */
   @bind(Actions.messagesReceived)
   receivedMessages(messages) {
@@ -155,8 +162,9 @@ class ChatStore {
   }
 
   /**
-   * @param {any} message
+   * @param {object} message
    * @memberof ChatStore
+   * @return {void}
    */
   @bind(Actions.sendMessage)
   sendMessage(message) {
@@ -165,8 +173,9 @@ class ChatStore {
   }
 
   /**
-   * @param {any} channel
+   * @param {object} channel
    * @memberof ChatStore
+   * @return {void}
    */
   @bind(Actions.addChannel)
   addChannel(channel) {
@@ -175,8 +184,9 @@ class ChatStore {
   }
 
   /**
-   * @param {any} channels
+   * @param {object} channels
    * @memberof ChatStore
+   * @return {void}
    */
   @bind(Actions.channelsReceived)
   receivedChannels(channels) {
@@ -201,8 +211,9 @@ class ChatStore {
   }
 
   /**
-   * @param {any} user
+   * @param {object} user
    * @memberof ChatStore
+   * @return {void}
    */
   @bind(Actions.login)
   login(user){
@@ -210,8 +221,9 @@ class ChatStore {
   }
 
   /**
-   * @param {any} user
+   * @param {object} user
    * @memberof ChatStore
+   * @return {void}
    */
   @bind(Actions.resendUser)
   resendUser(user) {
@@ -222,8 +234,9 @@ class ChatStore {
   }
 
   /**
-   * @param {any} user
+   * @param {object} user
    * @memberof ChatStore
+   * @return {void}
    */
   @bind(Actions.loginWithEmail)
   loginWithEmail(user) {
@@ -233,8 +246,9 @@ class ChatStore {
   }
 
   /**=
-   * @param {any} user
+   * @param {object} user
    * @memberof ChatStore
+   * @return {void}
    */
   @bind(Actions.createUserWithEmailAndPassword)
   createUserWithEmailAndPassword(user) {
@@ -245,8 +259,9 @@ class ChatStore {
   }
 
   /**
-   * @param {any} number
+   * @param {object} number
    * @memberof ChatStore
+   * @return {void}
    */
   @bind(Actions.phoneNumber)
   phoneNumber(number) {
@@ -255,8 +270,9 @@ class ChatStore {
   }
 
   /**
-   * @param {any} userDetails
+   * @param {object} userDetails
    * @memberof ChatStore
+   * @return {void}
    */
   @bind(Actions.editDetails)
   editDetails(userDetails) {
@@ -266,6 +282,7 @@ class ChatStore {
 
   /**
    * @memberof ChatStore
+   * @return {void}
    */
   @bind(Actions.userAddSuccess)
   userAddSuccess() {
@@ -273,8 +290,9 @@ class ChatStore {
   }
 
   /**
-   * @param {any} number
+   * @param {object} number
    * @memberof ChatStore
+   * @return {void}
    */
   @bind(Actions.addToFriends)
   addToFriends(number) {

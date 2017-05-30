@@ -9,6 +9,7 @@ import { ListItem } from 'material-ui';
 class Message extends React.Component {
 
   /**
+   * Returns messages from the database
    * @returns ListItem
    * @memberof Message
    */

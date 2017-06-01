@@ -60,18 +60,9 @@ class ChannelList extends React.Component {
   render() {
     if (!this.props.channels) {
       return (
-        <Card style={{
-          flexGrow: 1
-        }}>
-          <CircularProgress
+        <Card>
+          <CircularProgress className="CircularProgress"
             mode="indeterminate"
-            style={{
-              paddingTop: '20px',
-              paddingBottom: '20px',
-              margin: '0 auto',
-              display: 'block',
-              width: '60px'
-            }}
           />
         </Card>
       );
@@ -87,16 +78,9 @@ class ChannelList extends React.Component {
       .value();
 
     return (
-        <div
-          style={{
-            flexGrow: 1,
-          }}>
-            <Card id="channelCard"
-            style={{
-                overflow: 'scroll',
-                height: 200
-              }}>
-              <h6>Channel List</h6>
+        <div>
+            <Card id="channelCard" className="channelCard">
+              <h6 className="center">Channel List</h6>
                 <List>
                     {channelNodes}
                 </List>

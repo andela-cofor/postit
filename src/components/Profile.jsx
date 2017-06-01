@@ -110,21 +110,12 @@ class Profile extends React.Component {
    */
   render() {
     return (
-      <Card style={{
-        'maxWidth': '800px',
-        'margin': '30px auto',
-        'padding': '50px'
-      }}>
-      <CardText style={{
-        'textAlign': 'center'
-      }}>
+      <Card className="loginCard">
+      <CardText className="center">
         </CardText>
         <Avatar
           src={this.state.photoURL}
           size={50}
-          style={{
-            margin: 5
-          }}
         />
         <form className="mui-form" onSubmit={this.onSubmit}>
           <br /><br /><br /><br />
@@ -133,9 +124,6 @@ class Profile extends React.Component {
               name="phoneNumber"
               onChange={this.handleChange}
               placeholder="Enter your new phone number"
-              style={{
-                paddingTop: 15,
-              }}
               type="number"
             /><br />
           </div>
@@ -144,9 +132,6 @@ class Profile extends React.Component {
               name="userName"
               onChange={this.handleChange}
               placeholder="Enter your new userName"
-              style={{
-                paddingTop: 15,
-              }}
               type="text"
             /><br />
           </div>
@@ -156,7 +141,6 @@ class Profile extends React.Component {
               label="Submit"
               type="submit"
               primary={true}
-              style={{ margin: 12, }}
             />
           </div>
         </form>

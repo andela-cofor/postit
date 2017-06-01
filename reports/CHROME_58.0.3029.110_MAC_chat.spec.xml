@@ -5,9 +5,9 @@
 
   <testsuite name="chat.spec"
     errors="0" failures="1" hostname="" id="" package="chat.spec" skipped="3"
-    tests="4" time="81.06" timestamp="Tue, 30 May 2017 10:10:05 GMT">
+    tests="4" time="57.10" timestamp="Tue, 30 May 2017 16:24:39 GMT">
   
-    <testcase name="Add Channel" classname="chat.spec" time="81.06" assertions="5">
+    <testcase name="Add Channel" classname="chat.spec" time="57.10" assertions="5">
 
     
 

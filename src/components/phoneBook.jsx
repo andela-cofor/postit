@@ -91,27 +91,18 @@ class PhoneBook extends React.Component {
    */
   render() {
     return (
-      <Card style={{
-        'maxWidth': '800px',
-        'margin': '30px auto',
-        'padding': '50px'
-      }}>
-      <CardText style={{
-        'textAlign': 'center'
-      }}>
-          Number format: 080-0000-000
+      <Card className="phoneCard">
+      <CardText className="center">
+          Number format: 0800000000
         </CardText>
         <TextField
+          type="number"
+          className="phoneTextField"
           value={this.state.phoneNumber}
           onChange={this.onChange}
           onKeyUp={this.onKeyUp}
-          hintText="Enter your phone"
           className="browser-default"
           placeholder="Enter your phone number"
-          style={{
-            paddingTop: 15,
-          }}
-          type="number"
         /><br />
       </Card>
     );

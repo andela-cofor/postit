@@ -90,26 +90,13 @@ class MessageBox extends React.Component {
    */
   render() {
     return (
-      <Card style={{
-        maxWidth: 1200,
-        margin: '30px auto',
-        padding: 30
-      }}>
+      <Card className="messageBox">
         <textarea
           id="messageArea"
           value={this.state.message}
           onChange={this.onChange}
           onKeyUp={this.onKeyUp}
-          style={{
-            width: '100%',
-            borderColor: '#D0D0D0',
-            resize: 'none',
-            borderRadius: 3,
-            minHeight: 50,
-            color: '#555',
-            fontSize: 14,
-            outline: 'auto 0px'
-          }} />
+          />
         <RadioButtonGroup
           valueSelected={this.state.value}
           name="shipSpeed"
@@ -119,19 +106,16 @@ class MessageBox extends React.Component {
             id="normal"
             value="Normal"
             label="Normal"
-            style={{ marginBottom: 16, }}
           />
           <RadioButton
             id="urgent"
             value="Urgent"
             label="Urgent"
-            style={{ marginBottom: 16, }}
           />
           <RadioButton
             id="critical"
             value="Critical"
             label="Critical"
-            style={{ marginBottom: 16, }}
           />
         </RadioButtonGroup>
       </Card>

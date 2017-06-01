@@ -1,11 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites errors="0"
             failures="0"
-            tests="0">
+            tests="3">
 
   <testsuite name="login.spec"
     errors="0" failures="0" hostname="" id="" package="login.spec" skipped="0"
-    tests="0" time="0.000" timestamp="Tue, 30 May 2017 10:12:26 GMT">
+    tests="3" time="157.9" timestamp="Tue, 30 May 2017 16:25:53 GMT">
+  
+    <testcase name="Forget Password" classname="login.spec" time="27.26" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Login with Email" classname="login.spec" time="40.00" assertions="5">
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Login with Google Account" classname="login.spec" time="90.61" assertions="2">
+
+    
+
+    
+    </testcase>
   
   
   </testsuite>

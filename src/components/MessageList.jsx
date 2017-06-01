@@ -68,29 +68,14 @@ class MessageList extends React.Component {
           );
         });
     } else {
-      messageNodes = <CircularProgress
+      messageNodes = <CircularProgress className="CircularProgress"
         mode="indeterminate"
-        style={{
-          paddingTop: 20,
-          paddingBottom: 20,
-          margin: '0 auto',
-          display: 'block',
-          width: '60px'
-        }}
       />;
     }
     return (
-        <div
-          style={{
-            flex: 2,
-            marginLeft: 20,
-          }}>
-            <Card id="messageCard"
-              style={{
-                overflow: 'scroll',
-                height: 200
-              }}>
-              <h6>Group Messages</h6>
+        <div>
+            <Card id="messageCard" className="messageCard">
+              <h6 className="center">Group Messages</h6>
                 <List>
                     {messageNodes}
                 </List>

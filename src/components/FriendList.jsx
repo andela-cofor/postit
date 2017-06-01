@@ -54,15 +54,8 @@ class FriendList extends React.Component {
    */
   render() {
     if (!this.props.friends) {
-      <CircularProgress
+      <CircularProgress className="CircularProgress"
         mode="indeterminate"
-        style={{
-          paddingTop: '20px',
-          paddingBottom: '20px',
-          margin: '0 auto',
-          display: 'block',
-          width: '60px'
-        }}
       />;
     }
 
@@ -77,15 +70,9 @@ class FriendList extends React.Component {
     .value();
 
     return (
-      <Card
-        style={{
-          flex: 1,
-          marginLeft: 20,
-          overflow: 'scroll',
-          height: 200
-        }}
+      <Card className="FriendCard"
         >
-        <h6>Contact List</h6>
+        <h6 className="center">Contact List</h6>
         <List>
           {FriendNodes}
         </List>

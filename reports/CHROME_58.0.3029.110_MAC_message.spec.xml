@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites errors="0"
-            failures="0"
-            tests="0">
+            failures="1"
+            tests="1">
 
   <testsuite name="message.spec"
-    errors="0" failures="0" hostname="" id="" package="message.spec" skipped="0"
-    tests="0" time="0.000" timestamp="Tue, 30 May 2017 10:12:26 GMT">
+    errors="0" failures="1" hostname="" id="" package="message.spec" skipped="0"
+    tests="1" time="40.32" timestamp="Tue, 30 May 2017 16:28:34 GMT">
+  
+    <testcase name="Message Card" classname="message.spec" time="40.32" assertions="5">
+
+    
+
+    
+
+    
+
+      <failure message="Testing if the URL equals &quot;http://localhost:8080/chat&quot;.">    at Object.MessageCard [as Message Card] (/Users/chineduofor/Desktop/PostIt/postit/postit/src/test/e2e/message.spec.js:15:15)
+    at _combinedTickCallback (internal/process/next_tick.js:67:7)</failure>
+
+    
+    </testcase>
   
   
   </testsuite>

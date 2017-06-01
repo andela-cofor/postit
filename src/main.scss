@@ -1,13 +1,105 @@
-// $color: red;
-// $display: 'flex';
-// $flexflow: 'row wrap';
-// $maxWidth: 1200;
-// $width: '100%';
-// $margin: '30px auto 30px';
+$color: red;
 
+$padding-Top: 20px;
+$padding-Bottom: 20px;
+$width: 10px;
+$margin: 5px;
+$height: 200px;
+$overflow: scroll;
+$marginLeft: 1200px;
 
+$border-color: #D0D0D0;
+$border-radius: 3;
+$min-height: 50px;
+$none: none;
+$textArea-color: #555;
+$textArea-fontSize: 15px;
+$textArea-outline: auto 0px;
+$textArea-margin: 10px;
 
-body {
-    // color;
-    margin: 0;
+$circularMargin: 0 auto;
+$circularDisplay: block;
+$circularWidth: 60px;
+
+$raisedBtnmargin: 15px;
+
+$maxwidth: 500px;
+$signMargin: 30px auto;
+
+.signUpForm {
+  padding: $min-height;
+  max-width: $maxwidth;
+  margin: $signMargin;
 }
+
+.phoneCard {
+  padding: $min-height;
+  max-width: $maxwidth;
+  margin: $signMargin;
+}
+
+.loginCard {
+  padding: $min-height;
+  max-width: $maxwidth;
+  margin: $signMargin;
+}
+
+$messageBoxMaxWidth: 1200px;
+$messageBoxMargin: 30px auto;
+$messageBoxPadding: 30px;
+
+.CircularProgress {
+  padding-top: $padding-Top;
+  padding-bottom: $padding-Bottom;
+  margin: $circularMargin;
+  display: $circularDisplay;
+  width: $circularWidth;
+}
+
+.channelCard {
+  padding-top: $padding-Top;
+  padding-bottom: $padding-Bottom;
+  height: $height;
+  overflow: $overflow;
+}
+
+.messageCard {
+  padding-top: $padding-Top;
+  padding-bottom: $padding-Bottom;
+  height: $height;
+  overflow: $overflow;
+}
+
+.FriendCard {
+  padding-top: $padding-Top;
+  padding-bottom: $padding-Bottom;
+  height: $height;
+  overflow: $overflow;
+}
+
+.raisedBtn {
+  margin: $raisedBtnmargin;
+}
+
+.Avatar {
+  margin: margin;
+  margin-left: $marginLeft;
+}
+
+textarea {
+  border-color: $border-color;
+  resize: $none;
+  border-radius: $border-radius;
+  min-height: $min-height;
+  color: $textArea-color;
+  font-size: $textArea-fontSize;
+  outline: $textArea-outline;
+  margin-top: $textArea-margin;
+}
+
+.messageBox {
+  max-width: $messageBoxMaxWidth;
+  margin: $messageBoxMargin;
+  padding: $messageBoxPadding;
+}
+

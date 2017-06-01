@@ -63,14 +63,8 @@ class Signup extends React.Component {
    */
   render() {
     return (
-      <Card style={{
-        'maxWidth': '500px',
-        'margin': '30px auto',
-        'padding': '50px'
-      }}>
-        <CardText style={{
-          'textAlign': 'center'
-        }}>
+      <Card className="signUpForm">
+        <CardText className="center">
         <h6>Signup</h6>
         </CardText>
         <form className="mui-form center" onSubmit={this.signUp}>
@@ -145,9 +139,6 @@ class Signup extends React.Component {
               id="signup"
               label="Sign Up"
               type="submit"
-              style={{
-                margin: 12,
-              }}
             />
           </div>
         </form>

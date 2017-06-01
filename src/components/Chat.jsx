@@ -237,25 +237,18 @@ class Chat extends React.Component {
    */
   render() {
     return (
-      <div style={{
-        overflow: scroll,
-        maxHeight: 10,
-      }}
-      iconElementRight={
-        <RaisedButton
+      <div
+        iconElementRight={
+          <RaisedButton
           label='Profile'
-          style={{ margin: 12, }}
           onClick={this.loginPage}
-            />
-      }>
+          />
+          }>
         <Avatar
+          className="Avatar"
           onClick={this.loginPage}
           src={this.state.photoURL}
           size={50}
-          style={{
-            margin: 5,
-            marginLeft: 1200
-          }}
         />
         <div className="row">
           <div className="col s4">
@@ -265,23 +258,13 @@ class Chat extends React.Component {
               value={this.state.message}
               onChange={this.onChange}
               onKeyUp={this.onKeyUp}
-              className="col s6"
-              style={{
-                borderColor: '#D0D0D0',
-                resize: 'none',
-                borderRadius: 3,
-                minHeight: 50,
-                color: '#555',
-                fontSize: 14,
-                outline: 'auto 0px',
-                marginTop: 10
-              }} />
-              <RaisedButton
-              label='ADD'
-              onClick={this.addChannel}
-              className="col s3 offset-s1"
-                style={{marginTop: 15}}
-                />
+              className="col s6 textarea"
+            />
+            <RaisedButton
+            label='ADD'
+            onClick={this.addChannel}
+            className="col s3 offset-s1 raisedBtn"
+              />
           </div>
           <div className="col s4">
             <textarea
@@ -291,22 +274,12 @@ class Chat extends React.Component {
               value={this.state.newUserEmail}
               onKeyUp={this.inviteFriend}
               className="col s6 offset-s1"
-              style={{
-                borderColor: '#D0D0D0',
-                resize: 'none',
-                borderRadius: 3,
-                minHeight: 50,
-                color: '#555',
-                fontSize: 14,
-                outline: 'auto 0px',
-                marginTop: 10,
-              }} />
-              <RaisedButton
-                className="col s3 offset-s1"
-                onClick={this.inviteFriend2Channel}
-                style={{marginTop: 15}}
-                label='INVITE'
-                />
+            />
+            <RaisedButton
+              className="col s3 offset-s1 raisedBtn"
+              onClick={this.inviteFriend2Channel}
+              label='INVITE'
+            />
           </div>
           <div className="col s4">
             <textarea
@@ -315,22 +288,12 @@ class Chat extends React.Component {
               placeholder="Add a a friend with number..."
               onKeyUp={this.addAFriend}
               className="col s6 offset-s1"
-              style={{
-                borderColor: '#D0D0D0',
-                resize: 'none',
-                borderRadius: 3,
-                minHeight: 50,
-                color: '#555',
-                fontSize: 14,
-                outline: 'auto 0px',
-                marginTop: 10
-              }} />
-              <RaisedButton
-              onClick={this.addNumber}
-              style={{marginTop: 15}}
-              label='ADD'
-              className="col s3 offset-s1"
-                />
+            />
+            <RaisedButton
+            onClick={this.addNumber}
+            label='ADD'
+            className="col s3 offset-s1 raisedBtn"
+            />
           </div>
         </div>
         <div className="row">

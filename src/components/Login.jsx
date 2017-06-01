@@ -109,15 +109,8 @@ class Login extends React.Component {
    */
   render() {
     return (
-      <Card style={{
-        'maxWidth': '500px',
-        'margin': '30px auto',
-        'padding': '50px'
-        }}>;
-        <CardText
-          style = { {
-          'textAlign': 'center'
-        }}>
+      <Card className="loginCard">;
+        <CardText className="center">
             <h6>Login</h6>
         </CardText>
         <form className="mui-form center" onSubmit={this.signInWithEmailAndPassword}>
@@ -151,7 +144,7 @@ class Login extends React.Component {
             id="submit"
             label="Submit"
             type="submit"
-            style={{ margin: 12, }}
+            className="raisedBtn"
           />
           <RaisedButton
             id="loginWithGoogle"
@@ -162,12 +155,13 @@ class Login extends React.Component {
             id="signUp"
             label="Sign Up"
             onClick={this.signUp}
-            style={{ margin: 12, }} />
+            className="raisedBtn"
+          />
           </div>
           <a href="#"
             onClick={this.forgetPassword}
             id="fPassword"
-            ><h6>Forget Password</h6></a>
+            ><h6>Forgot Password</h6></a>
         </form>
         
       </Card>
